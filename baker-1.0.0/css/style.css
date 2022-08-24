@@ -6,6 +6,32 @@
     --dark: #1E1916;
 }
 
+#barra-lateral li:hover{
+    background-color: #8F1802;
+    color: white;
+    border-radius: 10px;
+}
+
+#barra-lateral{
+    background-color: #362A1E;
+}
+
+#barra-lateral a svg{
+    height: 20px;
+    vertical-align: middle;
+}
+
+#img-logo{
+    height: 60px;
+    border-radius: 45px;
+}
+
+.bi{
+    color: #EAA636;
+    padding-right: 10px;
+}
+
+
 h4,
 h5,
 h6,
