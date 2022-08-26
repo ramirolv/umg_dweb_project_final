@@ -29,291 +29,352 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <!----===== Boxicons CSS ===== -->
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
     
-        <div id="barra-lateral" class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px; height: 100vh;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-              <img id="img-logo" class="bi pe-none me-2" src="./img/logo_empresa.jpg" alt="" srcset="">
-              <span class="fs-4">Dimarcu's Pizza</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link text-white" aria-current="page">
-                        <i class="bi bi-square-half"></i>
-                        Inicio
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="./img/logo_empresa.jpg" alt="Logo de la empresa">
+                </span>
+
+                <div class="text logo-text">
+                    <span class="name">Dimarcu's</span>
+                    <span class="profession">Pizza</span>
+                </div>
+            </div>
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <!--
+                    Código para un recuadro de búsqueda
+                <li class="search-box">
+                    <i class='bx bx-search icon'></i>
+                    <input type="text" placeholder="Search...">
+                </li>
+                -->
+                <ul class="menu-links">
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-home-alt icon' ></i>
+                            <span class="text nav-text">Inicio</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./product.html">
+                            <i class="bi bi-snow2 icon"></i>
+                            <span class="text nav-text">Menu</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-bell icon'></i>
+                            <span class="text nav-text">Ordenes</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-pie-chart-alt icon' ></i>
+                            <span class="text nav-text">Informes</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="bi bi-person-circle icon"></i>
+                            <span class="text nav-text">Usuarios</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class="bi bi-people-fill icon"></i>
+                            <span class="text nav-text">Clientes</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bx-wallet icon' ></i>
+                            <span class="text nav-text">Gastos</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+                <li class="">
+                    <a href="#">
+                        <i class='bx bx-log-out icon' ></i>
+                        <span class="text nav-text">Cerrar sesión</span>
                     </a>
-                  </li>
-                <li class="nav-item">
-                <a href="product.html" class="nav-link text-white" aria-current="page">
-                    <i class="bi bi-file-text-fill"></i>
-                    Menu
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-text-left"></i>
-                    Ordenes
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-file-person"></i>
-                    Usuarios
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-pie-chart-fill"></i>
-                  Informes
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-person-bounding-box"></i>
-                    Clientes
-                </a>
-              </li>
-              
-            </ul>
+                </li>
+
+                <li class="mode">
+                    <div class="sun-moon">
+                        <i class='bx bx-moon icon moon'></i>
+                        <i class='bx bx-sun icon sun'></i>
+                    </div>
+                    <span class="mode-text text">Modo Dark</span>
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+                
+            </div>
         </div>
 
-    <!-- Spinner Start -->
-    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" role="status"></div>
+    </nav>
+
+    <div class="home">
+
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-grow text-primary" role="status"></div>
+        </div>
+        <!-- Spinner End -->
+    
+                
+                  <!-- PIZZA'S MENU -->
+                  <div class="container-xxl bg-light my-6 py-4 pt-0">
+                    <div class="container">     
+                    <h1>PIZZA </h1>
+                    
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <h4 class="mb-3">DE LUXE</h4>
+                                        <img class="img-fluid" src="img/pizza-deluxe.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                                               
+                                        <HR>Individual-Q10.00</HR>
+                                        <HR>Mediana-Q 40.00</HR>
+                                        <HR>Grande- Q 60.00</HR>
+                                    </div>
+                                    
+                                </div>
+                            </div>           
+                            <!--SECOND ITEM-->
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <h4 class="mb-3">DE PEPERONI</h4>
+                                        <img class="img-fluid" src="img/pizza-peperoni.jpeg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                   
+                                        <HR>Individual-Q10.00</HR>
+                                        <HR>Mediana-Q 40.00</HR>
+                                        <HR>Grande- Q 60.00</HR>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!--THIRD ITEM-->
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <h4 class="mb-3"> HAWAIANA</h4>
+                                        <img class="img-fluid" src="img/pizza-hawaiana.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <HR>Individual-Q10.00</HR>
+                                        <HR>Mediana-Q 40.00</HR>
+                                        <HR>Grande- Q 60.00</HR>
+                                    </div>                 
+                                </div>
+                            </div>                      
+                            <!--FOURTH ITEM-->
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <h4 class="mb-3"> CUATRO QUESOS</h4>
+                                        <img class="img-fluid" src="img/pizza-cuatro-quesos.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <HR>Individual-Q10.00</HR>
+                                        <HR>Mediana-Q 40.00</HR>
+                                        <HR>Grande- Q 60.00</HR>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!--END OF ITEMS-->
+                        </div>
+                    </div>
+                </div>
+                <!-- END PIZZA'S MENU -->
+                
+                <!--OTHER'S MENU -->
+                <div class="container-xxl bg-light my-2 py-4 pt-0">
+                    <div class="container">     
+                        <h1>OTROS PLATILLOS</h1>
+                        
+                        <div class="row g-4">
+                
+                            <div class="col-lg-3 col-md-8 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/alitas-barbacoa.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h4 class="mb-3">ALITAS DE BARBACOA</h4>
+                                        <span>Porcion de 15 unidades</span>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 30.00 </div>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!-- SECOND ITEM-->
+                            <div class="col-lg-3 col-md-8 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/alitas-crispy.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h4 class="mb-3">ALITAS CRISPY</h4>
+                                        <span>Porcion de 20 unidades</span>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 30.00 </div>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!-- THIRD ITEM-->
+                            <div class="col-lg-3 col-md-8 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/alitas-picantes.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h4 class="mb-3">ALITAS PICANTES</h4>
+                                        <span>Porcion de 12 unidades</span>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 30.00 </div>
+                                    </div>                 
+                                </div>
+                            </div>
+                        </div>
+                
+                        <hr> <div class="row g-5">
+                            <!-- FOURTH  ITEM-->
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/hamburguesa-trad.webp" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h5 class="mb-3">HAMBURGUESA TRADICIONAL</h5>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 20.00 </div>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!-- FIFTH ITEM-->
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/hamburguesa-cheese.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h5 class="mb-3">HAMBURGUESA DE QUESO</h5>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 25.00 </div>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!-- SIXTH ITEM-->            
+                            <div class="col-lg-3 col-md-5 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/hamburguesas-barbacoa.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h5 class="mb-3">HAMBURGUESA DE BARBACOA</h5>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 25.00 </div>
+                                    </div>                 
+                                </div>
+                            </div>
+                
+                        </div>     
+                        
+                    </div>
+                </div>
+                <!--END OTHER'S MENU -->
+                
+                <div class="container-xxl bg-light my-5 py-4 pt-0">
+                    <div class="container">     
+                    <h1>BEBIDAS </h1>
+                    
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-8 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/bebidas-gaseosas.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h4 class="mb-3">BEBIDAS GASEOSAS</h4>
+                                        <span>Venta por Unidad</span>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 5.00</div>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!-- SECOND ITEM-->
+                            <div class="col-lg-3 col-md-8 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/bebidas-naturales.webp" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h4 class="mb-3">BEBIDAS NATURALES</h4>
+                                        <span></span>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 10.00</div>
+                                    </div>                 
+                                </div>
+                            </div>
+                            <!-- THIRD ITEM-->
+                            <div class="col-lg-3 col-md-8 ">            
+                                <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
+                                    <div class="position-relative mt-auto">
+                                        <img class="img-fluid" src="img/bebidas-calientes.jpg" alt="">
+                                    </div>
+                                    <div class="text-center p-2">                    
+                                        <h4 class="mb-3">BEBIDAS CALIENTES</h4>
+                                        <span></span>
+                                        <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 10.00</div>
+                                    </div>                 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- END MENU-->
+    
+                <!-- Copyright Start -->
+                <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                            </div>
+                            <div class="col-md-6 text-center text-md-end">
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                                <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                </div>
+                <!-- Copyright End -->
     </div>
-    <!-- Spinner End -->
-
-            
-              <!-- PIZZA'S MENU -->
-              <div class="container-xxl bg-light my-6 py-4 pt-0">
-                <div class="container">     
-                <h1>PIZZA </h1>
-                
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <h4 class="mb-3">DE LUXE</h4>
-                                    <img class="img-fluid" src="img/pizza-deluxe.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                                               
-                                    <HR>Individual-Q10.00</HR>
-                                    <HR>Mediana-Q 40.00</HR>
-                                    <HR>Grande- Q 60.00</HR>
-                                </div>
-                                
-                            </div>
-                        </div>           
-                        <!--SECOND ITEM-->
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <h4 class="mb-3">DE PEPERONI</h4>
-                                    <img class="img-fluid" src="img/pizza-peperoni.jpeg" alt="">
-                                </div>
-                                <div class="text-center p-2">                   
-                                    <HR>Individual-Q10.00</HR>
-                                    <HR>Mediana-Q 40.00</HR>
-                                    <HR>Grande- Q 60.00</HR>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!--THIRD ITEM-->
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <h4 class="mb-3"> HAWAIANA</h4>
-                                    <img class="img-fluid" src="img/pizza-hawaiana.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <HR>Individual-Q10.00</HR>
-                                    <HR>Mediana-Q 40.00</HR>
-                                    <HR>Grande- Q 60.00</HR>
-                                </div>                 
-                            </div>
-                        </div>                      
-                        <!--FOURTH ITEM-->
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <h4 class="mb-3"> CUATRO QUESOS</h4>
-                                    <img class="img-fluid" src="img/pizza-cuatro-quesos.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <HR>Individual-Q10.00</HR>
-                                    <HR>Mediana-Q 40.00</HR>
-                                    <HR>Grande- Q 60.00</HR>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!--END OF ITEMS-->
-                    </div>
-                </div>
-            </div>
-            <!-- END PIZZA'S MENU -->
-            
-            <!--OTHER'S MENU -->
-            <div class="container-xxl bg-light my-2 py-4 pt-0">
-                <div class="container">     
-                    <h1>OTROS PLATILLOS</h1>
-                    
-                    <div class="row g-4">
-            
-                        <div class="col-lg-3 col-md-8 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/alitas-barbacoa.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h4 class="mb-3">ALITAS DE BARBACOA</h4>
-                                    <span>Porcion de 15 unidades</span>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 30.00 </div>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!-- SECOND ITEM-->
-                        <div class="col-lg-3 col-md-8 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/alitas-crispy.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h4 class="mb-3">ALITAS CRISPY</h4>
-                                    <span>Porcion de 20 unidades</span>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 30.00 </div>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!-- THIRD ITEM-->
-                        <div class="col-lg-3 col-md-8 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/alitas-picantes.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h4 class="mb-3">ALITAS PICANTES</h4>
-                                    <span>Porcion de 12 unidades</span>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 30.00 </div>
-                                </div>                 
-                            </div>
-                        </div>
-                    </div>
-            
-                    <hr> <div class="row g-5">
-                        <!-- FOURTH  ITEM-->
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/hamburguesa-trad.webp" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h5 class="mb-3">HAMBURGUESA TRADICIONAL</h5>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 20.00 </div>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!-- FIFTH ITEM-->
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/hamburguesa-cheese.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h5 class="mb-3">HAMBURGUESA DE QUESO</h5>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 25.00 </div>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!-- SIXTH ITEM-->            
-                        <div class="col-lg-3 col-md-5 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/hamburguesas-barbacoa.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h5 class="mb-3">HAMBURGUESA DE BARBACOA</h5>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 25.00 </div>
-                                </div>                 
-                            </div>
-                        </div>
-            
-                    </div>     
-                    
-                </div>
-            </div>
-            <!--END OTHER'S MENU -->
-            
-            <div class="container-xxl bg-light my-5 py-4 pt-0">
-                <div class="container">     
-                <h1>BEBIDAS </h1>
-                
-                    <div class="row g-4">
-                        <div class="col-lg-3 col-md-8 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/bebidas-gaseosas.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h4 class="mb-3">BEBIDAS GASEOSAS</h4>
-                                    <span>Venta por Unidad</span>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 5.00</div>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!-- SECOND ITEM-->
-                        <div class="col-lg-3 col-md-8 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/bebidas-naturales.webp" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h4 class="mb-3">BEBIDAS NATURALES</h4>
-                                    <span></span>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 10.00</div>
-                                </div>                 
-                            </div>
-                        </div>
-                        <!-- THIRD ITEM-->
-                        <div class="col-lg-3 col-md-8 ">            
-                            <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
-                                <div class="position-relative mt-auto">
-                                    <img class="img-fluid" src="img/bebidas-calientes.jpg" alt="">
-                                </div>
-                                <div class="text-center p-2">                    
-                                    <h4 class="mb-3">BEBIDAS CALIENTES</h4>
-                                    <span></span>
-                                    <hr><div class="d-inline-block border border-primary rounded-pill px-2 mb-2">Q 10.00</div>
-                                </div>                 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- END MENU-->
-
-            <!-- Copyright Start -->
-            <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-                        </div>
-                        <div class="col-md-6 text-center text-md-end">
-                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                            <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <!-- Copyright End -->
-        
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
@@ -330,6 +391,8 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script src="./js/script-sidebar.js"></script>
 </body>
 
 </html>
