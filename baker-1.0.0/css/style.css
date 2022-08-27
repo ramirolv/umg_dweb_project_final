@@ -34,6 +34,28 @@
 }
 
 /*** Código personalizado ***/
+
+
+.formulario{
+    min-height: 100vh;
+    top: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1e1916e5;
+}
+
+.formulario form{
+    background-color: #eaa536c4;
+    padding: 5% 2%;
+    border-radius: 45px;
+}
+
+.inputData{
+    background-color: #8F1802;
+}
+
+
 body{
     min-height: 100vh;
     background-color: var(--body-color);

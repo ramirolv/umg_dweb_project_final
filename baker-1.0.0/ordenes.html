@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Dimarcu's Pizza</title>
+    <title>Baker - Bakery Website Template</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="./img/favicon.ico" rel="icon">
+    <link href="img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,21 +21,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="./lib/animate/animate.min.css" rel="stylesheet">
-    <link href="./lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    
 </head>
 
 <body>
+    
     <nav class="sidebar close">
         <header>
             <div class="image-text">
@@ -63,7 +63,7 @@
                 -->
                 <ul class="menu-links">
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="./main.html">
                             <i class='bx bx-home-alt icon' ></i>
                             <span class="text nav-text">Inicio</span>
                         </a>
@@ -77,7 +77,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="./ordenes.html">
+                        <a href="#">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">Ordenes</span>
                         </a>
@@ -139,25 +139,85 @@
 
     </nav>
 
-    <div class="home">
-        <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="owl-carousel header-carousel position-relative">
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/background.jpg" alt="">
-                        <div class="owl-carousel-inner">
-                            <div class="container">
-                                <div class="row justify-content-start">
-                                    <div class="col-lg-8">
-                                        <p class="text-primary text-uppercase fw-bold mb-2">LA MEJOR PIZZERIA DIMARCU`S</p>
-                                        <h1 class="display-1 text-light mb-4 animated slideInDown">COCINAMOS CON PASION</h1>                                
-                                    </div>
+<div class="home">
+
+   
+    <!-- Contact Start -->
+    <div class="container-xxl py-6">
+        <div class="container">
+            <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                <h1 class="display-6 mb-4">INGRESO DE ORDENES</h1>
+            </div>
+            <div class="row g-0 justify-content-center">
+                <div class="col-lg-8 wow fadeInUp" data-wow-delay="0.1s">
+
+                    <form>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" placeholder="Your Name">
+                                    <label for="name">Nombre del Cliente</label>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" class="form-control" id="email" placeholder="Your Email">
+                                    <label for="email">Fecha de Orden</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Tipo de Orden</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                    <label for="subject">Total de Orden</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea class="form-control" placeholder="Leave a message here" id="message" style="height: 200px"></textarea>
+                                    <label for="message">DETALLE</label>
+                                </div>
+                            </div>
+                            <div class="col-12 text-center">
+                                <button class="btn btn-primary rounded-pill py-3 px-5" type="submit">CREAR ORDEN</button>
+                            </div>
                         </div>
-                </div> 
+                    </form>
+                </div>
             </div>
         </div>
-    </div> 
+    </div>
+    <!-- Contact End -->
+
+
+
+   
+    <!-- Copyright Start -->
+    <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                    &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                    Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                    <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Copyright End -->
+
+</div>
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -170,8 +230,6 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-
-    <script src="./js/script-sidebar.js"></script>
 </body>
 
 </html>
