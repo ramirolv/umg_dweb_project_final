@@ -1,618 +1,88 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+<head class="login">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
 
-<head>
-    <meta charset="utf-8">
-    <title>Dimarcu's Pizza</title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
-
-    <!-- Favicon -->
-    <link href="./img/favicon.ico" rel="icon">
-
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet"> 
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="./lib/animate/animate.min.css" rel="stylesheet">
-    <link href="./lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="./css/style.css" rel="stylesheet">
-
-    <!----===== Boxicons CSS ===== -->
-    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-    
-</head>
-
-<body>
-    <div class="row">
-        <div id="barra-lateral" class="d-flex flex-column flex-shrink-0 p-3 " style="width: 280px; height: 100vh;">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-              <img id="img-logo" class="bi pe-none me-2" src="./img/logo_empresa.jpg" alt="" srcset="">
-              <span class="fs-4">Dimarcu's Pizza</span>
-            </a>
-            <hr>
-            <ul class="nav nav-pills flex-column mb-auto">
-              <li class="nav-item">
-                <a href="product.html" class="nav-link text-white" aria-current="page">
-                    <i class="bi bi-file-text-fill"></i>
-                    Menu
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-text-left"></i>
-                    Ordenes
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-file-person"></i>
-                    Usuarios
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-pie-chart-fill"></i>
-                  Informes
-                </a>
-              </li>
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-person-bounding-box"></i>
-                    Clientes
-                </a>
-              </li>
-
-              <li>
-                <a href="#" class="nav-link text-white">
-                    <i class="bi bi-person-bounding-box"></i>
-                    Inicio de sesión
-                </a>
-              </li>
-              
-            </ul>
-            <hr>
-            <div class="dropdown">
-              <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" class="rounded-circle me-2" width="32" height="32">
-                <strong>mdo</strong>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark text-small shadow" style="">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-              </ul>
-
-    <nav class="sidebar close">
-        <header>
-            <div class="image-text">
-                <span class="image">
-                    <img src="./img/logo_empresa.jpg" alt="Logo de la empresa">
-                </span>
-
-                <div class="text logo-text">
-                    <span class="name">Dimarcu's</span>
-                    <span class="profession">Pizza</span>
-                </div>
-            </div>
-
-            <i class='bx bx-chevron-right toggle'></i>
-        </header>
-
-        <div class="menu-bar">
-            <div class="menu">
-                <!--
-                    Código para un recuadro de búsqueda
-                <li class="search-box">
-                    <i class='bx bx-search icon'></i>
-                    <input type="text" placeholder="Search...">
-                </li>
-                -->
-                <ul class="menu-links">
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-home-alt icon' ></i>
-                            <span class="text nav-text">Inicio</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="./product.html">
-                            <i class="bi bi-snow2 icon"></i>
-                            <span class="text nav-text">Menu</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Ordenes</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-pie-chart-alt icon' ></i>
-                            <span class="text nav-text">Informes</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class="bi bi-person-circle icon"></i>
-                            <span class="text nav-text">Usuarios</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class="bi bi-people-fill icon"></i>
-                            <span class="text nav-text">Clientes</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-link">
-                        <a href="#">
-                            <i class='bx bx-wallet icon' ></i>
-                            <span class="text nav-text">Gastos</span>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
-
-            <div class="bottom-content">
-                <li class="">
-                    <a href="#">
-                        <i class='bx bx-log-out icon' ></i>
-                        <span class="text nav-text">Cerrar sesión</span>
-                    </a>
-                </li>
-
-                <li class="mode">
-                    <div class="sun-moon">
-                        <i class='bx bx-moon icon moon'></i>
-                        <i class='bx bx-sun icon sun'></i>
-                    </div>
-                    <span class="mode-text text">Modo Dark</span>
-
-                    <div class="toggle-switch">
-                        <span class="switch"></span>
-                    </div>
-                </li>
-                
-            </div>
-        </div>
-
-    </nav>
-
-
-    <div class="home">
-
-        <!-- Carousel Start -->
-        <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="owl-carousel header-carousel position-relative">
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/carousel-1.jpg" alt="">
-                    <div class="owl-carousel-inner">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-lg-8">
-                                    <p class="text-primary text-uppercase fw-bold mb-2">// The Best Bakery</p>
-                                    <h1 class="display-1 text-light mb-4 animated slideInDown">We Bake With Passion</h1>
-                                    <p class="text-light fs-5 mb-4 pb-3">Vero elitr justo clita lorem. Ipsum dolor sed stet sit diam rebum ipsum.</p>
-                                    <a href="" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="owl-carousel-item position-relative">
-                    <img class="img-fluid" src="img/carousel-2.jpg" alt="">
-                    <div class="owl-carousel-inner">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-lg-8">
-                                    <p class="text-primary text-uppercase fw-bold mb-2">// The Best Bakery</p>
-                                    <h1 class="display-1 text-light mb-4 animated slideInDown">We Bake With Passion</h1>
-                                    <p class="text-light fs-5 mb-4 pb-3">Vero elitr justo clita lorem. Ipsum dolor sed stet sit diam rebum ipsum.</p>
-                                    <a href="" class="btn btn-primary rounded-pill py-3 px-5">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Carousel End -->
-
-
-        <!-- Facts Start -->
-        <div class="container-xxl py-6">
-            <div class="container">
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.1s">
-                        <div class="fact-item bg-light rounded text-center h-100 p-5">
-                            <i class="fa fa-certificate fa-4x text-primary mb-4"></i>
-                            <p class="mb-2">Years Experience</p>
-                            <h1 class="display-5 mb-0" data-toggle="counter-up">50</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.3s">
-                        <div class="fact-item bg-light rounded text-center h-100 p-5">
-                            <i class="fa fa-users fa-4x text-primary mb-4"></i>
-                            <p class="mb-2">Skilled Professionals</p>
-                            <h1 class="display-5 mb-0" data-toggle="counter-up">175</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.5s">
-                        <div class="fact-item bg-light rounded text-center h-100 p-5">
-                            <i class="fa fa-bread-slice fa-4x text-primary mb-4"></i>
-                            <p class="mb-2">Total Products</p>
-                            <h1 class="display-5 mb-0" data-toggle="counter-up">135</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeIn" data-wow-delay="0.7s">
-                        <div class="fact-item bg-light rounded text-center h-100 p-5">
-                            <i class="fa fa-cart-plus fa-4x text-primary mb-4"></i>
-                            <p class="mb-2">Order Everyday</p>
-                            <h1 class="display-5 mb-0" data-toggle="counter-up">9357</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Facts End -->
-
-
-        <!-- About Start -->
-        <div class="container-xxl py-6">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="row img-twice position-relative h-100">
-                            <div class="col-6">
-                                <img class="img-fluid rounded" src="img/about-1.jpg" alt="">
-                            </div>
-                            <div class="col-6 align-self-end">
-                                <img class="img-fluid rounded" src="img/about-2.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="h-100">
-                            <p class="text-primary text-uppercase mb-2">// About Us</p>
-                            <h1 class="display-6 mb-4">We Bake Every Item From The Core Of Our Hearts</h1>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                            <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                            <div class="row g-2 mb-4">
-                                <div class="col-sm-6">
-                                    <i class="fa fa-check text-primary me-2"></i>Quality Products
-                                </div>
-                                <div class="col-sm-6">
-                                    <i class="fa fa-check text-primary me-2"></i>Custom Products
-                                </div>
-                                <div class="col-sm-6">
-                                    <i class="fa fa-check text-primary me-2"></i>Online Order
-                                </div>
-                                <div class="col-sm-6">
-                                    <i class="fa fa-check text-primary me-2"></i>Home Delivery
-                                </div>
-                            </div>
-                            <a class="btn btn-primary rounded-pill py-3 px-5" href="">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- About End -->
+    <!--JQUERY-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         
-     <!-- Service Start -->
-        <div class="container-xxl py-6">
-            <div class="container">
-                <div class="row g-5">
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <p class="text-primary text-uppercase mb-2">// Our Services</p>
-                        <h1 class="display-6 mb-4">What Do We Offer For You?</h1>
-                        <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <div class="row gy-5 gx-4">
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                        <i class="fa fa-bread-slice text-white"></i>
-                                    </div>
-                                    <h5 class="mb-0">Quality Products</h5>
-                                </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                            </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.2s">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                        <i class="fa fa-birthday-cake text-white"></i>
-                                    </div>
-                                    <h5 class="mb-0">Custom Products</h5>
-                                </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                            </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                        <i class="fa fa-cart-plus text-white"></i>
-                                    </div>
-                                    <h5 class="mb-0">Online Order</h5>
-                                </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                            </div>
-                            <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
-                                <div class="d-flex align-items-center mb-3">
-                                    <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
-                                        <i class="fa fa-truck text-white"></i>
-                                    </div>
-                                    <h5 class="mb-0">Home Delivery</h5>
-                                </div>
-                                <span>Magna sea eos sit dolor, ipsum amet ipsum lorem diam eos</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="row img-twice position-relative h-100">
-                            <div class="col-6">
-                                <img class="img-fluid rounded" src="img/service-1.jpg" alt="">
-                            </div>
-                            <div class="col-6 align-self-end">
-                                <img class="img-fluid rounded" src="img/service-2.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Service End -->
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <!-- Customized  Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template     -->
+    <link href="css/style.css" rel="stylesheet">
+
+   
+</head>
+<body background="img/fondo_login.jpg" >
 
 
-        <!-- Team Start -->
-        <div class="container-xxl py-6">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                    <p class="text-primary text-uppercase mb-2">// Our Team</p>
-                    <h1 class="display-6 mb-4">We're Super Professional At Our Skills</h1>
-                </div>
-                <div class="row g-4">
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item text-center rounded overflow-hidden">
-                            <img class="img-fluid" src="img/team-1.jpg" alt="">
-                            <div class="team-text">
-                                <div class="team-title">
-                                    <h5>Full Name</h5>
-                                    <span>Designation</span>
-                                </div>
-                                <div class="team-social">
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item text-center rounded overflow-hidden">
-                            <img class="img-fluid" src="img/team-2.jpg" alt="">
-                            <div class="team-text">
-                                <div class="team-title">
-                                    <h5>Full Name</h5>
-                                    <span>Designation</span>
-                                </div>
-                                <div class="team-social">
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item text-center rounded overflow-hidden">
-                            <img class="img-fluid" src="img/team-3.jpg" alt="">
-                            <div class="team-text">
-                                <div class="team-title">
-                                    <h5>Full Name</h5>
-                                    <span>Designation</span>
-                                </div>
-                                <div class="team-social">
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item text-center rounded overflow-hidden">
-                            <img class="img-fluid" src="img/team-4.jpg" alt="">
-                            <div class="team-text">
-                                <div class="team-title">
-                                    <h5>Full Name</h5>
-                                    <span>Designation</span>
-                                </div>
-                                <div class="team-social">
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-square btn-light rounded-circle" href=""><i class="fab fa-instagram"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Team End -->
 
 
-        <!-- Testimonial Start -->
-        <div class="container-xxl bg-light my-6 py-6 pb-0">
-            <div class="container">
-                <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                    <p class="text-primary text-uppercase mb-2">// Client's Review</p>
-                    <h1 class="display-6 mb-4">More Than 20000+ Customers Trusted Us</h1>
-                </div>
-                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="testimonial-item bg-white rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-1.jpg" alt="">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <span>Profession</span>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                    <div class="testimonial-item bg-white rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-2.jpg" alt="">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <span>Profession</span>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                    <div class="testimonial-item bg-white rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-3.jpg" alt="">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <span>Profession</span>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
-                    <div class="testimonial-item bg-white rounded p-4">
-                        <div class="d-flex align-items-center mb-4">
-                            <img class="flex-shrink-0 rounded-circle border p-1" src="img/testimonial-4.jpg" alt="">
-                            <div class="ms-4">
-                                <h5 class="mb-1">Client Name</h5>
-                                <span>Profession</span>
-                            </div>
-                        </div>
-                        <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                    </div>
+    
+    <div class="modal-dialog text-center">
+        <div class="col-sm-8 main-section">
+            <div class="modal-content">
+                <div class="col-sm-8 user-img">
+                    <img src="img/login.webp" width="100" height="100" /> 
                 </div>
                 
-            </div>
-        </div>
-        <!-- Testimonial End -->
-
-
-        <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-light footer my-6 mb-0 py-5 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5">
-                <div class="row g-5">
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-light mb-4">Office Address</h4>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
-                            <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                <form class="col-12">
+                    <div class="form-group" id="user-group">
+                        <input id="inputUsuario" type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-light mb-4">Quick Links</h4>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Our Services</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Support</a>
+                    <div class="form-group" id="contrasena-group">
+                        <input id="inputClave" type="password" class="form-control" placeholder="Contrasena" name="password"/>
                     </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-light mb-4">Quick Links</h4>
-                        <a class="btn btn-link" href="">About Us</a>
-                        <a class="btn btn-link" href="">Contact Us</a>
-                        <a class="btn btn-link" href="">Our Services</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Support</a>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <h4 class="text-light mb-4">Photo Gallery</h4>
-                        <div class="row g-2">
-                          <div class="col-4">
-                              <img class="img-fluid bg-light rounded p-1" src="img/pizza-peperoni.jpeg" alt="Image">
-                          </div>
-                          <div class="col-4">
-                              <img class="img-fluid bg-light rounded p-1" src="img/pizza-hawaiana.jpg" alt="Image">
-                          </div>
-                          <div class="col-4">
-                              <img class="img-fluid bg-light rounded p-1" src="img/alitas-barbacoa.jpg" alt="Image">
-                          </div>
-                          <div class="col-4">
-                              <img class="img-fluid bg-light rounded p-1" src="img/hamburguesa-cheese.jpg" alt="Image">
-                          </div>
-                          <div class="col-4">
-                              <img class="img-fluid bg-light rounded p-1" src="img/bebidas-gaseosas.jpg" alt="Image">
-                          </div>
-                          <div class="col-4">
-                              <img class="img-fluid bg-light rounded p-1" src="img/pizza-cuatro-quesos.jpg" alt="Image">
-                          </div>
-                        </div>
-                    </div>
+                    <button id="iniciarSesion" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                </form>
+                <div class="col-12 forgot">
+                    <a href="#">Recordar contraseña?</a>
                 </div>
+
             </div>
+
+         </div>   
+      
+        
+        
         </div>
-        <!-- Footer End -->
 
+    </div>
+    
 
-        <!-- Copyright Start -->
-        <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="#">Your Site Name</a>, All Right Reserved.
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                        <br>Distributed By: <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Copyright End -->
+    <script>
+        var boton = document.getElementById('iniciarSesion');
+        var user = document.getElementById('inputUsuario');
+        var password = document.getElementById('inputClave');
 
-      </div>
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+        boton.addEventListener('click', function comprobarUsuario(){
+            if(user.value == "admin"){
+                if (password.value == "contra") {
+                    alert("Felicidades, ingresaste");
+                    window.close();
+                    open('./index.html');
+                }else{
+                    alert('❌Contraseña incorrecta');
+                }
+            }else{
+                alert('❌Usuario incorrecto');
+            }
 
+        });
 
-    <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-    <!-- Template Javascript -->
-    <script src="js/main.js"></script>
-
-    <script src="./js/script-sidebar.js"></script>
+        
+    </script>
 </body>
-
 </html>
+
