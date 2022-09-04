@@ -41,40 +41,6 @@
 </head>
 
 <body>
-    <!-- Panel de insertar -->
-    <div id="formularioAgregar" class="fixed-top w-100 p-3 formulario " style="display: none;">
-        <div class="container d-flex align-items-center">
-            <div class="container">
-                <button id="cerrarFormulario" class="btn btn-danger col-3"><i class="bi bi-arrow-left-circle-fill"></i> Regresar</button>
-                <br>
-                <form class="row g-3 needs-validation form-horizontal" novalidate>
-                    <div id="inputsData">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Img</span>
-                        <input id="inputLinkImg" type="text" class="form-control" placeholder="Escribe el link de tu imagen" aria-label="Username" aria-describedby="basic-addon1" required>
-                      </div> 
-                      <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon2">Tipo</span>
-                        <select class="form-control" aria-describedby="basic-addon2">
-                            <option value="Pizza">Pizza</option>
-                            <option value="Otros">Otros</option>
-                            <option value="Bebidas">Bebidas</option>
-                        </select>
-                      </div> 
-                      <div class="input-group mb-3 col-md-4">
-                        <span class="input-group-text" id="basic-addon3">Sabor</span>
-                        <input id="inputSabor" type="text" class="form-control" placeholder="Escribe el sabor del platillo" aria-label="Username" aria-describedby="basic-addon3" required>
-                      </div>
-                      <div class="input-group mb-3 col-md-4">
-                        <span class="input-group-text" id="basic-addon4">Precio</span>
-                        <input id="inputPrecio" type="number" min="0" max="100" class="form-control" placeholder="Escribe el precio del platillo" aria-label="Username" aria-describedby="basic-addon4" required>
-                      </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Cierre Panel de insertar -->
     
     <nav class="sidebar close">
         <header>
@@ -189,10 +155,57 @@
         </div>
         <!-- Spinner End -->
     
+
+    <!-- Panel de insertar -->
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+            <h5 class="modal-title text-danger" id="staticBackdropLabel">Ingrese los siguientes datos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation form-horizontal" novalidate>
+                    <div id="inputsData">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Img</span>
+                        <input id="inputLinkImg" type="text" class="form-control" placeholder="Escribe el link de tu imagen" aria-label="Username" aria-describedby="basic-addon1" required>
+                      </div> 
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2">Tipo</span>
+                        <select class="form-control" aria-describedby="basic-addon2">
+                            <option value="Pizza">Pizza</option>
+                            <option value="Otros">Otros</option>
+                            <option value="Bebidas">Bebidas</option>
+                        </select>
+                      </div> 
+                      <div class="input-group mb-3 col-md-4">
+                        <span class="input-group-text" id="basic-addon3">Sabor</span>
+                        <input id="inputSabor" type="text" class="form-control" placeholder="Escribe el sabor del platillo" aria-label="Username" aria-describedby="basic-addon3" required>
+                      </div>
+                      <div class="input-group mb-3 col-md-4">
+                        <span class="input-group-text" id="basic-addon4">Precio - Q </span>
+                        <input id="inputPrecio" type="number" min="0" max="100" class="form-control" placeholder="Escribe el precio del platillo" aria-label="Username" aria-describedby="basic-addon4" required>
+                      </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Cierre Panel de insertar -->
+
         <!-- MAIN BUTTONS-->
         <div class="container-fluid copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
             <div class="d-flex align-items-center justify-content-center"> 
-                <a id= "botonNuevo" class="btn btn-primary rounded-pill py-8 px-5" href="#">AGREGAR</a>
+                <a id= "botonNuevo" class="btn btn-primary rounded-pill py-8 px-5" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#">AGREGAR</a>
+                <!-- <a id= "botonNuevo" class="btn btn-primary rounded-pill py-8 px-5" href="#">AGREGAR</a> -->
                 <a class="btn btn-primary rounded-pill py-10 px-5" href="#">EDITAR</a>
                 <a class="btn btn-primary rounded-pill py-10 px-5" href="#">ELIMINAR</a>
             </div> 
