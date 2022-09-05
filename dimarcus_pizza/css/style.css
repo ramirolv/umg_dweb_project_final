@@ -33,7 +33,7 @@
 
 }
 
-/*** Código personalizado ***/
+/*** Código personalizado***/
 
 body{
     min-height: 100vh;
@@ -747,8 +747,7 @@ h6,
 }
 
 .modal-content{
-    background-color: #3b4652;
-    opacity: .85;
+    background-color: var(--sidebar-color);
     padding: 0 20px;
     box-shadow: 0px 0px 3px #848484;
 }
