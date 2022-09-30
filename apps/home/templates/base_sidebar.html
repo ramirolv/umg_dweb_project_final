@@ -1,0 +1,152 @@
+<!-- {% load static %} -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimarcu's Pizza</title>
+    
+    <!-- Favicon -->
+    <link href="{% static './img/favicon.ico'%}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Hojas de estilos de bootstrap -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <script src="{% static '/js/bootstrap.bundle.js'%}"></script>
+    <link rel="stylesheet" href="{% static '/css/style2.css'%}">
+    <!--
+        <link rel="stylesheet" href="{% static './css/bootstrap.min.css' %}">
+        <script src="{% static './js/bootstrap.bundle.min.js' %}"></script>
+    -->
+    
+    <!-- Iconos de Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="logo-details">
+            <i class='bx bxl-c-plus-plus icon'></i>
+            <div class="logo_name">Dimarcu's Pizza</div>
+            <i class='bx bx-menu' id="btn" ></i>
+        </div>
+        <ul class="p-0 nav-list">
+          <li>
+              <i class='bx bx-search' ></i>
+             <input type="text" placeholder="Escriba aquí...">
+             <span class="tooltip">Buscar</span>
+          </li>
+          <li>
+            <a href="{% url 'home:mainapp'%}">
+              <i class='bx bx-grid-alt'></i>
+              <span class="links_name">Dashboard Inicio</span>
+            </a>
+             <span class="tooltip">Dashboard Inicio</span>
+          </li>
+          <li>
+           <a href="{% url 'home:ordenesapp'%}">
+             <i class='bx bx-user' ></i>
+             <span class="links_name">Ordenes</span>
+           </a>
+           <span class="tooltip">Ordenes</span>
+         </li>
+         <li>
+           <a href="{% url 'home:productoapp'%}">
+             <i class='bx bx-chat' ></i>
+             <span class="links_name">Platillos</span>
+           </a>
+           <span class="tooltip">Platillos</span>
+         </li>
+         <li>
+           <a href="{% url 'home:serviceapp'%}">
+             <i class='bx bx-pie-chart-alt-2' ></i>
+             <span class="links_name">Gastos</span>
+           </a>
+           <span class="tooltip">Gastos</span>
+         </li>
+         <li>
+           <a href="{% url 'home:teamapp'%}">
+             <i class='bx bx-folder' ></i>
+             <span class="links_name">Usuarios</span>
+           </a>
+           <span class="tooltip">Usuarios</span>
+         </li>
+         <li>
+           <a href="{% url 'home:testimonialapp'%}">
+             <i class='bx bx-cart-alt' ></i>
+             <span class="links_name">Informes</span>
+           </a>
+           <span class="tooltip">Informes</span>
+         </li>
+
+         <li>
+           <a href="#">
+             <i class='bx bx-cog' ></i>
+             <span class="links_name">Configuración</span>
+           </a>
+           <span class="tooltip">Configuración</span>
+         </li>
+         <li class="profile">
+             <div class="profile-details">
+               <!--<img src="profile.jpg" alt="profileImg">-->
+               <div class="name_job">
+                 <div class="name">Prem Shahi</div>
+                 <div class="job">Web designer</div>
+               </div>
+             </div>
+             <i class='bx bx-log-out' id="log_out" ></i>
+         </li>
+        </ul>
+      </div>
+      <section class="home-section">
+          <div class="text">Dashboard</div>
+          
+            {% block contenido %}
+            
+            {% endblock contenido %}
+           
+      </section>
+
+
+
+      <script>
+      let sidebar = document.querySelector(".sidebar");
+      let closeBtn = document.querySelector("#btn");
+      let searchBtn = document.querySelector(".bx-search");
+    
+      closeBtn.addEventListener("click", ()=>{
+        sidebar.classList.toggle("open");
+        menuBtnChange();//calling the function(optional)
+      });
+    
+      searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
+        sidebar.classList.toggle("open");
+        menuBtnChange(); //calling the function(optional)
+      });
+    
+      // following are the code to change sidebar button(optional)
+      function menuBtnChange() {
+       if(sidebar.classList.contains("open")){
+         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
+       }else {
+         closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
+       }
+      }
+      </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="{% static '/js/bootstrap.min.js'%}"></script>
+</body>
+</html>
