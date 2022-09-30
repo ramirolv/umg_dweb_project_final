@@ -18,7 +18,7 @@
     
     <!-- Hojas de estilos de bootstrap -->
     <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
-    <script src="{% static '/js/bootstrap.bundle.js'%}"></script>
+    <!-- <script src="{% static '/js/bootstrap.bundle.js'%}"></script> -->
     <link rel="stylesheet" href="{% static '/css/style2.css'%}">
     <!--
         <link rel="stylesheet" href="{% static './css/bootstrap.min.css' %}">
@@ -33,115 +33,51 @@
 </head>
 <body>
 
-    <div class="sidebar">
-        <div class="logo-details">
-            <i class='bx bxl-c-plus-plus icon'></i>
-            <div class="logo_name">Dimarcu's Pizza</div>
-            <i class='bx bx-menu' id="btn" ></i>
-        </div>
-        <ul class="p-0 nav-list">
-          <li>
-              <i class='bx bx-search' ></i>
-             <input type="text" placeholder="Escriba aquí...">
-             <span class="tooltip">Buscar</span>
-          </li>
-          <li>
-            <a href="{% url 'home:mainapp'%}">
-              <i class='bx bx-grid-alt'></i>
-              <span class="links_name">Dashboard Inicio</span>
-            </a>
-             <span class="tooltip">Dashboard Inicio</span>
-          </li>
-          <li>
-           <a href="{% url 'home:ordenesapp'%}">
-             <i class='bx bx-user' ></i>
-             <span class="links_name">Ordenes</span>
-           </a>
-           <span class="tooltip">Ordenes</span>
-         </li>
-         <li>
-           <a href="{% url 'home:productoapp'%}">
-             <i class='bx bx-chat' ></i>
-             <span class="links_name">Platillos</span>
-           </a>
-           <span class="tooltip">Platillos</span>
-         </li>
-         <li>
-           <a href="{% url 'home:serviceapp'%}">
-             <i class='bx bx-pie-chart-alt-2' ></i>
-             <span class="links_name">Gastos</span>
-           </a>
-           <span class="tooltip">Gastos</span>
-         </li>
-         <li>
-           <a href="{% url 'home:teamapp'%}">
-             <i class='bx bx-folder' ></i>
-             <span class="links_name">Usuarios</span>
-           </a>
-           <span class="tooltip">Usuarios</span>
-         </li>
-         <li>
-           <a href="{% url 'home:testimonialapp'%}">
-             <i class='bx bx-cart-alt' ></i>
-             <span class="links_name">Informes</span>
-           </a>
-           <span class="tooltip">Informes</span>
-         </li>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark">
+    <div class="container-fluid justify-content-center">
+      <a class="navbar-brand" href="#">Dimarcu's Pizza</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
 
-         <li>
-           <a href="#">
-             <i class='bx bx-cog' ></i>
-             <span class="links_name">Configuración</span>
-           </a>
-           <span class="tooltip">Configuración</span>
-         </li>
-         <li class="profile">
-             <div class="profile-details">
-               <!--<img src="profile.jpg" alt="profileImg">-->
-               <div class="name_job">
-                 <div class="name">Prem Shahi</div>
-                 <div class="job">Web designer</div>
-               </div>
-             </div>
-             <i class='bx bx-log-out' id="log_out" ></i>
-         </li>
+            <a class="nav-link" aria-current="page" href="{% url 'home:mainapp' %}">Inicio</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Ordenes
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">En progreso</a></li>
+              <li><a class="dropdown-item" href="#">Terminadas</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'home:ordenesapp' %}">Nueva</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:productoapp' %}">Platillos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:gastoapp' %}">Gastos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:teamapp' %}">Usuarios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home:serviceapp' %}">Informes</a>
+          </li>
         </ul>
       </div>
-      <section class="home-section">
-          <div class="text">Dashboard</div>
-          
-            {% block contenido %}
-            
-            {% endblock contenido %}
-           
-      </section>
-
-
-
-      <script>
-      let sidebar = document.querySelector(".sidebar");
-      let closeBtn = document.querySelector("#btn");
-      let searchBtn = document.querySelector(".bx-search");
-    
-      closeBtn.addEventListener("click", ()=>{
-        sidebar.classList.toggle("open");
-        menuBtnChange();//calling the function(optional)
-      });
-    
-      searchBtn.addEventListener("click", ()=>{ // Sidebar open when you click on the search iocn
-        sidebar.classList.toggle("open");
-        menuBtnChange(); //calling the function(optional)
-      });
-    
-      // following are the code to change sidebar button(optional)
-      function menuBtnChange() {
-       if(sidebar.classList.contains("open")){
-         closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");//replacing the iocns class
-       }else {
-         closeBtn.classList.replace("bx-menu-alt-right","bx-menu");//replacing the iocns class
-       }
-      }
-      </script>
+    </div>
+  </nav>
+  
+    <main class="mt-5">
+      <br>
+        {% block contenido %}  
+        {% endblock contenido %}
+    </main>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
