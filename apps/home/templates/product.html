@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{% static 'img/favicon.ico'%}" rel="icon"> 
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,21 +21,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css'%}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
 
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Invocación de Jquery JavaScript -->
     <script src="https://code.jquery.com/jquery.js"></script>
-    <script src="./js/product.js"></script>
+    <script src="{% static './js/product.js'%}"></script>
     <!-- / Invocación de Jquery JavaScript -->
 
 </head>
@@ -46,7 +46,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="./img/logo_empresa.jpg" alt="Logo de la empresa">
+                    <img src="{% static './img/logo_empresa.jpg'%}" alt="Logo de la empresa">
                 </span>
 
                 <div class="text logo-text">
@@ -227,7 +227,7 @@
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
                                         <h4 class="mb-3">DE LUXE</h4>
-                                        <img class="img-fluid" src="img/pizza-deluxe.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/pizza-deluxe.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                                               
                                         <HR>Individual-Q10.00</HR>
@@ -242,7 +242,7 @@
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
                                         <h4 class="mb-3">DE PEPERONI</h4>
-                                        <img class="img-fluid" src="img/pizza-peperoni.jpeg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/pizza-peperoni.jpeg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                   
                                         <HR>Individual-Q10.00</HR>
@@ -256,7 +256,7 @@
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
                                         <h4 class="mb-3"> HAWAIANA</h4>
-                                        <img class="img-fluid" src="img/pizza-hawaiana.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/pizza-hawaiana.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <HR>Individual-Q10.00</HR>
@@ -270,7 +270,7 @@
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
                                         <h4 class="mb-3"> CUATRO QUESOS</h4>
-                                        <img class="img-fluid" src="img/pizza-cuatro-quesos.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/pizza-cuatro-quesos.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <HR>Individual-Q10.00</HR>
@@ -295,7 +295,7 @@
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/alitas-barbacoa.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/alitas-barbacoa.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h4 class="mb-3">ALITAS DE BARBACOA</h4>
@@ -308,7 +308,7 @@
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/alitas-crispy.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/alitas-crispy.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h4 class="mb-3">ALITAS CRISPY</h4>
@@ -321,7 +321,7 @@
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/alitas-picantes.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/alitas-picantes.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h4 class="mb-3">ALITAS PICANTES</h4>
@@ -337,7 +337,7 @@
                             <div class="col-lg-3 col-md-5 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/hamburguesa-trad.webp" alt="">
+                                        <img class="img-fluid" src="{% static 'img/hamburguesa-trad.webp'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h5 class="mb-3">HAMBURGUESA TRADICIONAL</h5>
@@ -349,7 +349,7 @@
                             <div class="col-lg-3 col-md-5 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/hamburguesa-cheese.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/hamburguesa-cheese.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h5 class="mb-3">HAMBURGUESA DE QUESO</h5>
@@ -361,7 +361,7 @@
                             <div class="col-lg-3 col-md-5 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/hamburguesas-barbacoa.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/hamburguesas-barbacoa.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h5 class="mb-3">HAMBURGUESA DE BARBACOA</h5>
@@ -385,7 +385,7 @@
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/bebidas-gaseosas.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/bebidas-gaseosas.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h4 class="mb-3">BEBIDAS GASEOSAS</h4>
@@ -398,7 +398,7 @@
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/bebidas-naturales.webp" alt="">
+                                        <img class="img-fluid" src="{% static 'img/bebidas-naturales.webp'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h4 class="mb-3">BEBIDAS NATURALES</h4>
@@ -411,7 +411,7 @@
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
-                                        <img class="img-fluid" src="img/bebidas-calientes.jpg" alt="">
+                                        <img class="img-fluid" src="{% static 'img/bebidas-calientes.jpg'%}" alt="">
                                     </div>
                                     <div class="text-center p-2">                    
                                         <h4 class="mb-3">BEBIDAS CALIENTES</h4>
@@ -453,16 +453,16 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js'%}"></script>
+    <script src="{% static 'lib/easing/easing.min.js'%}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js'%}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
 
-    <script src="./js/script-sidebar.js"></script>
+    <script src="{% static './js/script-sidebar.js'%}"></script>
 </body>
 
 </html>

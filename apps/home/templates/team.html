@@ -9,7 +9,7 @@
     <meta content="" name="description">
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="{% static 'img/favicon.ico'%}" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +21,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="{% static 'lib/animate/animate.min.css'%}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{% static 'css/style.css'%}" rel="stylesheet">
 
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -40,7 +40,7 @@
         <header>
             <div class="image-text">
                 <span class="image">
-                    <img src="./img/logo_empresa.jpg" alt="Logo de la empresa">
+                    <img src="{% static './img/logo_empresa.jpg'%}" alt="Logo de la empresa">
                 </span>
 
                 <div class="text logo-text">
@@ -170,7 +170,7 @@
             <div class="row g-4">
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" src="img/administrador.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'img/administrador.jpg'%}" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>ADMINISTRADOR</h5>
@@ -185,7 +185,7 @@
                 
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="team-item text-center rounded overflow-hidden">
-                        <img class="img-fluid" src="img/CAJERO.jpg" alt="">
+                        <img class="img-fluid" src="{% static 'img/CAJERO.jpg'%}" alt="">
                         <div class="team-text">
                             <div class="team-title">
                                 <h5>CAJERO</h5>
@@ -200,7 +200,7 @@
                 
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="team-item text-center rounded overflow-hidden">
-                            <img class="img-fluid" src="img/cocinero.jpg" alt="">
+                            <img class="img-fluid" src="{% static 'img/cocinero.jpg'%}" alt="">
                             <div class="team-text">
                                 <div class="team-title">
                                     <h5>COCINERO</h5>
@@ -215,7 +215,7 @@
                    
                         <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="team-item text-center rounded overflow-hidden">
-                                <img class="img-fluid" src="img/mesero.jpg" alt="">
+                                <img class="img-fluid" src="{% static 'img/mesero.jpg'%}" alt="">
                                 <div class="team-text">
                                     <div class="team-title">
                                         <h5>MESERO</h5>
@@ -230,7 +230,7 @@
                         <div class="row g-4">
                             <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="team-item text-center rounded overflow-hidden">
-                                    <img class="img-fluid" src="img/repartidor.jpg" alt="">
+                                    <img class="img-fluid" src="{% static 'img/repartidor.jpg'%}" alt="">
                                     <div class="team-text">
                                         <div class="team-title">
                                             <h5>REPARTIDOR</h5>
@@ -268,16 +268,16 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/wow/wow.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/counterup/counterup.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js'%}"></script>
+    <script src="{% static 'lib/easing/easing.min.js'%}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js'%}"></script>
+    <script src="{% static 'lib/counterup/counterup.min.js'%}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
 
     <!-- Template Javascript -->
-    <script src="js/main.js"></script>
+    <script src="{% static 'js/main.js'%}"></script>
 
-    <script src="./js/script-sidebar.js"></script>
+    <script src="{% static './js/script-sidebar.js'%}"></script>
 </body>
 
 </html>
