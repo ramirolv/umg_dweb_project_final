@@ -32,6 +32,12 @@
 
     <!----===== Boxicons CSS ===== -->
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Invocación de Jquery JavaScript -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="./js/product.js"></script>
+    <!-- / Invocación de Jquery JavaScript -->
+
 </head>
 
 <body>
@@ -77,7 +83,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a href="#">
+                        <a href="./ordenes.html">
                             <i class='bx bx-bell icon'></i>
                             <span class="text nav-text">Ordenes</span>
                         </a>
@@ -141,19 +147,82 @@
 
     <div class="home">
 
+
+
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-grow text-primary" role="status"></div>
         </div>
         <!-- Spinner End -->
     
+
+    <!-- Panel de insertar -->
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title text-light" id="staticBackdropLabel">Ingrese los siguientes datos</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation form-horizontal" novalidate>
+                    <div id="inputsData">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Img</span>
+                        <input id="inputLinkImg" type="text" class="form-control" placeholder="Escribe el link de tu imagen" aria-label="Username" aria-describedby="basic-addon1" required>
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon2">Tipo</span>
+                        <select id="selectTipo" class="form-control" aria-describedby="basic-addon2">
+                            <option value="Pizza">Pizza</option>
+                            <option value="Otros">Otros platillos</option>
+                            <option value="Bebidas">Bebidas</option>
+                        </select>
+                      </div> 
+                      <div class="input-group mb-3 col-md-4">
+                        <span class="input-group-text" id="basic-addon3">Sabor</span>
+                        <input id="inputSabor" type="text" class="form-control" placeholder="Escribe el sabor del platillo" aria-label="Username" aria-describedby="basic-addon3" required>
+                      </div>
+                      <div class="input-group mb-3 col-md-4">
+                        <span class="input-group-text" id="basic-addon4">Precio - Q </span>
+                        <input id="inputPrecio" type="number" min="0" max="100" class="form-control" placeholder="Escribe el precio del platillo" aria-label="Username" aria-describedby="basic-addon4" required>
+                      </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary col-5" data-bs-dismiss="modal">Cerrar</button>
+                <button id="btnAgregar" type="button" class="btn btn-primary col-5">Aceptar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <!-- Cierre Panel de insertar -->
+
+        <!-- MAIN BUTTONS-->
+        <div class="container-fluid fix-top copyright text-light py-4 wow fadeIn" data-wow-delay="0.1s">
+            <div class="row d-flex align-items-center justify-content-center d-none d-sm-none d-md-flex"> 
+                <a id= "botonNuevo" class="btn btn-primary rounded-pill  mx-auto col col-3 col-lg-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#"><i class="bi bi-plus-circle"></i> </i>AGREGAR</a>                <a class="btn btn-primary rounded-pill mx-auto col col-3 col-lg-3" href="#"><i class="bi bi-pencil-square"></i> EDITAR</a>
+                <a class="btn btn-primary rounded-pill mx-auto col col-3 col-lg-3" href="#"><i class="bi bi-dash-circle"></i> ELIMINAR</a>
+            </div> 
+            <div class="row d-flex align-items-center justify-content-center d-flex d-sm-flex d-md-none"> 
+                <a id= "botonNuevo" class="btn btn-primary rounded-pill col col-3 col-lg-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop" href="#"><i class="bi bi-plus-circle"></i></a>
+                <!-- <a id= "botonNuevo" class="btn btn-primary rounded-pill py-8 px-5" href="#">AGREGAR</a> -->
+                <a class="btn btn-primary rounded-pill col col-3 col-lg-3" href="#"><i class="bi bi-pencil-square"></i></a>
+                <a class="btn btn-primary rounded-pill col col-3 col-lg-3" href="#"><i class="bi bi-dash-circle"></i></a>
+            </div> 
+        </div>
+        
                 
                   <!-- PIZZA'S MENU -->
                   <div class="container-xxl bg-light my-6 py-4 pt-0">
                     <div class="container">     
                     <h1>PIZZA </h1>
                     
-                        <div class="row g-4">
+                        <div id="contenedorProductos1" class="row g-4">
+                            <!--First ITEM-->
                             <div class="col-lg-3 col-md-5 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
@@ -221,8 +290,8 @@
                     <div class="container">     
                         <h1>OTROS PLATILLOS</h1>
                         
-                        <div class="row g-4">
-                
+                        <div id="contenedorProductos2" class="row g-4">
+                            <!--First ITEM-->
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
@@ -311,7 +380,8 @@
                     <div class="container">     
                     <h1>BEBIDAS </h1>
                     
-                        <div class="row g-4">
+                        <div id="contenedorProductos3" class="row g-4">
+                            <!--First ITEM-->
                             <div class="col-lg-3 col-md-8 ">            
                                 <div class="product-item d-flex flex-column bg-white rounded overflow-hidden h-100">
                                     <div class="position-relative mt-auto">
