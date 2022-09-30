@@ -43,7 +43,8 @@
                     <div class="form-group" id="contrasena-group">
                         <input id="inputClave" type="password" class="form-control" placeholder="Contrasena" name="password"/>
                     </div>
-                    <button id="iniciarSesion" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>
+                    <a href="{% url 'home:mainapp'%}" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar</a>
+                    <!--    <button id="iniciarSesion" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Ingresar </button>   -->
                 </form>
                 <div class="col-12 forgot">
                     <a href="#">Recordar contraseña?</a>
@@ -58,30 +59,6 @@
         </div>
 
     </div>
-    
-
-    <script>
-        var boton = document.getElementById('iniciarSesion');
-        var user = document.getElementById('inputUsuario');
-        var password = document.getElementById('inputClave');
-
-        boton.addEventListener('click', function comprobarUsuario(){
-            if(user.value == "admin"){
-                if (password.value == "contra") {
-                    alert("Felicidades, ingresaste");
-                    open('./main.html');
-                    window.close(); 
-                }else{
-                    alert('❌Contraseña incorrecta');
-                }
-            }else{
-                alert('❌Usuario incorrecto');
-            }
-
-        });
-
-        
-    </script>
 </body>
 </html>
 

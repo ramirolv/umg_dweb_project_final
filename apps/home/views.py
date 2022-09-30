@@ -12,7 +12,7 @@ class OrdenesView(TemplateView):
     template_name = 'ordenes.html'
 
 class ProductosView(TemplateView):
-    template_name = 'productos.html'
+    template_name = 'product.html'
 
 class ServiceView(TemplateView):
     template_name = 'service.html'
