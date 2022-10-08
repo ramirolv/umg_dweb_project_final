@@ -1,8 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
-from django.http import HttpResponseRedirect
-from django.urls import reverse_lazy
-from .forms import OrdenForm, PlatilloForm, ColaboradorForm, GastoForm
+from django.views.generic import TemplateView
 # Create your views here.
 
 class HomeView(TemplateView):
@@ -11,25 +8,17 @@ class HomeView(TemplateView):
 class MainView(TemplateView):
     template_name = 'main.html'
 
-class OrdenesView(CreateView):
+class OrdenesView(TemplateView):
     template_name = 'ordenes.html'
-    form_class = OrdenForm
-    success_url = reverse_lazy('home:mainapp')
 
-class ProductosView(CreateView):
-    template_name = 'product.html'
-    form_class = PlatilloForm
-    success_url = reverse_lazy('home:mainapp')
+class ProductosView(TemplateView):
+    template_name = 'productos.html'
 
 class ServiceView(TemplateView):
     template_name = 'service.html'
 
-class TeamView(CreateView):
+class TeamView(TemplateView):
     template_name = 'team.html'
-    form_class = ColaboradorForm
-    success_url = reverse_lazy('home:mainapp')
 
-class GastoView(CreateView):
-    template_name = 'gasto.html'
-    form_class = GastoForm
-    success_url = reverse_lazy('home:mainapp')
+class TestimonialView(TemplateView):
+    template_name = 'testimonial.html'
