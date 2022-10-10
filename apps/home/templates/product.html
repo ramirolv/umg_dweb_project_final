@@ -59,7 +59,15 @@
         <div class="modal-body">
           <form method="post">
             {% csrf_token %}
-            Nombre {{ form.nombre }}
+            Nombre {{ form.tipo }}
+            <br>
+            <br>
+            Precio {{ form.precio }}
+            <br>
+            <br>
+            Tipo {{ form.platillo_id }}
+            <br>
+            <br>
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
         </div>
