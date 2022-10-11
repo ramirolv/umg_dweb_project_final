@@ -5,11 +5,13 @@
     <div class="container">
         <form method="post">
             {% csrf_token %}
-            Nombre {{ form.nombre }}
-            Direccion {{ form.direccion }}
-            Puesto {{ form.puesto_id }}
+            Fecha {{ form.fecha }}
+            Cantidad {{ form.cantidad }}
+            Descripción {{ form.descripcion }}
+            Monto {{ form.monto }}
+            Total {{ form.total }}
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
     </div>
 
-{% endblock contenido %}
+    {% endblock contenido %}
