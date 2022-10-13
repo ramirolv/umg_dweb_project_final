@@ -3,13 +3,14 @@
 {% block contenido %}
 
     <div class="container">
-        <form method="post">
+        <form method="POST">
             {% csrf_token %}
-            Fecha {{ form.fecha }}
-            Cantidad {{ form.cantidad }}
-            Descripción {{ form.descripcion }}
-            Monto {{ form.monto }}
-            Total {{ form.total }}
+            fecha {{ form.fecha }}
+            cantidad {{ form.cantidad }}
+            descripción {{ form.descripcion }}
+            monto {{ form.monto }}
+            total {{ form.total }}
+            cuadreCaja {{ form.cuadreCaja }}
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
     </div>
