@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from .forms import PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
 # Create your views here.
@@ -18,6 +18,9 @@ class ProductosView(CreateView):
     template_name = 'product.html'
     form_class = TipoPlatilloForm
     success_url = reverse_lazy('home:mainapp')
+
+def list_product(request, product_id):
+    return HttpResponse(f"El producto seleccionado es: {product_id}")
 
 class ServiceView(TemplateView):
     template_name = 'service.html'

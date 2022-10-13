@@ -26,7 +26,9 @@ urlpatterns = [
     path('main/', MainView.as_view(), name='mainapp'),
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
     path('producto/', ProductosView.as_view(), name='productoapp'),
+    #Ejemplo: producto/5/
+    path('producto/<int:product_id>/', views.list_product, name='productoapp'),
     path('service/', ServiceView.as_view(), name='serviceapp'),
     path('team/', TeamView.as_view(), name='teamapp'),
-    path('gasto/', GastoView.as_view(), name='gastoapp')
+    path('gasto/', GastoView.as_view(), name='gastoapp'),
 ]
