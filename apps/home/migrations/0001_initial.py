@@ -30,6 +30,7 @@ class Migration(migrations.Migration):
                 ('nombre', models.CharField(max_length=45, verbose_name='Nombre')),
                 ('direccion', models.CharField(max_length=45, verbose_name='Direccion')),
                 ('creacion', models.DateTimeField(auto_now_add=True)),
+                
             ],
         ),
         migrations.CreateModel(

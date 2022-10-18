@@ -28,5 +28,6 @@ urlpatterns = [
     path('producto/', ProductosView.as_view(), name='productoapp'),
     path('service/', ServiceView.as_view(), name='serviceapp'),
     path('team/', TeamView.as_view(), name='teamapp'),
-    path('gasto/', GastoView.as_view(), name='gastoapp')
+    path('gasto/', GastoView.as_view(), name='gastoapp'),
+    
 ]
