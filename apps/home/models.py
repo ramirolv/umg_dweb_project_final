@@ -1,6 +1,7 @@
 from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Cliente(models.Model):
@@ -61,6 +62,7 @@ class Puesto(models.Model):
 
 class Colaborador(models.Model):
     #idColaborador=models.IntegerField
+    perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
     nombre =models.CharField(max_length=45, verbose_name = 'Nombre') 
     direccion= models.CharField(max_length=45, verbose_name = 'Direccion')
     puesto_id = models.ForeignKey(Puesto,on_delete =models.CASCADE)
