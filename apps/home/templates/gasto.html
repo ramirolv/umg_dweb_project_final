@@ -14,5 +14,28 @@
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
     </div>
+    <div class ="container">
+        <table class="table table-bordered">
+            <tr>
+                <td>Fecha</td>
+                <td>Cantidad</td>
+                <td>Descripcion</td>
+                <td>Monto</td>
+                <td>Total</td>
+                <td>Cuadre Caja</td>
+            </tr>
+            {% for gast in object_list %}
+            <tr>
+                <td>{{gast.fecha}}</td>
+                <td>{{gast.cantidad}}</td>
+                <td>{{gast.descripcion}}</td>
+                <td>{{gast.monto}}</td>
+                <td>{{gast.total}}</td>
+                <td>{{gast.cuadreCaja}}</td>                
+            </tr>
+            {% endfor %}
+        </table>
 
-    {% endblock contenido %}
+    </div>
+
+{% endblock contenido %}

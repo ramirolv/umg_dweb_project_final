@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
-from .models import Colaborador, Gasto, TipoPlatillo
+from .models import Colaborador, Gasto, Platillo, TipoPlatillo
 from .forms import PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
 
 
@@ -57,3 +57,12 @@ class GastoView(CreateView, ListView):
 
     def get_query(self):
         return Gasto.objects.all()
+
+class PlatillosView(CreateView,ListView):
+    template_name = 'product.html'
+    form_class = PlatilloForm
+    success_url = reverse_lazy('home:gastoapp')
+    model = Platillo
+
+    def get_query(self):
+        return Platillo.objects.all()
