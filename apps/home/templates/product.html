@@ -95,7 +95,7 @@
         
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
-        
+          {% for platillo in object_list %}
           <div class="col">
             <div class="card h-100 border-secondary">
               <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
@@ -110,24 +110,22 @@
               </div>         
             </div>
           </div>
-          <div class ="container">
-            <table class="table table-bordered">
-                <tr>
-                    <td><h5 class="card-title">Tipo</h5></td>
-                    <td>Precio</td>
-                    <td>Platillo_id</td>
-                </tr>
-                {% for plat in object_list %}
-                <tr>
-                    <td>{{ plat.tipo }}</td>  
-                    <td><div class="btn-group" role="group" aria-label="Basic outlined example">
-                      <button type="button" class="btn btn-outline-primary">{{plat.precio}}</button>
-                    </div></td>
-                    <td>{{ plat.platillo_id }}</td>            
-                </tr>
-                {% endfor %}
-            </table>
-        </div>
+          {% endfor %}
+          {% for platillo in object_list %}
+          <div class="col">
+            <div class="card h-100 border-secondary">
+              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ platillo.tipo }}</h5>
+                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
+              </div>
+              <div class="btn-group" role="group" aria-label="Basic outlined example">
+                <button type="button" class="btn btn-outline-primary">{{platillo.precio}}</button>
+                <button type="button" class="btn btn-outline-primary">{{ platillo.platillo_id }}</button>
+              </div>         
+            </div>
+          </div>
+          {% endfor %}
           <div class="col">
             <div class="card h-100 border-secondary">
               <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
