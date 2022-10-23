@@ -62,7 +62,16 @@
             Nombre {{ form.tipo }}
             <br>
             <br>
-            Precio {{ form.precio }}
+            Descripcion {{ form.descripcion }}
+            <br>
+            <br>
+            Precio1 {{ form.PrimerPrecio }}
+            <br>
+            <br>
+            Precio2 {{ form.SegundoPrecio }}
+            <br>
+            <br>
+            Precio3 {{ form.TercerPrecio }}
             <br>
             <br>
             Tipo {{ form.platillo_id }}
@@ -117,11 +126,12 @@
               <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
               <div class="card-body">
                 <h5 class="card-title">{{ platillo.tipo }}</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
+                <p class="card-text">{{ platillo.descripcion }}</p>    
               </div>
               <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">{{platillo.precio}}</button>
-                <button type="button" class="btn btn-outline-primary">{{ platillo.platillo_id }}</button>
+                <button type="button" class="btn btn-outline-primary">{{ platillo.PrimerPrecio }}</button>
+                <button type="button" class="btn btn-outline-primary">{{ platillo.SegundoPrecio }}</button>
+                <button type="button" class="btn btn-outline-primary">{{ platillo.TercerPrecio }}</button>
               </div>         
             </div>
           </div>

@@ -25,7 +25,10 @@ class Platillo(models.Model):
 class TipoPlatillo(models.Model):
     # idPlatillo=models.IntegerField
     tipo =models.CharField(max_length=45, verbose_name = 'Tipo')
-    precio =models.DecimalField(max_digits=5, decimal_places=2)
+    PrimerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    SegundoPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    TercerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    descripcion =models.CharField(max_length=200, verbose_name = 'Descripcion') 
     creacion =models.DateTimeField(auto_now_add=True)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     def __str__(self):
