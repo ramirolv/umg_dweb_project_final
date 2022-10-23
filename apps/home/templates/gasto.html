@@ -3,15 +3,39 @@
 {% block contenido %}
 
     <div class="container">
-        <form method="post">
+        <form method="POST">
             {% csrf_token %}
-            Fecha {{ form.fecha }}
-            Cantidad {{ form.cantidad }}
-            Descripción {{ form.descripcion }}
-            Monto {{ form.monto }}
-            Total {{ form.total }}
+            fecha {{ form.fecha }}
+            cantidad {{ form.cantidad }}
+            descripción {{ form.descripcion }}
+            monto {{ form.monto }}
+            total {{ form.total }}
+            cuadreCaja {{ form.cuadreCaja }}
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
     </div>
+    <div class ="container">
+        <table class="table table-bordered">
+            <tr>
+                <td>Fecha</td>
+                <td>Cantidad</td>
+                <td>Descripcion</td>
+                <td>Monto</td>
+                <td>Total</td>
+                <td>Cuadre Caja</td>
+            </tr>
+            {% for gast in object_list %}
+            <tr>
+                <td>{{gast.fecha}}</td>
+                <td>{{gast.cantidad}}</td>
+                <td>{{gast.descripcion}}</td>
+                <td>{{gast.monto}}</td>
+                <td>{{gast.total}}</td>
+                <td>{{gast.cuadreCaja}}</td>                
+            </tr>
+            {% endfor %}
+        </table>
 
-    {% endblock contenido %}
+    </div>
+
+{% endblock contenido %}

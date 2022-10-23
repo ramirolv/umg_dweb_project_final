@@ -23,12 +23,15 @@ class Platillo(models.Model):
     nombre =models.CharField(max_length=45, verbose_name = 'Nombre')
     creacion =models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.nombre
-
+        return '%s' % (self.nombre)
+ 
 class TipoPlatillo(models.Model):
     # idPlatillo=models.IntegerField
     tipo =models.CharField(max_length=45, verbose_name = 'Tipo')
-    precio =models.DecimalField(max_digits=5, decimal_places=2)
+    PrimerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    SegundoPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    TercerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    descripcion =models.CharField(max_length=200, verbose_name = 'Descripcion') 
     creacion =models.DateTimeField(auto_now_add=True)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     def __str__(self):
@@ -40,7 +43,7 @@ class CuadreCaja(models.Model):
     fecha =models.DateField(verbose_name = 'Fecha')  
     creacion =models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.disponible
+        return '%s' % (self.disponible)
 
 class Gasto(models.Model):
      #idGasto =models.IntegerField
@@ -51,7 +54,8 @@ class Gasto(models.Model):
     total =models.DecimalField(max_digits=5, decimal_places=2)
     cuadreCaja = models.ForeignKey(CuadreCaja,on_delete =models.CASCADE)
     creacion =models.DateTimeField(auto_now_add=True)
-
+    def __str__(self):
+        return '%s' % (self.descripcion)
 
 class Puesto(models.Model):
     #idPuesto =models.IntegerField

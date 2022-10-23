@@ -36,10 +36,24 @@
 /*** Código personalizado***/
 
 body{
+     margin: 0;
+     background-repeat: no-repeat;
+     background-size: cover;
+     background-position: center center;
+     background-attachment: fixed;
+ }
+ 
+ body:before{
+    content: "";
+    width: 100%;
     min-height: 100vh;
-    background-color: var(--body-color);
-    transition: var(--tran-05);
-}
+    position: absolute;
+    top:0;
+    left: 0;
+    background :linear-gradient(#AB8768,#6EB5A6,#D1B5A6);
+    opacity: 0.5;
+  }
+  
 
 ::selection{
     background-color: var(--primary-color);
