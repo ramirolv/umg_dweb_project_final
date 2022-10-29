@@ -31,4 +31,5 @@ urlpatterns = [
     path('service/', ServiceView.as_view(), name='serviceapp'),
     path('team/', TeamView.as_view(), name='teamapp'),
     path('gasto/', GastoView.as_view(), name='gastoapp'),
+    
 ]
