@@ -1,6 +1,9 @@
 from email.policy import default
 from unittest.util import _MAX_LENGTH
 from django.db import models
+from django.contrib.auth.models import User
+from django.dispatch import receiver 
+from django.db.models.signals import post_save
 
 # Create your models here.
 class Cliente(models.Model):
@@ -25,7 +28,10 @@ class Platillo(models.Model):
 class TipoPlatillo(models.Model):
     # idPlatillo=models.IntegerField
     tipo =models.CharField(max_length=45, verbose_name = 'Tipo')
-    precio =models.DecimalField(max_digits=5, decimal_places=2)
+    PrimerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    SegundoPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    TercerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    descripcion =models.CharField(max_length=200, verbose_name = 'Descripcion') 
     creacion =models.DateTimeField(auto_now_add=True)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     def __str__(self):
@@ -62,12 +68,23 @@ class Puesto(models.Model):
 
 class Colaborador(models.Model):
     #idColaborador=models.IntegerField
+    perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
     nombre =models.CharField(max_length=45, verbose_name = 'Nombre') 
     direccion= models.CharField(max_length=45, verbose_name = 'Direccion')
-    puesto_id = models.ForeignKey(Puesto,on_delete =models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
+    
     def __str__(self):
         return self.nombre
+        
+@receiver ( post_save, sender = User)
+def crear_colaborador(sender, instance, created, **kwargs):
+        if created:
+            Colaborador.objects.create(perfil=instance)
+
+@receiver ( post_save, sender = User)
+def guardar_colaborador(sender, instance, created, **kwargs):
+       instance.colaborador.save()
+
 
 class Orden(models.Model):
     tipo_estado=(
@@ -97,11 +114,3 @@ class DetalleOrden(models.Model):
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     creacion =models.DateTimeField(auto_now_add=True)
 
-class Usuario(models.Model):
-    #idUsuario =models.IntegerField
-    user =models.CharField(max_length=45, verbose_name = 'User') 
-    password =models.CharField(max_length=45, verbose_name = 'Password')
-    puesto_id= models.OneToOneField(Puesto,on_delete =models.CASCADE)   
-    creacion =models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.user
