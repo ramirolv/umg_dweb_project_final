@@ -37,15 +37,9 @@ class PuestoForm(forms.ModelForm):
 class ColaboradorForm(forms.ModelForm):
    
     class Meta:
-        model= User
-        fields = (
-        
-            'username',
-            'email',
-            'password',
-            
-        )
-        
+        model= Colaborador
+        fields = fields = '__all__'
+       
 class OrdenForm(forms.ModelForm):
     class Meta:
         model = Orden

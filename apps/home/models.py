@@ -69,12 +69,14 @@ class Puesto(models.Model):
 class Colaborador(models.Model):
     #idColaborador=models.IntegerField
     perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
-    nombre =models.CharField(max_length=45, verbose_name = 'Nombre') 
-    direccion= models.CharField(max_length=45, verbose_name = 'Direccion')
+    nombre =models.CharField(max_length=45, null= True) 
+    edad= models.IntegerField (null=True, blank=True)
+    direccion= models.CharField (max_length=100, null=True, blank =True)
+    telefono = models.CharField (max_length=20, null=True, blank =True)
     creacion = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.nombre
+        return self.perfil.username
         
 @receiver ( post_save, sender = User)
 def crear_colaborador(sender, instance, created, **kwargs):
