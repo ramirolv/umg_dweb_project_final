@@ -2,24 +2,6 @@
 
 {% block contenido %}
 
-    <div class="container">
-        <form method="POST">
-            {% csrf_token %}
-            fecha {{ form.fecha }}
-            cantidad {{ form.cantidad }}
-            descripción {{ form.descripcion }}
-            monto {{ form.monto }}
-            total {{ form.total }}
-            cuadreCaja {{ form.cuadreCaja }}
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-          </form>
-    </div>
-
-    <form action="" method="get">
-        <input type="text" name="descripcion" value="{{request.GET.descripcion}}">
-        <button type="submit">Buscar</button>
-    </form>
-
     <div class ="container">
         <table class="table table-bordered">
             <tr>
@@ -38,8 +20,8 @@
                 <td>{{gast.descripcion}}</td>
                 <td>{{gast.monto}}</td>
                 <td>{{gast.total}}</td>
-                <td>{{gast.cuadreCaja}}</td>  
-                <td><a href="{% url 'home:editargastoapp' gast.id %}">Editar</a></td>              
+                <td>{{gast.cuadreCaja}}</td>   
+                <td></td>             
             </tr>
             {% endfor %}
         </table>
