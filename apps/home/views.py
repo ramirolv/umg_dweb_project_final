@@ -41,7 +41,7 @@ class ServiceView(TemplateView):
 class TeamView(CreateView, ListView):
     template_name = 'team.html'
     form_class = ColaboradorForm
-    success_url = reverse_lazy('home:teamapp')
+    success_url = reverse_lazy('home:mainapp')
     model = Colaborador
 
 
@@ -77,3 +77,4 @@ class PlatillosView(CreateView,ListView):
 
     def get_query(self):
         return Platillo.objects.all()
+
