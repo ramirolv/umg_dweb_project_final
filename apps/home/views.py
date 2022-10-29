@@ -1,3 +1,6 @@
+from contextvars import Context
+from datetime import datetime
+from pipes import Template
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView
 from django.http import HttpResponseRedirect, HttpResponse
@@ -66,3 +69,26 @@ class PlatillosView(CreateView,ListView):
 
     def get_query(self):
         return Platillo.objects.all()
+
+"""
+def plantillaParametros(request):
+    nombre = "Ramiro"
+    fechaActual = datetime.now()
+
+    #Abrimos el documento de la plantilla
+    plantillaExterna = open("./templates.main.html")
+
+    #Se carga el documento en una variable de tipo plantillal
+    template = Template(plantillaExterna.read())
+
+    #Se cierra el documento por seguridad y optimización
+    plantillaExterna.close()
+
+    #Se crea un contexto - Recepción de parámetros
+    contexto = Context({"nombreCanal": nombre, "fechaActual": fechaActual})
+
+    #Se renderiza el documento
+    documento = template.render(contexto)
+    return HttpResponse(documento)
+    """
+
