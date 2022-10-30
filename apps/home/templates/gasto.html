@@ -2,6 +2,44 @@
 
 {% block contenido %}
 
+<!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Agregue los siguientes datos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="post">
+            {% csrf_token %}
+            Nombre {{ form.tipo }}
+            <br>
+            <br>
+            Descripcion {{ form.descripcion }}
+            <br>
+            <br>
+            Precio1 {{ form.PrimerPrecio }}
+            <br>
+            <br>
+            Precio2 {{ form.SegundoPrecio }}
+            <br>
+            <br>
+            Precio3 {{ form.TercerPrecio }}
+            <br>
+            <br>
+            Tipo {{ form.platillo_id }}
+            <br>
+            <br>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="container">
         <form method="POST" class="form-ingreso">
             {% csrf_token %}
@@ -9,8 +47,12 @@
             Cantidad {{ form.cantidad }}
             Descripción {{ form.descripcion }}
             Monto {{ form.monto }}
+            <br>
+            <br>
             Total {{ form.total }}
             CuadreCaja {{ form.cuadreCaja }}
+            <br>
+            <br>
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
         </form>
     </div>
