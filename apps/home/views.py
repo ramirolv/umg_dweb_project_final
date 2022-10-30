@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from .models import Colaborador, Gasto, Platillo, TipoPlatillo
@@ -55,11 +55,8 @@ class GastoView(CreateView, ListView):
     success_url = reverse_lazy('home:gastoapp')
     model = Gasto
 
-<<<<<<< Updated upstream
-    def get_query(self):
-        return Gasto.objects.all()
-=======
-    def get_queryset(self):
+
+def get_queryset(self):
         vDescripcion =self.request.GET.get('descripcion')
         if(vDescripcion):
             return Gasto.objects.filter(descripcion__icontains=vDescripcion)
@@ -67,15 +64,13 @@ class GastoView(CreateView, ListView):
             return Gasto.objects.all()
 
    
-
 class EditarGastoView(UpdateView):
     template_name = 'editargasto.html'
     model = Gasto
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
-   
->>>>>>> Stashed changes
 
+   
 class PlatillosView(CreateView,ListView):
     template_name = 'product.html'
     form_class = PlatilloForm
