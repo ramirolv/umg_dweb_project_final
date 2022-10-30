@@ -1,0 +1,18 @@
+{% extends 'base_sidebar.html' %}
+
+{% block contenido %}
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+        fecha {{ form.fecha }}
+        cantidad {{ form.cantidad }}
+        descripción {{ form.descripcion }}
+        monto {{ form.monto }}
+        total {{ form.total }}
+        cuadreCaja {{ form.cuadreCaja }}
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+      </form>
+</div>
+
+{% endblock contenido %}
