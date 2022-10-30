@@ -28,9 +28,9 @@ class Platillo(models.Model):
 class TipoPlatillo(models.Model):
     # idPlatillo=models.IntegerField
     tipo =models.CharField(max_length=45, verbose_name = 'Tipo')
-    PrimerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
-    SegundoPrecio =models.DecimalField(max_digits=5, decimal_places=2)
-    TercerPrecio =models.DecimalField(max_digits=5, decimal_places=2)
+    PrimerPrecio =models.DecimalField(max_digits=10, decimal_places=2)
+    SegundoPrecio =models.DecimalField(max_digits=10, decimal_places=2)
+    TercerPrecio =models.DecimalField(max_digits=10, decimal_places=2)
     descripcion =models.CharField(max_length=200, verbose_name = 'Descripcion') 
     creacion =models.DateTimeField(auto_now_add=True)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
@@ -39,19 +39,19 @@ class TipoPlatillo(models.Model):
 
 class CuadreCaja(models.Model):
     # idCaja =models.IntegerField
-    disponible =models.DecimalField(max_digits=5, decimal_places=2)
-    fecha =models.DateField(verbose_name = 'Fecha')  
+    disponible =models.DecimalField(max_digits=10, decimal_places=2)
+    fecha =models.DateField(verbose_name = 'Fecha')
     creacion =models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return '%s' % (self.disponible)
 
 class Gasto(models.Model):
      #idGasto =models.IntegerField
-    fecha =models.DateField(verbose_name = 'Fecha') 
+    #fecha =models.DateField(verbose_name = 'Fecha') 
     cantidad =models.IntegerField(default =0)
     descripcion =models.CharField(max_length=45, verbose_name = 'Descripcion') 
-    monto =models.DecimalField(max_digits=5, decimal_places=2)
-    total =models.DecimalField(max_digits=5, decimal_places=2)
+    monto =models.DecimalField(max_digits=10, decimal_places=2)
+    total =models.DecimalField(max_digits=10, decimal_places=2)
     cuadreCaja = models.ForeignKey(CuadreCaja,on_delete =models.CASCADE)
     creacion =models.DateTimeField(auto_now_add=True)
     def __str__(self):
@@ -69,12 +69,14 @@ class Puesto(models.Model):
 class Colaborador(models.Model):
     #idColaborador=models.IntegerField
     perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
-    nombre =models.CharField(max_length=45, verbose_name = 'Nombre') 
-    direccion= models.CharField(max_length=45, verbose_name = 'Direccion')
+    nombre =models.CharField(max_length=45, null= True) 
+    edad= models.IntegerField (null=True, blank=True)
+    direccion= models.CharField (max_length=100, null=True, blank =True)
+    telefono = models.CharField (max_length=20, null=True, blank =True)
     creacion = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.nombre
+        return self.perfil.username
         
 @receiver ( post_save, sender = User)
 def crear_colaborador(sender, instance, created, **kwargs):
