@@ -1,7 +1,9 @@
+from datetime import datetime
 from django.shortcuts import render
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
+from django.template import Template, Context
 from .models import Colaborador, Gasto, Platillo, TipoPlatillo
 from .forms import PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
 
@@ -80,3 +82,25 @@ class PlatillosView(CreateView,ListView):
     def get_query(self):
         return Platillo.objects.all()
 
+def plantillaParametros(request):
+    modeloGastos = Gasto
+    modeloPlatillos = TipoPlatillo
+    nombre = "Curso Django"
+    fechaActual = datetime.now()
+    lenguajes = ["Python", "Ruby", "JavaScript"]
+
+    #Se abri el documento que contiene la plantilla
+    plantillaExterna = open('./apps/home/templates/plantillaparametros.html')
+
+    #Se carga el documento en una variable de tipo template
+    template = Template(plantillaExterna.read())
+    
+    #Se cierra el documento por seguridad y optimización
+    plantillaExterna.close()
+
+    #Se crea un contexto para pasarle parámetros
+    contexto = Context({"nombre": nombre, "fechaActual": fechaActual, "lenguajes": lenguajes, "gastos": modeloGastos.objects.all(), "platillos": modeloPlatillos.objects.all()})
+
+    #Se renderiza el documento con el contexto
+    documento = template.render(contexto)
+    return HttpResponse(documento)

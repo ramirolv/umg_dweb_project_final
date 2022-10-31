@@ -115,4 +115,3 @@ class DetalleOrden(models.Model):
     orden_id = models.ForeignKey(Orden,on_delete =models.CASCADE)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     creacion =models.DateTimeField(auto_now_add=True)
-

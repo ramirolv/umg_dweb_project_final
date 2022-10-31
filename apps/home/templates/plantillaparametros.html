@@ -1,0 +1,67 @@
+{% extends 'base_sidebar.html' %}
+
+{% block contenido %}
+<div class="container">
+    <h1>En esta web veremos las variables que pasamos con django</h1>
+<p> {{ nombre }} </p>
+<p> {{ fechaActual }} </p>
+<ol>
+    {% for leng in lenguajes %}
+    <li> {{leng}} </li>
+    {% endfor %}
+</ol>
+
+
+<h2>Gastos</h2>
+
+<table class="table table-bordered table-warning table-hover">
+    <tr>
+        <td>Fecha</td>
+        <td>Cantidad</td>
+        <td>Descripcion</td>
+        <td>Monto</td>
+        <td>Total</td>
+        <td>Cuadre Caja</td>
+        <td>Editar</td>
+    </tr>
+        {% for gast in gastos %}
+        <tr>
+            <td>{{gast.creacion}}</td>
+            <td>{{gast.cantidad}}</td>
+            <td>{{gast.descripcion}}</td>
+            <td>{{gast.monto}}</td>
+            <td>{{gast.total}}</td>
+            <td>{{gast.cuadreCaja}}</td>  
+            <td><a data-popup="yes" href="{% url 'home:editargastoapp' gast.id %}">Editar</a></td>              
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h2>Platillos</h2>
+    <table class="table table-bordered table-dark table-hover">
+        <tr>
+            <td>Tipo</td>
+            <td>1 Precio</td>
+            <td>2 Precio</td>
+            <td>3 Precio</td>
+            <td>Descripcion</td>
+            <td>Platillo Caja</td>
+            <td>Editar</td>
+        </tr>
+        {% for platillo in platillos %}
+        <tr>
+            <td>{{platillo.tipo}}</td>
+            <td>{{platillo.PrimerPrecio}}</td>
+            <td>{{platillo.SegundoPrecio}}</td>
+            <td>{{platillo.TercerPrecio}}</td>
+            <td>{{platillo.descripcion}}</td>
+            <td>{{platillo.platillo_id}}</td>  
+            <td><a href="{% url 'home:editargastoapp' platillo.id %}">Editar</a></td>              
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+</div>
+{% endblock contenido %}

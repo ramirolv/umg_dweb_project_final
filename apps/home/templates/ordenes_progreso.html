@@ -3,7 +3,7 @@
 {% block contenido %}
 
     <div class="home">
-    
+     
                 
                   <!-- PIZZA'S MENU -->
                   <!-- Panel OffCanvas -->
@@ -48,63 +48,16 @@
 
   <!-- / Panel OffCanvas -->
 
-  <!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Agregue los siguientes datos</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form method="post">
-            {% csrf_token %}
-            Nombre {{ form.tipo }}
-            <br>
-            <br>
-            Descripcion {{ form.descripcion }}
-            <br>
-            <br>
-            Precio1 {{ form.PrimerPrecio }}
-            <br>
-            <br>
-            Precio2 {{ form.SegundoPrecio }}
-            <br>
-            <br>
-            Precio3 {{ form.TercerPrecio }}
-            <br>
-            <br>
-            Tipo {{ form.platillo_id }}
-            <br>
-            <br>
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-     
-
-    <main class="main">
+    <main class="">
       <div class="container">
         <h2 class="">Pizzas</h2>
 
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          <i class="bi bi-bag-plus-fill">Agregar</i>
-        </button>
-
-        
-
-        
+        <a class="btn btn-offcanvas btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+          <i class="bi bi-bag-plus-fill">Ver Orden</i>
+        </a>
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
-          {% for platillo in object_list %}
+        
           <div class="col">
             <div class="card h-100 border-secondary">
               <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
@@ -119,23 +72,6 @@
               </div>         
             </div>
           </div>
-          {% endfor %}
-          {% for platillo in object_list %}
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ platillo.tipo }}</h5>
-                <p class="card-text">{{ platillo.descripcion }}</p>    
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">{{ platillo.PrimerPrecio }}</button>
-                <button type="button" class="btn btn-outline-primary">{{ platillo.SegundoPrecio }}</button>
-                <button type="button" class="btn btn-outline-primary">{{ platillo.TercerPrecio }}</button>
-              </div>         
-            </div>
-          </div>
-          {% endfor %}
           <div class="col">
             <div class="card h-100 border-secondary">
               <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
@@ -178,6 +114,7 @@
               </ul>            
             </div>
           </div>
+        </div>
           <div class="col">
             <div class="card h-100 border-secondary">
               <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
