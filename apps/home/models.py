@@ -1,4 +1,5 @@
 from email.policy import default
+from tabnanny import verbose
 from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.contrib.auth.models import User
@@ -43,7 +44,7 @@ class CuadreCaja(models.Model):
     fecha =models.DateField(verbose_name = 'Fecha')
     creacion =models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return '%s' % (self.disponible)
+        return '%s' % (self.fecha)
 
 class Gasto(models.Model):
      #idGasto =models.IntegerField
@@ -89,24 +90,17 @@ def guardar_colaborador(sender, instance, created, **kwargs):
 
 
 class Orden(models.Model):
-    tipo_estado=(
-        ('C', 'Creada'),
-        ('T', 'Terminada'),
-        ('E', 'Entregada'),   
-      )
     #idOrden=models.IntegerField
     fecha =models.DateField(verbose_name = 'Fecha')  
     tipo=models.CharField(max_length=45, verbose_name = 'Tipo')
-    estado = models.CharField(
-        max_length=1,
-        choices = tipo_estado,
-        default = 'C',
-      )
-
+    estado = models.CharField(max_length=20, verbose_name="Estado")
     cliente_id = models.ForeignKey(Cliente,on_delete =models.CASCADE)
     colaborador_id = models.ForeignKey(Colaborador,on_delete =models.CASCADE)
     cuadreCaja_id = models.ForeignKey(CuadreCaja,on_delete =models.CASCADE)
     creacion =models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return '%s %s %s' % (self.id, self.cliente_id, self.fecha)
 
 class DetalleOrden(models.Model):
     #idDetalleOrden=models.IntegerField

@@ -1,5 +1,12 @@
 {% extends 'base_sidebar.html' %}
 
+{% block controles %}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  <i class="bi bi-bag-plus-fill small"> Agregar</i>
+</button>
+{% endblock controles %}
+
 {% block contenido %}
 
     <div class="home">
@@ -87,21 +94,9 @@
     </div>
   </div>
   
-     
 
-    <main class="main">
       <div class="container">
         <h2 class="">Pizzas</h2>
-
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          <i class="bi bi-bag-plus-fill">Agregar</i>
-        </button>
-
-        
-
-        
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
           {% for platillo in object_list %}
@@ -350,7 +345,6 @@
         </div>
 
       </div>
-    </main>
     </div>
 
     {% endblock contenido %}
