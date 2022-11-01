@@ -4,8 +4,8 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, Gasto, Platillo, TipoPlatillo
-from .forms import PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
+from .models import Colaborador, Gasto, Orden, Platillo, TipoPlatillo
+from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
 
 
 # Create your views here.
@@ -19,6 +19,24 @@ class MainView(TemplateView):
 
 class OrdenesView(TemplateView):
     template_name = 'ordenes.html'
+
+
+class OrdenesProgresoView(CreateView, ListView):
+    template_name = 'ordenes_progreso.html'
+    form_class = OrdenForm
+    success_url = reverse_lazy('home:ordenesapp')
+    model = Orden
+
+    def get_query(self):
+        return Orden.objects.all()
+
+
+    def get_queryset(self):
+        vEstado = self.request.GET.get('estado')
+        if(vEstado):
+            return Orden.objects.filter(estado__icontains=vEstado)
+        else:
+            return Orden.objects.all()
 
 
 class ProductosView(CreateView, ListView):
