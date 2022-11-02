@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apps.home import views
-from .views import HomeView, MainView, OrdenesView, OrdenesProgresoView, ProductosView, ServiceView, TeamView, GastoView, EditarGastoView, plantillaParametros
+from .views import HomeView, MainView, OrdenesView, ordenNueva, OrdenesProgresoView, ProductosView, ServiceView, TeamView, GastoView, EditarGastoView, plantillaParametros
 
 app_name='home'
 
@@ -25,7 +25,8 @@ urlpatterns = [
     path('', HomeView.as_view(), name='indexapp'),
     path('main/', MainView.as_view(), name='mainapp'),
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
-    path('ordenes/progreso', OrdenesProgresoView.as_view(), name='ordenes_progeso'),
+    path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),
+    path('ordenes/progreso/', OrdenesProgresoView.as_view(), name='ordenes_progeso'),
     path('producto/', ProductosView.as_view(), name='productoapp'),
     #Ejemplo: producto/5/
     # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
