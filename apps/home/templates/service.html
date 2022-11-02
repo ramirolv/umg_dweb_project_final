@@ -1,5 +1,14 @@
-
 {% extends 'base_sidebar.html' %}
+
+{% block titulo %}
+  <div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <i class="bi bi-bag-plus-fill small"> Imprimir informe</i>
+    </button>
+  </div>
+  <h2 class="text-white">Informes</h2>
+{% endblock titulo %}
 
 {% block contenido %}
 {% load static %}

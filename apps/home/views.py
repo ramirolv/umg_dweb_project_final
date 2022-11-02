@@ -1,10 +1,10 @@
 from datetime import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, Gasto, Orden, Platillo, TipoPlatillo
+from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente
 from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
 
 
@@ -28,15 +28,36 @@ class OrdenesProgresoView(CreateView, ListView):
     model = Orden
 
     def get_query(self):
-        return Orden.objects.all()
+
+        return {"orden":Orden.objects.all(), "cliente":Cliente.objects.all(), "colaborador":Colaborador.objects.all(), "cuadrecaja":CuadreCaja.objects.all()}
 
 
     def get_queryset(self):
         vEstado = self.request.GET.get('estado')
         if(vEstado):
-            return Orden.objects.filter(estado__icontains=vEstado)
+            return {"orden":Orden.objects.filter(estado__icontains=vEstado), "cliente":Cliente.objects.all(), "colaborador":Colaborador.objects.all(), "cuadrecaja":CuadreCaja.objects.all()}
         else:
-            return Orden.objects.all()
+            return {"orden":Orden.objects.all(), "cliente":Cliente.objects.all(), "colaborador":Colaborador.objects.all(), "cuadrecaja":CuadreCaja.objects.all()}
+
+
+def ordenNueva(request):
+    tipo= request.POST['tipo']
+    #estado= request.POST['estado'] Se asigna directamente
+    cliente_id= Cliente.objects.get(pk=request.POST['cliente'])
+    colaborador_id= Colaborador.objects.get(pk=request.POST['colaborador_id'])
+    cuadrecaja_id= CuadreCaja.objects.get(pk=request.POST['cuadrecaja'])
+
+    orden = Orden(tipo=tipo, estado='Creada', cliente_id=cliente_id, colaborador_id=colaborador_id, cuadreCaja_id=cuadrecaja_id)
+    orden.save()
+
+    return redirect('home:ordenes_progreso')
+
+
+def ordenEliminar(request, id):
+    orden = Orden.objects.get(id=id)
+    orden.delete()
+
+    return redirect('home:ordenes_progreso')
 
 
 class ProductosView(CreateView, ListView):
@@ -91,7 +112,7 @@ class EditarGastoView(UpdateView):
     success_url = reverse_lazy('home:gastoapp')
 
    
-class PlatillosView(CreateView,ListView):
+class PlatillosView(ListView):
     template_name = 'product.html'
     form_class = PlatilloForm
     success_url = reverse_lazy('home:gastoapp')
@@ -99,6 +120,8 @@ class PlatillosView(CreateView,ListView):
 
     def get_query(self):
         return Platillo.objects.all()
+
+
 
 def plantillaParametros(request):
     modeloGastos = Gasto

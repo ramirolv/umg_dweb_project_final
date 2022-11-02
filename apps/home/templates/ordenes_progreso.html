@@ -1,75 +1,112 @@
 {% extends 'base_sidebar.html' %}
 
+{% block titulo %}
+  <div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <i class="bi bi-bag-plus-fill small"> Agregar</i>
+    </button>
+
+  </div>
+  <h2 class="text-white">Ordenes</h2>
+{% endblock titulo %}
+
+
 {% block contenido %}
 
-    <div class="home">
-     
-                
-                  <!-- PIZZA'S MENU -->
-                  <!-- Panel OffCanvas -->
-  
-  <div class="offcanvas offcanvas-end bg-dark text-light" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Orden No. 15</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <h2 class="mt-5">Detalle de orden</h2>
-      <table class="table table-primary table-bordered table-hover">
-        <thead>
-          <td>#</td>
-          <td>Descripción</td>
-          <td>Precio</td>
-        </thead>
-        <tr>
-          <td>4</td>
-          <td>Pizza Pepperoni (Grande)</td>
-          <td>Q360</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Pizza Hauawiana (Mediana)</td>
-          <td>Q140</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Coca-Cola</td>
-          <td>Q10</td>
-        </tr>
-        <tfoot>
-          <td></td>
-          <td>Total</td>
-          <td>Q510</td>
-        </tfoot>
-      </table>
-      
-    </div>
-  </div>
-
-  <!-- / Panel OffCanvas -->
+  <div class="home">
 
     <main class="">
-      <div class="container">
-        <h2 class="">Pizzas</h2>
+      <!-- Modal -->
+      <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="staticBackdropLabel">Agregue los siguientes datos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action=" {% url 'home:ordenes_nueva' %} "  method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label" for="id_tipo">Consumo en:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="tipo" id="id_tipo">
+                      <option value="Local">Local</option>
+                      <option value="Domicilio">Domicilio</option>
+                      <option value="Llevar">Para llevar</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="form-group row">
+                  <label class="col-sm-2 col-form-label" for="id_cliente_id">Cliente</label>
+                  <div class="col-sm-8">
+                    <select class="form-control" name="cliente" id="id_cliente_id">
+                      {% for cli in object_list.cliente %}
+                      <option value=" {{cli.id}} "> {{cli.nombre}} </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  <div class="col-sm-2">
+                    <input class="btn btn-success" type="button" value="+">
+                  </div>
+                </div>
 
-        <a class="btn btn-offcanvas btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-          <i class="bi bi-bag-plus-fill">Ver Orden</i>
-        </a>
+                <div class="form-group row mt-2">
+                  <label class="col-sm-2 col-form-label" for="id_colaborador_id">Colaborador</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="colaborador_id" id="id_colaborador_id">
+                      {% for cli in object_list.colaborador %}
+                      <option value=" {{cli.id}} "> {{cli.nombre}} </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
 
-        <div style = "text-align:center">
-          <form action="" method="get">
-            <label for="estado">Filtrar por Estado</label>
-            <br>
-            <select name="estado" id="" value="{{request.GET.estado}}">
-              <option value="">Todas</option>
-              <option value="Creada">Creada</option>
-              <option value="Terminada">Terminada</option>
-              <option value="Entregada">Entregada</option>
-            </select>
+                <div class="form-group row mt-2">
+                  <label class="col-sm-2 col-form-label" for="id_cuadrecaja_id">Cuadre de caja</label>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="cuadrecaja" id="id_cuadrecaja_id">
+                      {% for cli in object_list.cuadrecaja %}
+                      <option value=" {{cli.id}} "> {{cli.fecha}} </option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="container d-flex justify-content-center my-3">
+                  <button class="btn btn-success" type="sumbit">Guardar</button>
+                </div>
 
-              <button type="submit">Buscar</button>
-          </form>
+
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <div class="container">
+        <h2 class="">En Progreso</h2>
+
+        <div class="container">
+          <form class="form-inline d-flex justify-content-center" action="" method="get">
+            <div class="form-group px-5">
+              <label for="estado">Filtrar por estado</label>
+              <select class="form-control" name="estado" id="estado" value=" {{ request.GET.estado }} ">
+                <option value="">Todas</option>
+                <option value="Creada">Creada</option>
+                <option value="Terminada">Terminada</option>
+                <option value="Entregada">Entregada</option>
+              </select>
+              <div class="container my-1">
+                <input class="btn btn-primary" type="submit" value="Buscar">
+              </div>
+            </div>
+          </form>
+        </div>
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
           <table class="table table-dark table-hover table-bordered">
@@ -81,150 +118,27 @@
               <td>Cliente</td>
               <td>Colaborador</td>
               <td>Cuadre de caja</td>
+              <td>Acciones</td>
             </tr>
-            {% for ord in object_list %}
+            {% for ord in object_list.orden %}
             <tr>
               <td> {{ord.id}} </td>
-              <td> {{ord.fecha}} </td>
+              <td> {{ord.creacion}} </td>
               <td> {{ord.tipo}} </td>
               <td> {{ord.estado}} </td>
               <td> {{ord.cliente_id}} </td>
               <td> {{ord.colaborador_id}} </td>
               <td> {{ord.cuadreCaja_id}} </td>
+              <td>
+                <a href="#" class="btn btn-info">*</a>
+                <a href="{% url 'home:ordenes_eliminar' ord.id %}" class="btn btn-danger">-</a>
+              </td>
             </tr>
             {% endfor %}
           </table>
         </div>
-
-
-        <h2 class="mt-5">Otros platillos</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          
-        </div>
-
-
-
-
-        <h2 class="mt-5">Bebidas</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://www.tn23.tv/wp-content/uploads/2019/05/caf%C3%A9-2-256x256.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Café</h5>
-                <p class="card-text">Variedades de café</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Simple Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Con leche Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Capuchino Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://fitenium.com/wp-content/uploads/2019/02/aromatic-close-cup-1417945-256x256.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Té</h5>
-                <p class="card-text">Variedades de té</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Manzanilla Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Jamaica Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Limón Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://sc04.alicdn.com/kf/Udd455d611ee14618ae3cd404bc844409z.jpeg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Gaseosa</h5>
-                <p class="card-text">Variedades de gaseosas</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Coca-Cola Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Sprite Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mirinda Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          
-          
-        </div>
-
       </div>
     </main>
-    </div>
+  </div>
 
-    {% endblock contenido %}
+{% endblock contenido %}

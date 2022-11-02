@@ -91,7 +91,6 @@ def guardar_colaborador(sender, instance, created, **kwargs):
 
 class Orden(models.Model):
     #idOrden=models.IntegerField
-    fecha =models.DateField(verbose_name = 'Fecha')  
     tipo=models.CharField(max_length=45, verbose_name = 'Tipo')
     estado = models.CharField(max_length=20, verbose_name="Estado")
     cliente_id = models.ForeignKey(Cliente,on_delete =models.CASCADE)
@@ -100,7 +99,7 @@ class Orden(models.Model):
     creacion =models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
-        return '%s %s %s' % (self.id, self.cliente_id, self.fecha)
+        return '%s %s %s' % (self.id, self.cliente_id, self.creacion)
 
 class DetalleOrden(models.Model):
     #idDetalleOrden=models.IntegerField
