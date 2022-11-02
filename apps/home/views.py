@@ -39,7 +39,25 @@ class OrdenesProgresoView(CreateView, ListView):
         else:
             return {"orden":Orden.objects.all(), "cliente":Cliente.objects.all(), "colaborador":Colaborador.objects.all(), "cuadrecaja":CuadreCaja.objects.all()}
 
-    
+
+def ordenNueva(request):
+    tipo= request.POST['tipo']
+    #estado= request.POST['estado'] Se asigna directamente
+    cliente_id= Cliente.objects.get(pk=request.POST['cliente'])
+    colaborador_id= Colaborador.objects.get(pk=request.POST['colaborador_id'])
+    cuadrecaja_id= CuadreCaja.objects.get(pk=request.POST['cuadrecaja'])
+
+    orden = Orden(tipo=tipo, estado='Creada', cliente_id=cliente_id, colaborador_id=colaborador_id, cuadreCaja_id=cuadrecaja_id)
+    orden.save()
+
+    return redirect('home:ordenes_progreso')
+
+
+def ordenEliminar(request, id):
+    orden = Orden.objects.get(id=id)
+    orden.delete()
+
+    return redirect('home:ordenes_progreso')
 
 
 class ProductosView(CreateView, ListView):
@@ -103,17 +121,6 @@ class PlatillosView(ListView):
     def get_query(self):
         return Platillo.objects.all()
 
-def ordenNueva(request):
-    tipo= request.POST['tipo']
-    #estado= request.POST['estado'] Se asigna directamente
-    cliente_id= Cliente.objects.get(pk=request.POST['cliente'])
-    colaborador_id= Colaborador.objects.get(pk=request.POST['colaborador_id'])
-    cuadrecaja_id= CuadreCaja.objects.get(pk=request.POST['cuadrecaja'])
-
-    orden = Orden(tipo=tipo, estado='Creada', cliente_id=cliente_id, colaborador_id=colaborador_id, cuadreCaja_id=cuadrecaja_id)
-    orden.save()
-
-    return redirect('home:ordenes_progeso')
 
 
 def plantillaParametros(request):

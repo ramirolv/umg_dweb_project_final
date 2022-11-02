@@ -118,6 +118,7 @@
               <td>Cliente</td>
               <td>Colaborador</td>
               <td>Cuadre de caja</td>
+              <td>Acciones</td>
             </tr>
             {% for ord in object_list.orden %}
             <tr>
@@ -128,6 +129,10 @@
               <td> {{ord.cliente_id}} </td>
               <td> {{ord.colaborador_id}} </td>
               <td> {{ord.cuadreCaja_id}} </td>
+              <td>
+                <a href="#" class="btn btn-info">*</a>
+                <a href="{% url 'home:ordenes_eliminar' ord.id %}" class="btn btn-danger">-</a>
+              </td>
             </tr>
             {% endfor %}
           </table>
