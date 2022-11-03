@@ -29,6 +29,7 @@ urlpatterns = [
     path('ordenes/progreso/', OrdenesProgresoView.as_view(), name='ordenes_progreso'),
     path('ordenes/eliminar/<int:id>', ordenEliminar, name='ordenes_eliminar'),
     path('ordenes/platillos/<int:id>', tomarOrden, name='tomar_orden'),
+    path('ordenes/detalle/eliminar/<int:id>', detalleOrdenEliminar, name='detalle_eliminar'),
     path('cliente/formulario/', clienteFormulario, name='cliente_formulario'),
     path('cliente/nuevo/', clienteNuevo, name='cliente_nuevo'),
     path('producto/', ProductosView.as_view(), name='productoapp'),
