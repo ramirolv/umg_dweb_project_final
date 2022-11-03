@@ -10,7 +10,6 @@ from django.db.models.signals import post_save
 class Cliente(models.Model):
     #idCliente=models.IntegerField
     nombre =models.CharField(max_length=45, verbose_name = 'Nombre')
-    telefono=models.IntegerField
     direccion=models.CharField(max_length=45, verbose_name = 'Direccion')
     DPI=models.CharField(max_length=45, verbose_name = 'DPI')
     NIT=models.CharField(max_length=45, verbose_name = 'NIT')

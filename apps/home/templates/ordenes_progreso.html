@@ -51,7 +51,7 @@
                     </select>
                   </div>
                   <div class="col-sm-2">
-                    <input class="btn btn-success" type="button" value="+">
+                    <a href=" {% url 'home:cliente_formulario' %} " class="btn btn-success" type="button" target="__blank" rel="noopener noreferrer">+</a>
                   </div>
                 </div>
 
@@ -61,17 +61,6 @@
                     <select class="form-control" name="colaborador_id" id="id_colaborador_id">
                       {% for cli in object_list.colaborador %}
                       <option value=" {{cli.id}} "> {{cli.nombre}} </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-
-                <div class="form-group row mt-2">
-                  <label class="col-sm-2 col-form-label" for="id_cuadrecaja_id">Cuadre de caja</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" name="cuadrecaja" id="id_cuadrecaja_id">
-                      {% for cli in object_list.cuadrecaja %}
-                      <option value=" {{cli.id}} "> {{cli.fecha}} </option>
                       {% endfor %}
                     </select>
                   </div>
