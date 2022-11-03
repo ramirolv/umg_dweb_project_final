@@ -1,0 +1,80 @@
+{% extends 'base_sidebar.html' %}
+
+{% block titulo %}
+    <a class="btn btn-offcanvas btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <i class="bi bi-bag-plus-fill">Ver Orden</i>
+    </a>
+{% endblock titulo %}
+
+
+{% block contenido %}
+
+    <!-- Panel OffCanvas -->
+    <div class="offcanvas offcanvas-end bg-warning text-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+            <div class="container">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">Orden No. {{orden.id}} </h5>
+                <div> {{orden.cliente_id}} </div>
+                <div> {{orden.tipo}} </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <h2 class="mt-5">Detalle de orden</h2>
+            <table class="table table-primary table-bordered table-hover">
+                <thead>
+                    <td>Borrar</td>
+                    <td>Cantidad</td>
+                    <td>Descripción</td>
+                    <td>Precio</td>
+                </thead>
+
+                {% for det in orden.detalleorden_set.all %}
+                    <tr>
+                        <td><a href=" {% url 'home:detalle_eliminar' det.id %} " class="btn btn-danger">-</a></td>
+                        <td> {{det.cantidad}} </td>
+                        <td> {{det.tipoPlatillo_id}} </td>
+                        <td> Q{{det.sub_total}} </td>
+                    </tr>
+                {% endfor %}
+
+                <tfoot>
+                <td></td>
+                <td></td>
+                <td>Total</td>
+                <td id="sumaTotal">Q105</td>
+                </tfoot>
+            </table>
+            <a class="btn btn-primary" href=" {% url 'home:ordenes_progreso' %} ">Completar orden</a>
+        </div>
+    </div>
+    <!-- / Panel OffCanvas -->
+
+    <div class="container">
+        {% for plat in platillos %}
+            <h2 class=""> {{plat.nombre}} </h2>
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
+                {% for tipoPlat in plat.tipoplatillo_set.all %}
+                    <div class="col">
+                        <div class="card h-100 border-secondary">
+                            <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ tipoPlat.tipo }} </h5>
+                                <p class="card-text">{{ tipoPlat.descripcion }}</p>    
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
+                                <li class="list-group-item list-group-item-action d-flex">Mediana Q{{ tipoPlat.SegundoPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
+                                <li class="list-group-item list-group-item-action d-flex">Grande Q{{ tipoPlat.TercerPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
+                            </ul>            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+        {% endfor %}
+
+    </div>
+
+{% endblock contenido %}

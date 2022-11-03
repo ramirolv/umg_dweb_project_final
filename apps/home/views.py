@@ -4,7 +4,7 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente
+from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden
 from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
 
 
@@ -45,12 +45,23 @@ def ordenNueva(request):
     #estado= request.POST['estado'] Se asigna directamente
     cliente_id= Cliente.objects.get(pk=request.POST['cliente'])
     colaborador_id= Colaborador.objects.get(pk=request.POST['colaborador_id'])
-    cuadrecaja_id= CuadreCaja.objects.get(pk=request.POST['cuadrecaja'])
 
+    if(CuadreCaja.objects.filter(fecha=datetime.now().date()).count() == 0):
+        try:
+            ultimo = CuadreCaja.objects.filter(fecha__isnull=False).latest('fecha')
+            nuevoCuadre = CuadreCaja(disponible=ultimo.disponible, fecha=datetime.now().date())
+        except CuadreCaja.DoesNotExist:
+            nuevoCuadre = CuadreCaja(disponible=0, fecha=datetime.now().date())
+
+        nuevoCuadre.save()
+
+    cuadrecaja_id = CuadreCaja.objects.get(fecha=datetime.now().date())
     orden = Orden(tipo=tipo, estado='Creada', cliente_id=cliente_id, colaborador_id=colaborador_id, cuadreCaja_id=cuadrecaja_id)
     orden.save()
 
-    return redirect('home:ordenes_progreso')
+    orden = Orden.objects.latest('creacion')
+
+    return redirect('home:tomar_orden', orden.id)
 
 
 def ordenEliminar(request, id):
@@ -58,6 +69,51 @@ def ordenEliminar(request, id):
     orden.delete()
 
     return redirect('home:ordenes_progreso')
+
+
+def tomarOrden(request, id):
+    modeloPlatillo = Platillo.objects.all()
+    modeloOrden = Orden.objects.get(pk=id)
+
+    templateExterno = open('./apps/home/templates/ordenes_tomar_platillos.html')
+    template = Template(templateExterno.read())
+    contexto = Context({'orden':modeloOrden, 'platillos':modeloPlatillo})
+    documento = template.render(contexto)
+    return HttpResponse(documento)
+
+
+def agregarDetalleOrden(request):
+    id_orden = request.POST['id_orden']
+    cantidad = request.POST['cantidad']
+    tipoPlatillo = request.POST['tipoPlatillo']
+    #sub_total = cantidad -> hacer suma automática
+
+    detalle = DetalleOrden()
+    detalle.save()
+
+
+def detalleOrdenEliminar(request, id):
+    detalleOrden = DetalleOrden.objects.get(id=id)
+    orden = Orden.objects.get(pk=detalleOrden.orden_id.id)
+    detalleOrden.delete()
+
+    return redirect('home:tomar_orden', orden.id)
+
+
+def clienteFormulario(request):
+    return render(request, './cliente_nuevo.html')
+
+
+def clienteNuevo(request):
+    nombre = request.POST['nombre']
+    direccion = request.POST['direccion']
+    dpi = request.POST['dpi']
+    nit = request.POST['nit']
+
+    cliente = Cliente(nombre=nombre, direccion=direccion, DPI=dpi, NIT=nit)
+    cliente.save()
+
+    return redirect('home:indexapp')
 
 
 class ProductosView(CreateView, ListView):
