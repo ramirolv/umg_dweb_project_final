@@ -77,6 +77,7 @@ class Colaborador(models.Model):
     telefono = models.CharField (max_length=20, null=True, blank =True)
     creacion = models.DateTimeField(auto_now_add=True)
     puesto= models.ForeignKey (Puesto,null=True,on_delete=models.CASCADE)
+    perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
 
     
     def __str__(self):
@@ -114,3 +115,21 @@ class DetalleOrden(models.Model):
 
     def __str__(self):
         return '%s %s %s' % (self.cantidad, self.tipoPlatillo_id, self.sub_total)
+
+
+class Usuario(models.Model):
+    #idUsuario =models.IntegerField
+    perfil = models.OneToOneField (User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.perfil.username 
+        
+@receiver ( post_save, sender = User)
+def crear_usuario(sender, instance, created, **kwargs):
+        if created:
+            Usuario.objects.create(perfil=instance)
+
+@receiver ( post_save, sender = User)
+def guardar_usuario(sender, instance, created, **kwargs):
+       instance.usuario.save()
+    
