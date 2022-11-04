@@ -32,9 +32,14 @@
                     <img src="{% static 'img/login.webp' %}" width="100" height="100" /> 
                 </div>
                 
-                <form class="col-12">
+                <form class="col-12" method="POST">
                     <div class="form-group" id="user-group">
-                        <input id="inputUsuario" type="text" class="form-control" placeholder="Nombre de usuario" name="username"/>
+
+                    
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <input id="inputUsuario" type="text" class="form-control" placeholder="Nombre de usuario" name="username"/> 
+                        
                     </div>
                     <div class="form-group" id="contrasena-group">
                         <input id="inputClave" type="password" class="form-control" placeholder="Contrasena" name="password"/>

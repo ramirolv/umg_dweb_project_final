@@ -70,7 +70,7 @@
         <td>{{ col.puesto }}</td>
         <td>
             <a class="btn btn-info" href="{% url 'home:editarusuarioapp' col.id %}">Editar</a> <a class="btn btn-danger" href="{% url 'home:eliminarusuario' col.id %}">Eliminar</a></td>
-        
+            <a class="btn btn-info" href="{% url 'home:registro' %}">Crear Usuario</a>
       </tr>
       {% endfor %}
   </div>    

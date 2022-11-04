@@ -46,5 +46,7 @@ urlpatterns = [
     path('puesto/', PuestoView.as_view(), name='puestoapp'),
     path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
     path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
+    path('registro/', RegistroView.as_view(), name='registro'),
+    path('login/', LoginView.as_view(), name='login')
 ]
 
