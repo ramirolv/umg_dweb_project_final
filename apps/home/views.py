@@ -160,7 +160,7 @@ class EditarUsuarioView(UpdateView):
     success_url = reverse_lazy('home:teamapp')
     model = Colaborador
 
-class PuestoView (CreateView, ListView):
+class PuestoView (CreateView):
     template_name = "puesto.html"
     form_class= PuestoForm
     success_url = reverse_lazy('home:teamapp')
