@@ -4,8 +4,8 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, Gasto, Platillo, TipoPlatillo
-from .forms import PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
+from .models import Colaborador, Gasto, Platillo, TipoPlatillo, Puesto
+from .forms import PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm, PuestoForm
 
 
 # Create your views here.
@@ -49,6 +49,16 @@ class TeamView(CreateView, ListView):
 
     def get_query(self):
         return Colaborador.objects.all()
+
+class PuestoView (CreateView):
+    template_name= 'puesto.html'
+    form_class = PuestoForm
+    success_url = reverse_lazy ('home:mainapp')
+    model= Puesto
+
+    def get_query(self):
+        return Puesto.objects.all()
+
 
 
 class GastoView(CreateView, ListView):

@@ -68,15 +68,16 @@ class Puesto(models.Model):
 
 class Colaborador(models.Model):
     #idColaborador=models.IntegerField
-    perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
     nombre =models.CharField(max_length=45, null= True) 
     edad= models.IntegerField (null=True, blank=True)
     direccion= models.CharField (max_length=100, null=True, blank =True)
     telefono = models.CharField (max_length=20, null=True, blank =True)
     creacion = models.DateTimeField(auto_now_add=True)
+    puesto= models.ForeignKey (Puesto,null=True,on_delete=models.CASCADE)
+
     
     def __str__(self):
-        return self.perfil.username
+        return str(self.nombre)
         
 @receiver ( post_save, sender = User)
 def crear_colaborador(sender, instance, created, **kwargs):
