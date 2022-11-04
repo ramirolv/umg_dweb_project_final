@@ -33,6 +33,7 @@
                   <form method="POST">
                   {% csrf_token %}
                   {{ col.creacion }} 
+                  <br><br>nombre{{ form.nombre }}
                   <br><br>nombre{{ form.edad }}
                   <br><br>descripción {{ form.direccion}}
                   <br><br> monto {{ form.telefono}}
