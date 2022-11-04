@@ -151,14 +151,19 @@ class GastoView(CreateView, ListView):
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
     model = Gasto
-
-
-def get_queryset(self):
+    
+    def get_queryset(self):
         vDescripcion =self.request.GET.get('descripcion')
         if(vDescripcion):
             return Gasto.objects.filter(descripcion__icontains=vDescripcion)
         else:
             return Gasto.objects.all()
+
+def gastodelete (request,pk):
+    gasto = Gasto.objects.get(id=pk)
+    gasto.delete()
+    return redirect('home:gastoapp')
+
 
    
 class EditarGastoView(UpdateView):
