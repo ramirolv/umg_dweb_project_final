@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from apps.home import views
-from .views import HomeView, MainView, OrdenesView, ProductosView,  ServiceView, TeamView, PuestoView,  GastoView,  EditarGastoView, plantillaParametros, PuestoView
+from .views import *
 
 app_name='home'
 
@@ -25,6 +25,13 @@ urlpatterns = [
     path('', HomeView.as_view(), name='indexapp'),
     path('main/', MainView.as_view(), name='mainapp'),
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
+    path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),
+    path('ordenes/progreso/', OrdenesProgresoView.as_view(), name='ordenes_progreso'),
+    path('ordenes/eliminar/<int:id>', ordenEliminar, name='ordenes_eliminar'),
+    path('ordenes/platillos/<int:id>', tomarOrden, name='tomar_orden'),
+    path('ordenes/detalle/eliminar/<int:id>', detalleOrdenEliminar, name='detalle_eliminar'),
+    path('cliente/formulario/', clienteFormulario, name='cliente_formulario'),
+    path('cliente/nuevo/', clienteNuevo, name='cliente_nuevo'),
     path('producto/', ProductosView.as_view(), name='productoapp'),
     #Ejemplo: producto/5/
     # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
@@ -32,8 +39,9 @@ urlpatterns = [
     path('team/', TeamView.as_view(), name='teamapp'),
     path('gasto/', GastoView.as_view(), name='gastoapp'),
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
-    path('plantilla/', plantillaParametros, name='plantilla'), 
-    path('puesto/', PuestoView.as_view(), name='puestoapp'),
-   
-    
+    path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
+    path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
+    path('eliminar_platillo/<int:pk>', views.delete, name='eliminarplatillo'),
+    path('plantilla/', plantillaParametros, name='plantilla'),    
 ]
+

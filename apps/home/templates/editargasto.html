@@ -2,17 +2,31 @@
 
 {% block contenido %}
 
-<div class="container">
-    <form method="POST">
-        {% csrf_token %}
-        fecha {{ form.fecha }}
-        cantidad {{ form.cantidad }}
-        descripción {{ form.descripcion }}
-        monto {{ form.monto }}
-        total {{ form.total }}
-        cuadreCaja {{ form.cuadreCaja }}
-        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-      </form>
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h1 class="modal-title fs-5" id="exampleModalLabel">Editando Registro</h1>
+
+    </div>   
+      <div class="modal-body">
+      </div>   
+      <div class="modal-body">
+          <form method="POST">
+          {% csrf_token %}
+          {{gast.creacion}}</td>
+          <br><br>cantidad {{ form.cantidad }}
+          <br><br>descripción {{ form.descripcion }}
+          <br><br> monto {{ form.monto }}
+          <br><br>total {{ form.total }}
+          <br><br>cuadreCaja {{ form.cuadreCaja }}
+          <br><br><br>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          <td><a class="btn btn-dark" href="{% url 'home:gastoapp'%}">Cancelar</a></td>              
+        </form>
+      </div> 
+      </div> 
+  </div>
+</div>
 </div>
 
 {% endblock contenido %}

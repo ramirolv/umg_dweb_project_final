@@ -1,5 +1,15 @@
 {% extends 'base_sidebar.html' %}
 
+{% block titulo %}
+  <div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <i class="bi bi-bag-plus-fill small"> Agregar</i>
+    </button>
+  </div>
+  <h2 class="text-white">Platillos</h2>
+{% endblock titulo %}
+
 {% block contenido %}
 
     <div class="home">
@@ -87,21 +97,9 @@
     </div>
   </div>
   
-     
 
-    <main class="main">
       <div class="container">
         <h2 class="">Pizzas</h2>
-
-
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-          <i class="bi bi-bag-plus-fill">Agregar</i>
-        </button>
-
-        
-
-        
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
           {% for platillo in object_list %}
@@ -132,6 +130,8 @@
                 <button type="button" class="btn btn-outline-primary">{{ platillo.PrimerPrecio }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ platillo.SegundoPrecio }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ platillo.TercerPrecio }}</button>
+                <button type="button" class="btn btn-outline-primary"><a href="{% url 'home:editarplatilloapp' platillo.id %}">Editar</a></button>
+                <button type="button" class="btn btn-outline-primary"><a href="{% url 'home:eliminarplatillo' platillo.id %}">Eliminar</a></button>
               </div>         
             </div>
           </div>
@@ -350,7 +350,6 @@
         </div>
 
       </div>
-    </main>
     </div>
 
     {% endblock contenido %}

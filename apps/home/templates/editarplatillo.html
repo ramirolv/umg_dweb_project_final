@@ -1,0 +1,30 @@
+{% extends 'base_sidebar.html' %}
+
+{% block contenido %}
+
+<div class="modal-body">
+    <form method="post">
+      {% csrf_token %}
+      Nombre {{ form.tipo }}
+      <br>
+      <br>
+      Descripcion {{ form.descripcion }}
+      <br>
+      <br>
+      Precio1 {{ form.PrimerPrecio }}
+      <br>
+      <br>
+      Precio2 {{ form.SegundoPrecio }}
+      <br>
+      <br>
+      Precio3 {{ form.TercerPrecio }}
+      <br>
+      <br>
+      Tipo {{ form.platillo_id }}
+      <br>
+      <br>
+      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+  </div>
+
+{% endblock contenido %}
