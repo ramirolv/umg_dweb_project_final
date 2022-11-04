@@ -11,6 +11,7 @@ class Cliente(models.Model):
     #idCliente=models.IntegerField
     nombre =models.CharField(max_length=45, verbose_name = 'Nombre')
     direccion=models.CharField(max_length=45, verbose_name = 'Direccion')
+    telefono=models.CharField(max_length=20, verbose_name = 'Telefono')
     DPI=models.CharField(max_length=45, verbose_name = 'DPI')
     NIT=models.CharField(max_length=45, verbose_name = 'NIT')
     creacion =models.DateTimeField(auto_now_add=True)

@@ -74,22 +74,24 @@ def ordenEliminar(request, id):
 def tomarOrden(request, id):
     modeloPlatillo = Platillo.objects.all()
     modeloOrden = Orden.objects.get(pk=id)
+    modeloCliente = Cliente.objects.get(pk=modeloOrden.cliente_id.id)
 
     templateExterno = open('./apps/home/templates/ordenes_tomar_platillos.html')
     template = Template(templateExterno.read())
-    contexto = Context({'orden':modeloOrden, 'platillos':modeloPlatillo})
+    contexto = Context({'orden':modeloOrden, 'platillos':modeloPlatillo, 'cliente':modeloCliente})
     documento = template.render(contexto)
     return HttpResponse(documento)
 
 
 def agregarDetalleOrden(request):
-    id_orden = request.POST['id_orden']
+    id_orden = Orden.objects.get(pk=request.POST['id_orden'])
     cantidad = request.POST['cantidad']
-    tipoPlatillo = request.POST['tipoPlatillo']
-    #sub_total = cantidad -> hacer suma automática
+    tipo_platillo = TipoPlatillo.objects.get(pk=request.POST['tipoPlatillo'])
+    sub_total = cantidad * tipo_platillo.PrimerPrecio
 
-    detalle = DetalleOrden()
+    detalle = DetalleOrden(cantidad=cantidad, sub_total=sub_total, orden_id=id_orden, tipoPlatillo_id=tipo_platillo)
     detalle.save()
+    return redirect('home:tomar_orden', id_orden)
 
 
 def detalleOrdenEliminar(request, id):
@@ -106,14 +108,15 @@ def clienteFormulario(request):
 
 def clienteNuevo(request):
     nombre = request.POST['nombre']
+    telefono = request.POST['telefono']
     direccion = request.POST['direccion']
     dpi = request.POST['dpi']
     nit = request.POST['nit']
 
-    cliente = Cliente(nombre=nombre, direccion=direccion, DPI=dpi, NIT=nit)
+    cliente = Cliente(nombre=nombre, telefono=telefono, direccion=direccion, DPI=dpi, NIT=nit)
     cliente.save()
 
-    return redirect('home:indexapp')
+    return redirect('home:ordenes_progreso')
 
 
 class ProductosView(CreateView, ListView):
