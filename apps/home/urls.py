@@ -39,7 +39,12 @@ urlpatterns = [
     path('team/', TeamView.as_view(), name='teamapp'),
     path('gasto/', GastoView.as_view(), name='gastoapp'),
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
+    path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
     path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
     path('eliminar_platillo/<int:pk>', views.delete, name='eliminarplatillo'),
     path('plantilla/', plantillaParametros, name='plantilla'),    
+    path('puesto/', PuestoView.as_view(), name='puestoapp'),
+    path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
+    path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
 ]
+

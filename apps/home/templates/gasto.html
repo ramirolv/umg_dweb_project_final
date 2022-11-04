@@ -2,105 +2,76 @@
 
 {% block titulo %}
   <div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success" data-bs-toggle="" data-bs-target="#staticBackdrop">
-      <i class="bi bi-bag-plus-fill small"> Boton Prueba</i>
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+      <i class="bi bi-plus-circle-fill"> Agregar</i>
     </button>
   </div>
+
   <h2 class="text-white">Gastos</h2>
 {% endblock titulo %}
 
-
 {% block contenido %}
 
-<!-- Modal -->
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Agregue los siguientes datos</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form method="post">
-            {% csrf_token %}
-            Nombre {{ form.tipo }}
-            <br>
-            <br>
-            Descripcion {{ form.descripcion }}
-            <br>
-            <br>
-            Precio1 {{ form.PrimerPrecio }}
-            <br>
-            <br>
-            Precio2 {{ form.SegundoPrecio }}
-            <br>
-            <br>
-            Precio3 {{ form.TercerPrecio }}
-            <br>
-            <br>
-            Tipo {{ form.platillo_id }}
-            <br>
-            <br>
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<br><br>
+<form class= "form-inline my-2 my-lg-0">
+  <input class= "form-control mr-ms-2" type="text" name="descripcion" value="{{request.GET.descripcion}}" placeholder ="Buscar..." arial-label="Search">    
+</form>
+
+    <!--Create a new register using Model -->
+    <br><br><br>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresando Gastos</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>   
+            <div class="modal-body">
+                <form method="POST">
+                {% csrf_token %}
+                {{gast.creacion}}</td>
+                <br><br>cantidad {{ form.cantidad }}
+                <br><br>descripción {{ form.descripcion }}
+                <br><br> monto {{ form.monto }}
+                <br><br>total {{ form.total }}
+                <br><br>cuadreCaja {{ form.cuadreCaja }}
+                <br><br><br>
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+              <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              </form>
+            </div> 
         </div>
       </div>
     </div>
-  </div>
+  
+    <!--Data Listed-->
     <div class="container">
-        <form method="POST" class="form-ingreso">
-            {% csrf_token %}
-            <!--Fecha {{ form.fecha }}-->
-            Cantidad {{ form.cantidad }}
-            Descripción {{ form.descripcion }}
-            Monto {{ form.monto }}
-            <br>
-            <br>
-            Total {{ form.total }}
-            CuadreCaja {{ form.cuadreCaja }}
-            <br>
-            <br>
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        </form>
+      <table class="table table-dark">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Cantidad<div class="fw-normal"></div></th>
+          <th>Descripcion<div class="fw-normal"></div></th>
+          <th>Monto<div class="fw-normal"></div></th>
+          <th>Total<div class="fw-normal"></div></th>
+          <th>Cuadre Caja<div class="fw-normal"></div></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for gast in object_list %}
+      <tr>
+        <td><code>{{gast.creacion}}</code></td>
+        <td>{{gast.cantidad}}</td>
+        <td>{{gast.descripcion}}</td>
+        <td>{{gast.monto}}</td>
+        <td>{{gast.total}}</td>
+        <td>{{gast.cuadreCaja}}</td> 
+        <td><a class="btn btn-dark" href="{% url 'home:editargastoapp' gast.id %}">Editar</a></td>              
+        <td><a class="btn btn-danger" href="{% url 'home:eliminargasto' gast.id %}">Eliminar</a></td>   
+     </tr>
+     {% endfor %}
     </div>
-
-    <div style = "text-align:center">
-        <form action="" method="get">
-            <input type="text" name="descripcion" value="{{request.GET.descripcion}}">
-            <button type="submit">Buscar</button>
-        </form>
-    </div>
-
-    
-
-    <div class ="container">
-        <table class="table table-bordered">
-            <tr>
-                <td>Fecha</td>
-                <td>Cantidad</td>
-                <td>Descripcion</td>
-                <td>Monto</td>
-                <td>Total</td>
-                <td>Cuadre Caja</td>
-                <td>Editar</td>
-            </tr>
-            {% for gast in object_list %}
-            <tr>
-                <td>{{gast.creacion}}</td>
-                <td>{{gast.cantidad}}</td>
-                <td>{{gast.descripcion}}</td>
-                <td>{{gast.monto}}</td>
-                <td>{{gast.total}}</td>
-                <td>{{gast.cuadreCaja}}</td>  
-                <td><a href="{% url 'home:editargastoapp' gast.id %}">Editar</a></td>              
-            </tr>
-            {% endfor %}
-        </table>
-
-    </div>
-
+  </div>
 {% endblock contenido %}

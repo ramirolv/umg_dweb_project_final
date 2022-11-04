@@ -1,21 +1,79 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Registro de usuarios</h1>
-    {% block content %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p  }}
-        <input type="submit" name="Guardar">
+{% extends 'base_sidebar.html' %}
 
 
-    </form>
-    {% endblock content%}
-</body>
-</html>
+{% block titulo %}
+  <div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="bi bi-bag-plus-fill small"> Agregar</i>
+    </button>
+
+  </div>
+  <h2 class="text-white">Colaboradores</h2>
+{% endblock titulo %}
+
+
+{% block contenido %}  
+
+<br><br>
+<form class= "form-inline my-2 my-lg-0">
+  <input class= "form-control mr-ms-2" type="text" name="descripcion" value="{{request.GET.descripcion}}" placeholder ="Buscar..." arial-label="Search">    
+</form>
+
+<br><br><br>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresando Colaboradores</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>   
+              <div class="modal-body">
+                  <form method="POST">
+                  {% csrf_token %}
+                  {{ col.creacion }} 
+                  <br><br>nombre{{ form.edad }}
+                  <br><br>descripción {{ form.direccion}}
+                  <br><br> monto {{ form.telefono}}
+                  <br><br>total {{ form.puesto }}
+                  <br><br><br>
+                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </form>
+              </div> 
+          </div>
+        </div>
+      </div>
+
+
+<div class="container">
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Puesto</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+
+    {% for col in object_list %}
+    <tbody>
+      <tr>
+        <td>{{ col.nombre }}</td>
+        <td>{{ col.edad }}</td>
+        <td>{{ col.direccion }}</td>
+        <td>{{ col.telefono }}</td>
+        <td>{{ col.puesto }}</td>
+        <td>
+            <a class="btn btn-info" href="{% url 'home:editarusuarioapp' col.id %}">Editar</a> <a class="btn btn-danger" href="{% url 'home:eliminarusuario' col.id %}">Eliminar</a></td>
+        
+      </tr>
+      {% endfor %}
+  </div>    
+</div>
+
+{% endblock %}

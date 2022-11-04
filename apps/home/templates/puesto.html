@@ -1,0 +1,46 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css'%}">
+    <!-- <script src="{% static '/js/bootstrap.bundle.js'%}"></script> -->
+    <link rel="stylesheet" href="{% static '/css/style4.css'%}">
+    <title>Modal Box</title>
+<h5>jvghgchgc</h5>
+
+</head>
+<body>
+
+  
+
+ {% block puesto %}   
+    <div class="center1">
+<input type="checkbox"  id="click">
+<label for="click" class="click-me1">Agregar puesto</label>
+
+<div class="content1">
+    <div class="header"> <h2>Registrar nuevo puesto</h2></div>
+
+        
+    <form action="" method="POST">
+       <p> {% csrf_token %}
+        {{ form }}
+
+        
+    
+    </p>
+        <input type="submit" name="Guardar">
+    
+    </form>
+
+<label for="click" class="close-btn1">Cerrar</label>
+</div>
+
+</div>
+{% endblock puesto%}
+

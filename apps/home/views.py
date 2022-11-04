@@ -4,8 +4,8 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden
-from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
+from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden, Puesto
+from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm, PuestoForm
 
 
 # Create your views here.
@@ -141,27 +141,52 @@ class ServiceView(TemplateView):
 class TeamView(CreateView, ListView):
     template_name = 'team.html'
     form_class = ColaboradorForm
-    success_url = reverse_lazy('home:mainapp')
+    success_url = reverse_lazy('home:teamapp')
     model = Colaborador
 
 
     def get_query(self):
         return Colaborador.objects.all()
+    
+def usuariodelete (request,id):
+    colaborador = Colaborador.objects.get(id=id)
+    colaborador.delete()
+    return redirect('home:teamapp')
 
+
+class EditarUsuarioView(UpdateView):
+    template_name = 'editarusuario.html'
+    form_class = ColaboradorForm
+    success_url = reverse_lazy('home:teamapp')
+    model = Colaborador
+
+class PuestoView (CreateView):
+    template_name = "puesto.html"
+    form_class= PuestoForm
+    success_url = reverse_lazy('home:mainapp')
+    model= Colaborador
+
+    def get_query(self):
+        return Colaborador.objects.all()
 
 class GastoView(CreateView, ListView):
     template_name = 'gasto.html'
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
     model = Gasto
-
-
-def get_queryset(self):
+    
+    def get_queryset(self):
         vDescripcion =self.request.GET.get('descripcion')
         if(vDescripcion):
             return Gasto.objects.filter(descripcion__icontains=vDescripcion)
         else:
             return Gasto.objects.all()
+
+def gastodelete (request,pk):
+    gasto = Gasto.objects.get(id=pk)
+    gasto.delete()
+    return redirect('home:gastoapp')
+
 
    
 class EditarGastoView(UpdateView):
