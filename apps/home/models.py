@@ -11,6 +11,7 @@ class Cliente(models.Model):
     #idCliente=models.IntegerField
     nombre =models.CharField(max_length=45, verbose_name = 'Nombre')
     direccion=models.CharField(max_length=45, verbose_name = 'Direccion')
+    telefono=models.CharField(max_length=20, verbose_name = 'Telefono')
     DPI=models.CharField(max_length=45, verbose_name = 'DPI')
     NIT=models.CharField(max_length=45, verbose_name = 'NIT')
     creacion =models.DateTimeField(auto_now_add=True)
@@ -29,13 +30,15 @@ class TipoPlatillo(models.Model):
     # idPlatillo=models.IntegerField
     tipo =models.CharField(max_length=45, verbose_name = 'Tipo')
     PrimerPrecio =models.DecimalField(max_digits=10, decimal_places=2)
-    SegundoPrecio =models.DecimalField(max_digits=10, decimal_places=2)
-    TercerPrecio =models.DecimalField(max_digits=10, decimal_places=2)
+    SegundoPrecio =models.DecimalField(max_digits=10, decimal_places=2, null=True, blank =True)
+    TercerPrecio =models.DecimalField(max_digits=10, decimal_places=2, null=True, blank =True)
     descripcion =models.CharField(max_length=200, verbose_name = 'Descripcion') 
     creacion =models.DateTimeField(auto_now_add=True)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     def __str__(self):
         return self.tipo
+
+
 
 class CuadreCaja(models.Model):
     # idCaja =models.IntegerField
@@ -68,15 +71,16 @@ class Puesto(models.Model):
 
 class Colaborador(models.Model):
     #idColaborador=models.IntegerField
-    perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
     nombre =models.CharField(max_length=45, null= True) 
     edad= models.IntegerField (null=True, blank=True)
     direccion= models.CharField (max_length=100, null=True, blank =True)
     telefono = models.CharField (max_length=20, null=True, blank =True)
     creacion = models.DateTimeField(auto_now_add=True)
+    puesto= models.ForeignKey (Puesto,null=True,on_delete=models.CASCADE)
+
     
     def __str__(self):
-        return self.perfil.username
+        return str(self.nombre)
         
 @receiver ( post_save, sender = User)
 def crear_colaborador(sender, instance, created, **kwargs):

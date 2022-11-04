@@ -1,5 +1,7 @@
 {% extends 'base_sidebar.html' %}
 
+{% load static %}
+
 {% block titulo %}
   <div>
 
@@ -51,7 +53,7 @@
                     </select>
                   </div>
                   <div class="col-sm-2">
-                    <a href=" {% url 'home:cliente_formulario' %} " class="btn btn-success" type="button" target="__blank" rel="noopener noreferrer">+</a>
+                    <a href=" {% url 'home:cliente_formulario' %} " class="btn btn-success" type="button" rel="noopener noreferrer">+</a>
                   </div>
                 </div>
 
@@ -67,7 +69,7 @@
                 </div>
                 
                 <div class="container d-flex justify-content-center my-3">
-                  <button class="btn btn-success" type="sumbit">Guardar</button>
+                  <button class="btn btn-primary" type="sumbit">Crear Orden</button>
                 </div>
 
 
@@ -116,10 +118,10 @@
               <td> {{ord.tipo}} </td>
               <td> {{ord.estado}} </td>
               <td> {{ord.cliente_id}} </td>
-              <td> {{ord.colaborador_id}} </td>
+              <td> {{ord.colaborador_id.nombre}} </td>
               <td> {{ord.cuadreCaja_id}} </td>
               <td>
-                <a href="#" class="btn btn-info">*</a>
+                <a href=" {% url 'home:tomar_orden' ord.id %} " class="btn btn-info">*</a>
                 <a href="{% url 'home:ordenes_eliminar' ord.id %}" class="btn btn-danger">-</a>
               </td>
             </tr>
@@ -130,4 +132,6 @@
     </main>
   </div>
 
-{% endblock contenido %}
+  {% endblock contenido %}
+
+  <script src=" {% static './js/functions/emergente.js' %} "></script>

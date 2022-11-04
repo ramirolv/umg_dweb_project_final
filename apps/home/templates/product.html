@@ -130,6 +130,8 @@
                 <button type="button" class="btn btn-outline-primary">{{ platillo.PrimerPrecio }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ platillo.SegundoPrecio }}</button>
                 <button type="button" class="btn btn-outline-primary">{{ platillo.TercerPrecio }}</button>
+                <button type="button" class="btn btn-outline-primary"><a href="{% url 'home:editarplatilloapp' platillo.id %}">Editar</a></button>
+                <button type="button" class="btn btn-outline-primary"><a href="{% url 'home:eliminarplatillo' platillo.id %}">Eliminar</a></button>
               </div>         
             </div>
           </div>

@@ -1,5 +1,7 @@
 {% extends 'base_sidebar.html' %}
 
+{% load static %}
+
 {% block titulo %}
     <a class="btn btn-offcanvas btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         <i class="bi bi-bag-plus-fill">Ver Orden</i>
@@ -16,11 +18,13 @@
                 <h5 class="offcanvas-title" id="offcanvasExampleLabel">Orden No. {{orden.id}} </h5>
                 <div> {{orden.cliente_id}} </div>
                 <div> {{orden.tipo}} </div>
+                <div> Direccion: {{cliente.direccion}} </div>
+                <div> Telefono: <a class="link-danger" href="tel:+502{{cliente.telefono}}">{{cliente.telefono}}</a> </div>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <h2 class="mt-5">Detalle de orden</h2>
+            <h2 class="">Detalle de orden</h2>
             <table class="table table-primary table-bordered table-hover">
                 <thead>
                     <td>Borrar</td>
@@ -29,20 +33,22 @@
                     <td>Precio</td>
                 </thead>
 
-                {% for det in orden.detalleorden_set.all %}
-                    <tr>
-                        <td><a href=" {% url 'home:detalle_eliminar' det.id %} " class="btn btn-danger">-</a></td>
-                        <td> {{det.cantidad}} </td>
-                        <td> {{det.tipoPlatillo_id}} </td>
-                        <td> Q{{det.sub_total}} </td>
-                    </tr>
-                {% endfor %}
+                <tbody id="body_table_orden">
+                    {% for det in orden.detalleorden_set.all %}
+                        <tr>
+                            <td><a href=" {% url 'home:detalle_eliminar' det.id %} " class="btn btn-danger">-</a></td>
+                            <td> {{det.cantidad}} </td>
+                            <td> {{det.tipoPlatillo_id}} </td>
+                            <td> Q{{det.sub_total}} </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
 
                 <tfoot>
-                <td></td>
-                <td></td>
-                <td>Total</td>
-                <td id="sumaTotal">Q105</td>
+                    <td></td>
+                    <td></td>
+                    <td>Total</td>
+                    <td id="sumaTotal">Q105</td>
                 </tfoot>
             </table>
             <a class="btn btn-primary" href=" {% url 'home:ordenes_progreso' %} ">Completar orden</a>
@@ -63,10 +69,10 @@
                                 <p class="card-text">{{ tipoPlat.descripcion }}</p>    
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
+                                <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}<a href="javascript:agregarDetalle()" class="d-flex ms-auto btn btn-success">+</a></li>
                                 <li class="list-group-item list-group-item-action d-flex">Mediana Q{{ tipoPlat.SegundoPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
                                 <li class="list-group-item list-group-item-action d-flex">Grande Q{{ tipoPlat.TercerPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                            </ul>            
+                            </ul>        
                         </div>
                     </div>
                 {% endfor %}
@@ -77,4 +83,32 @@
 
     </div>
 
-{% endblock contenido %}
+    {% endblock contenido %}
+
+    <script>
+        function agregarDetalle(){
+            var fila = document.createElement('tr');
+            var tdAcciones = document.createElement('td');
+            var tdCantidad = document.createElement('td');
+            var tdDescripcion = document.createElement('td');
+            var tdPrecio = document.createElement('td');
+        
+            var textoAcciones = document.createTextNode('-');
+            var textoCantidad = document.createTextNode('4');
+            var textoDescripcion = document.createTextNode('Pizza');
+            var textoPrecio = document.createTextNode('50.00');
+
+            tdAcciones.appenChild(textoAcciones);
+            tdCantidad.appenChild(textoCantidad);
+            tdDescripcion.appenChild(textoDescripcion);
+            tdPrecio.appenChild(textoPrecio);
+            
+            fila.appenChild(tdAcciones);
+            fila.appenChild(tdCantidad);
+            fila.appenChild(tdDescripcion);
+            fila.appenChild(tdPrecio);
+        
+            var tabla = document.getElementById('body_table_orden');
+            tabla.appenChild(fila);
+        }
+    </script>

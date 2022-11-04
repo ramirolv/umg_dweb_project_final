@@ -4,8 +4,8 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden
-from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm
+from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden, Puesto
+from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm, PuestoForm
 
 
 # Create your views here.
@@ -74,22 +74,24 @@ def ordenEliminar(request, id):
 def tomarOrden(request, id):
     modeloPlatillo = Platillo.objects.all()
     modeloOrden = Orden.objects.get(pk=id)
+    modeloCliente = Cliente.objects.get(pk=modeloOrden.cliente_id.id)
 
     templateExterno = open('./apps/home/templates/ordenes_tomar_platillos.html')
     template = Template(templateExterno.read())
-    contexto = Context({'orden':modeloOrden, 'platillos':modeloPlatillo})
+    contexto = Context({'orden':modeloOrden, 'platillos':modeloPlatillo, 'cliente':modeloCliente})
     documento = template.render(contexto)
     return HttpResponse(documento)
 
 
 def agregarDetalleOrden(request):
-    id_orden = request.POST['id_orden']
+    id_orden = Orden.objects.get(pk=request.POST['id_orden'])
     cantidad = request.POST['cantidad']
-    tipoPlatillo = request.POST['tipoPlatillo']
-    #sub_total = cantidad -> hacer suma automática
+    tipo_platillo = TipoPlatillo.objects.get(pk=request.POST['tipoPlatillo'])
+    sub_total = cantidad * tipo_platillo.PrimerPrecio
 
-    detalle = DetalleOrden()
+    detalle = DetalleOrden(cantidad=cantidad, sub_total=sub_total, orden_id=id_orden, tipoPlatillo_id=tipo_platillo)
     detalle.save()
+    return redirect('home:tomar_orden', id_orden)
 
 
 def detalleOrdenEliminar(request, id):
@@ -106,14 +108,15 @@ def clienteFormulario(request):
 
 def clienteNuevo(request):
     nombre = request.POST['nombre']
+    telefono = request.POST['telefono']
     direccion = request.POST['direccion']
     dpi = request.POST['dpi']
     nit = request.POST['nit']
 
-    cliente = Cliente(nombre=nombre, direccion=direccion, DPI=dpi, NIT=nit)
+    cliente = Cliente(nombre=nombre, telefono=telefono, direccion=direccion, DPI=dpi, NIT=nit)
     cliente.save()
 
-    return redirect('home:indexapp')
+    return redirect('home:ordenes_progreso')
 
 
 class ProductosView(CreateView, ListView):
@@ -138,27 +141,52 @@ class ServiceView(TemplateView):
 class TeamView(CreateView, ListView):
     template_name = 'team.html'
     form_class = ColaboradorForm
-    success_url = reverse_lazy('home:mainapp')
+    success_url = reverse_lazy('home:teamapp')
     model = Colaborador
 
 
     def get_query(self):
         return Colaborador.objects.all()
+    
+def usuariodelete (request,id):
+    colaborador = Colaborador.objects.get(id=id)
+    colaborador.delete()
+    return redirect('home:teamapp')
 
+
+class EditarUsuarioView(UpdateView):
+    template_name = 'editarusuario.html'
+    form_class = ColaboradorForm
+    success_url = reverse_lazy('home:teamapp')
+    model = Colaborador
+
+class PuestoView (CreateView):
+    template_name = "puesto.html"
+    form_class= PuestoForm
+    success_url = reverse_lazy('home:mainapp')
+    model= Colaborador
+
+    def get_query(self):
+        return Colaborador.objects.all()
 
 class GastoView(CreateView, ListView):
     template_name = 'gasto.html'
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
     model = Gasto
-
-
-def get_queryset(self):
+    
+    def get_queryset(self):
         vDescripcion =self.request.GET.get('descripcion')
         if(vDescripcion):
             return Gasto.objects.filter(descripcion__icontains=vDescripcion)
         else:
             return Gasto.objects.all()
+
+def gastodelete (request,pk):
+    gasto = Gasto.objects.get(id=pk)
+    gasto.delete()
+    return redirect('home:gastoapp')
+
 
    
 class EditarGastoView(UpdateView):
@@ -166,6 +194,17 @@ class EditarGastoView(UpdateView):
     model = Gasto
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
+
+class EditarPlatilloView(UpdateView):
+    template_name = 'editarplatillo.html'
+    model = TipoPlatillo
+    form_class = TipoPlatilloForm
+    success_url = reverse_lazy('home:productoapp')
+
+def delete (request,pk):
+    Platillo = TipoPlatillo.objects.get(id=pk)
+    Platillo.delete()
+    return redirect('home:productoapp')
 
    
 class PlatillosView(ListView):
