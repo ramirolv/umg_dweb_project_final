@@ -40,5 +40,6 @@ urlpatterns = [
     path('gasto/', GastoView.as_view(), name='gastoapp'),
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
     path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
+    path('eliminar_platillo/<int:pk>', views.delete, name='eliminarplatillo'),
     path('plantilla/', plantillaParametros, name='plantilla'),    
 ]

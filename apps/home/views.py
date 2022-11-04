@@ -173,6 +173,10 @@ class EditarPlatilloView(UpdateView):
     form_class = TipoPlatilloForm
     success_url = reverse_lazy('home:productoapp')
 
+def delete (request,pk):
+    Platillo = TipoPlatillo.objects.get(id=pk)
+    Platillo.delete()
+    return redirect('home:productoapp')
 
    
 class PlatillosView(ListView):
