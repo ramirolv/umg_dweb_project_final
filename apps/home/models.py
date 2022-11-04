@@ -83,15 +83,6 @@ class Colaborador(models.Model):
     def __str__(self):
         return str(self.nombre)
         
-@receiver ( post_save, sender = User)
-def crear_colaborador(sender, instance, created, **kwargs):
-        if created:
-            Colaborador.objects.create(perfil=instance)
-
-@receiver ( post_save, sender = User)
-def guardar_colaborador(sender, instance, created, **kwargs):
-       instance.colaborador.save()
-
 
 class Orden(models.Model):
     #idOrden=models.IntegerField
