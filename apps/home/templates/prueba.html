@@ -1,0 +1,121 @@
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Agregue los siguientes datos</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action=" {% url 'home:team' %} "  method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="id_tipo">Nombre:</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="tipo" id="id_tipo">
+                  <option value="Local">Edad</option>
+                  <option value="Domicilio">edad</option>
+                  <option value="Domicilio">Dirección</option>
+                  <option value="Domicilio">Telefono</option>
+                  
+                </select>
+              </div>
+            </div>
+            
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" for="id_cliente_id">Cliente</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="cliente" id="id_cliente_id">
+                  {% for col in object_list.cliente %}
+                  <option value=" {{col.id}} "> {{col.nombre}} </option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-sm-2">
+                <a href=" {% url 'home:cliente_formulario' %} " class="btn btn-success" type="button" target="__blank" rel="noopener noreferrer">+</a>
+              </div>
+            </div>
+
+            <div class="form-group row mt-2">
+              <label class="col-sm-2 col-form-label" for="id_colaborador_id">Colaborador</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="colaborador_id" id="id_colaborador_id">
+                  {% for cli in object_list.colaborador %}
+                  <option value=" {{cli.id}} "> {{cli.nombre}} </option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            
+            <div class="container d-flex justify-content-center my-3">
+              <button class="btn btn-success" type="sumbit">Guardar</button>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  {% extends 'base_sidebar.html' %}
+
+  {% block titulo %}
+    <div>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+        <i class="bi bi-plus-circle-fill"> Agregar</i>
+      </button>
+    </div>
+  
+    <h2 class="text-white">Colaboradores</h2>
+  {% endblock titulo %}
+  
+  {% block contenido %}
+  
+  <br><br>
+  <form class= "form-inline my-2 my-lg-0">
+    <input class= "form-control mr-ms-2" type="text" name="descripcion" value="{{request.GET.descripcion}}" placeholder ="Buscar..." arial-label="Search">    
+  </form>
+  
+      <!--Create a new register using Model -->
+      <br><br><br>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresando Colaboradores</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>   
+              <div class="modal-body">
+                  <form method="POST">
+                  {% csrf_token %}
+                  {{ form.as_p  }} </td>
+                  <br><br>nombre{{ form.edad }}
+                  <br><br>descripción {{ form.direccion}}
+                  <br><br> monto {{ form.telefono}}
+                  <br><br>total {{ form.puesto }}
+                  <br><br><br>
+                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </form>
+              </div> 
+          </div>
+        </div>
+      </div>

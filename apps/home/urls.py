@@ -44,5 +44,7 @@ urlpatterns = [
     path('eliminar_platillo/<int:pk>', views.delete, name='eliminarplatillo'),
     path('plantilla/', plantillaParametros, name='plantilla'),    
     path('puesto/', PuestoView.as_view(), name='puestoapp'),
+    path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
+    path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
 ]
 

@@ -1,37 +1,79 @@
 {% extends 'base_sidebar.html' %}
 
- {% block contenido %}  
+
+{% block titulo %}
+  <div>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <i class="bi bi-bag-plus-fill small"> Agregar</i>
+    </button>
+
+  </div>
+  <h2 class="text-white">Colaboradores</h2>
+{% endblock titulo %}
 
 
-     <div class="container">
-        {% block content %}
-        <form action="" method="POST">
-            
-           <p> {% csrf_token %}
-            {{ form.as_p  }}</p>
-            <input type="submit" name="Guardar">
-           </form>
-        {% endblock content %}
-    </div>
+{% block contenido %}  
 
-    <div style = "text-align:center">
-        <form action="" method="get">
-            <input type="text" name="descripcion" value="{{request.GET.descripcion}}">
-            <button type="submit">Buscar</button>
-        </form>
-    </div>
+<br><br>
+<form class= "form-inline my-2 my-lg-0">
+  <input class= "form-control mr-ms-2" type="text" name="descripcion" value="{{request.GET.descripcion}}" placeholder ="Buscar..." arial-label="Search">    
+</form>
+
+<br><br><br>
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresando Colaboradores</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>   
+              <div class="modal-body">
+                  <form method="POST">
+                  {% csrf_token %}
+                  {{ col.creacion }} 
+                  <br><br>nombre{{ form.edad }}
+                  <br><br>descripción {{ form.direccion}}
+                  <br><br> monto {{ form.telefono}}
+                  <br><br>total {{ form.puesto }}
+                  <br><br><br>
+                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </form>
+              </div> 
+          </div>
+        </div>
+      </div>
 
 
- 
-    {% block list%}
-{% for col in object_list %}
-{{ col.nombre }}
-{{ col.edad }}
-{{ col.direccion }}
-{{ col.telefono }}
-{% endfor %}
-<a href="{% url 'home:mainapp' %}">Home</a>
-{% endblock list %}
-    </div>
+<div class="container">
+<table class="table table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Edad</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Puesto</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
 
-{% endblock contenido %}
+    {% for col in object_list %}
+    <tbody>
+      <tr>
+        <td>{{ col.nombre }}</td>
+        <td>{{ col.edad }}</td>
+        <td>{{ col.direccion }}</td>
+        <td>{{ col.telefono }}</td>
+        <td>{{ col.puesto }}</td>
+        <td>
+            <a class="btn btn-info" href="{% url 'home:editarusuarioapp' col.id %}">Editar</a> <a class="btn btn-danger" href="{% url 'home:eliminarusuario' col.id %}">Eliminar</a></td>
+        
+      </tr>
+      {% endfor %}
+  </div>    
+</div>
+
+{% endblock %}
