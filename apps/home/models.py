@@ -29,13 +29,15 @@ class TipoPlatillo(models.Model):
     # idPlatillo=models.IntegerField
     tipo =models.CharField(max_length=45, verbose_name = 'Tipo')
     PrimerPrecio =models.DecimalField(max_digits=10, decimal_places=2)
-    SegundoPrecio =models.DecimalField(max_digits=10, decimal_places=2)
-    TercerPrecio =models.DecimalField(max_digits=10, decimal_places=2)
+    SegundoPrecio =models.DecimalField(max_digits=10, decimal_places=2, null=True, blank =True)
+    TercerPrecio =models.DecimalField(max_digits=10, decimal_places=2, null=True, blank =True)
     descripcion =models.CharField(max_length=200, verbose_name = 'Descripcion') 
     creacion =models.DateTimeField(auto_now_add=True)
     platillo_id = models.ForeignKey(Platillo,on_delete =models.CASCADE)
     def __str__(self):
         return self.tipo
+
+
 
 class CuadreCaja(models.Model):
     # idCaja =models.IntegerField

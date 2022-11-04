@@ -167,6 +167,13 @@ class EditarGastoView(UpdateView):
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
 
+class EditarPlatilloView(UpdateView):
+    template_name = 'editarplatillo.html'
+    model = TipoPlatillo
+    form_class = TipoPlatilloForm
+    success_url = reverse_lazy('home:productoapp')
+
+
    
 class PlatillosView(ListView):
     template_name = 'product.html'
