@@ -32,11 +32,11 @@
               <div class="modal-body">
                   <form method="POST">
                   {% csrf_token %}
-                  {{ col.creacion }} 
-                  <br><br>nombre{{ form.edad }}
-                  <br><br>descripción {{ form.direccion}}
-                  <br><br> monto {{ form.telefono}}
-                  <br><br>total {{ form.puesto }}
+                  <br><br>Nombre{{ form.nombre }}
+                  <br><br>Edad{{ form.edad }}
+                  <br><br>Dirección {{ form.direccion}}
+                  <br><br>Telefono{{ form.telefono}}
+                  <br><br>Puesto{{ form.puesto }}
                   <br><br><br>
                   <button type="submit" class="btn btn-primary">Guardar cambios</button>
                 <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

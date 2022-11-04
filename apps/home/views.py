@@ -160,14 +160,14 @@ class EditarUsuarioView(UpdateView):
     success_url = reverse_lazy('home:teamapp')
     model = Colaborador
 
-class PuestoView (CreateView):
+class PuestoView (CreateView, ListView):
     template_name = "puesto.html"
     form_class= PuestoForm
-    success_url = reverse_lazy('home:mainapp')
-    model= Colaborador
+    success_url = reverse_lazy('home:teamapp')
+    model= Puesto
 
     def get_query(self):
-        return Colaborador.objects.all()
+        return Puesto.objects.all()
 
 class GastoView(CreateView, ListView):
     template_name = 'gasto.html'
