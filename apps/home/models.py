@@ -79,7 +79,6 @@ class Colaborador(models.Model):
     puesto= models.ForeignKey (Puesto,null=True,on_delete=models.CASCADE)
     perfil = models.OneToOneField (User, null= True, on_delete=models.CASCADE)
 
-    
     def __str__(self):
         return str(self.nombre)
         

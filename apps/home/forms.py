@@ -51,15 +51,12 @@ class DetalleOrdenForm(forms.ModelForm):
         fields = '__all__'
 
 class RegistroForm(UserCreationForm):
-   
-
-    class Meta:
+       class Meta:
         model=User 
-        fields = (
+        fields =(
             'username',
-            'password',
-            
-
-       )
+            'password1',
+            'password2',
+            )
 
 

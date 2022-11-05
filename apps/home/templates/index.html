@@ -34,8 +34,6 @@
                 
                 <form class="col-12" method="POST">
                     <div class="form-group" id="user-group">
-
-                    
                         {% csrf_token %}
                         {{ form.as_p}}
                         <input id="inputUsuario" type="text" class="form-control" placeholder="Nombre de usuario" name="username"/> 

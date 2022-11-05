@@ -260,7 +260,7 @@ def plantillaParametros(request):
 class RegistroView (CreateView):
     model= Usuario
     form_class = RegistroForm
-    success_url =reverse_lazy ('home:mainapp')
+    success_url =reverse_lazy('home:teamapp')
 
 class LoginView(LoginView):
     template_name = 'index.html'
