@@ -67,26 +67,37 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="post">
+          <form action=" {% url 'home:producto_nuevo' %} " method="post">
             {% csrf_token %}
-            Nombre {{ form.tipo }}
-            <br>
-            <br>
-            Descripcion {{ form.descripcion }}
-            <br>
-            <br>
-            Precio1 {{ form.PrimerPrecio }}
-            <br>
-            <br>
-            Precio2 {{ form.SegundoPrecio }}
-            <br>
-            <br>
-            Precio3 {{ form.TercerPrecio }}
-            <br>
-            <br>
-            Tipo {{ form.platillo_id }}
-            <br>
-            <br>
+            <div class="form-group">
+              <label for="id_tipo">Nombre del platillo</label>
+              <input class="form-control" type="text" id="id_tipo" name="tipo" required="">
+            </div>
+            <div class="form-group">
+              <label for="id_Descripcion">Descripcion</label>
+              <input class="form-control" type="text" id="id_Descripcion" name="descripcion">
+            </div>
+            <div class="form-group">
+              <label for="id_Precio1">Precio pequeño</label>
+              <input class="form-control" type="number" id="id_Precio1" name="precio1">
+            </div>
+            <div class="form-group">
+              <label for="id_Precio2">Precio mediano</label>
+              <input class="form-control" type="number" id="id_Precio2" name="precio2">
+            </div>
+            <div class="form-group">
+              <label for="id_Precio3">Precio Grande</label>
+              <input class="form-control" type="number" id="id_Precio3" name="precio3">
+            </div>
+            <div class="form-group">
+              <label for="id_platillo_id">Tipo de Platillo</label>
+              <select class="form-control" name="platillo_id" id="id_platillo_id">
+                {% for plat in platillo %}
+                <option value=" {{plat.id}} "> {{ plat.nombre }} </option>
+                {% endfor %}
+              </select>
+
+            </div>
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
         </div>
@@ -98,258 +109,31 @@
   </div>
   
 
-      <div class="container">
-        <h2 class="">Pizzas</h2>
-
+  <div class="container">
+    <h2>Platillos</h2>
+    {% for plat in platillo %}
+        <h2 class=""> {{plat.nombre}} </h2>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
-          {% for platillo in object_list %}
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza de Pepperoni</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">Pequeña Q50</button>
-                <button type="button" class="btn btn-outline-primary">Mediana Q70</button>
-                <button type="button" class="btn btn-outline-primary">Grande Q90</button>
-              </div>         
-            </div>
-          </div>
-          {% endfor %}
-          {% for platillo in object_list %}
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ platillo.tipo }}</h5>
-                <p class="card-text">{{ platillo.descripcion }}</p>    
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">{{ platillo.PrimerPrecio }}</button>
-                <button type="button" class="btn btn-outline-primary">{{ platillo.SegundoPrecio }}</button>
-                <button type="button" class="btn btn-outline-primary">{{ platillo.TercerPrecio }}</button>
-                <button type="button" class="btn btn-outline-primary"><a href="{% url 'home:editarplatilloapp' platillo.id %}">Editar</a></button>
-                <button type="button" class="btn btn-outline-primary"><a href="{% url 'home:eliminarplatillo' platillo.id %}">Eliminar</a></button>
-              </div>         
-            </div>
-          </div>
-          {% endfor %}
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza de Pepperoni</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">Pequeña Q50</button>
-                <button type="button" class="btn btn-outline-primary">Mediana Q70</button>
-                <button type="button" class="btn btn-outline-primary">Grande Q90</button>
-              </div>             
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza de Pepperoni</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <div class="btn-group" role="group" aria-label="Basic outlined example">
-                <button type="button" class="btn btn-outline-primary">Pequeña Q50</button>
-                <button type="button" class="btn btn-outline-primary">Mediana Q70</button>
-                <button type="button" class="btn btn-outline-primary">Grande Q90</button>
-              </div>              
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Pizza</h5>
-                <p class="card-text">Deliciosa pizza con base de salsa de tomate, queso mozzarella y pepperoni.</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
+            {% for tipoPlat in plat.tipoplatillo_set.all %}
+                <div class="col">
+                    <div class="card h-100 border-secondary">
+                        <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"> {{ tipoPlat.tipo }} </h5>
+                            <p class="card-text">{{ tipoPlat.descripcion }}</p>    
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}</li>
+                            <li class="list-group-item list-group-item-action d-flex">Mediana Q{{ tipoPlat.SegundoPrecio }}</li>
+                            <li class="list-group-item list-group-item-action d-flex">Grande Q{{ tipoPlat.TercerPrecio }}</li>
+                        </ul>        
+                    </div>
+                </div>
+            {% endfor %}
         </div>
+        <br>
+        <br>
+    {% endfor %}
+  </div>
 
-
-        <h2 class="mt-5">Otros platillos</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://images.hola.com/imagenes/cocina/noticiaslibros/20210528190401/dia-internacional-hamburguesa-recetas-2021/0-957-454/dia-hamburguesa-m.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Hamburguesa</h5>
-                <p class="card-text">Deliciosa Hamburguesa hecha con pan, tomate, lechuga, y carne de ...</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Pequeña Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mediana Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Grande Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          
-        </div>
-
-
-
-
-        <h2 class="mt-5">Bebidas</h2>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://www.tn23.tv/wp-content/uploads/2019/05/caf%C3%A9-2-256x256.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Café</h5>
-                <p class="card-text">Variedades de café</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Simple Q50<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Con leche Q70<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Capuchino Q90<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://fitenium.com/wp-content/uploads/2019/02/aromatic-close-cup-1417945-256x256.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Té</h5>
-                <p class="card-text">Variedades de té</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Manzanilla Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Jamaica Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Limón Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100 border-secondary">
-              <img src="https://sc04.alicdn.com/kf/Udd455d611ee14618ae3cd404bc844409z.jpeg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">Gaseosa</h5>
-                <p class="card-text">Variedades de gaseosas</p>    
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action d-flex">Coca-Cola Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Sprite Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                <li class="list-group-item list-group-item-action d-flex">Mirinda Q5<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-              </ul>            
-            </div>
-          </div>
-          
-          
-        </div>
-
-      </div>
-    </div>
-
-    {% endblock contenido %}
+{% endblock contenido %}
