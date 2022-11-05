@@ -119,19 +119,34 @@ def clienteNuevo(request):
     return redirect('home:ordenes_progreso')
 
 
-class ProductosView(CreateView, ListView):
-    template_name = 'product.html'
-    form_class = TipoPlatilloForm
-    success_url = reverse_lazy('home:productoapp')
-    model = TipoPlatillo
+def ProductosView(request):
+    model = Platillo
+    return render(request, 'product.html' ,{'platillo':Platillo.objects.all()})
 
 
-    def get_query(self):
-        return TipoPlatillo.objects.all()
+def producto_Nuevo(request):
+    tipo = request.POST['tipo']
+    descripcion = request.POST['descripcion']
+    precio1 = request.POST['precio1']
+    precio2 = request.POST['precio2']
+    precio3 = request.POST['precio3']
+    id_platillo = Platillo.objects.get(pk=request.POST['platillo_id'])
+
+    plat = TipoPlatillo(tipo=tipo, descripcion=descripcion, PrimerPrecio=precio1, SegundoPrecio=precio2, TercerPrecio=precio3, platillo_id=id_platillo)
+    plat.save()
+
+    return redirect('home:productoapp')
 
 
-""" def list_product(request, product_id):
-    return HttpResponse(f"El producto seleccionado es: {product_id}") """
+def platillo_Formulario(request):
+    return render(request, 'platillo_formulario.html')
+
+
+def platillo_Nuevo(request):
+    nombre_platillo = request.POST['nombrePlatillo']
+    platillo = Platillo(nombre=nombre_platillo)
+    platillo.save()
+    return redirect('home:productoapp')
 
 
 class ServiceView(TemplateView):
