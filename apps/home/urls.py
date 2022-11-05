@@ -32,7 +32,10 @@ urlpatterns = [
     path('ordenes/detalle/eliminar/<int:id>', detalleOrdenEliminar, name='detalle_eliminar'),
     path('cliente/formulario/', clienteFormulario, name='cliente_formulario'),
     path('cliente/nuevo/', clienteNuevo, name='cliente_nuevo'),
-    path('producto/', ProductosView.as_view(), name='productoapp'),
+    path('producto/', ProductosView, name='productoapp'),
+    path('producto/nuevo/', producto_Nuevo, name='producto_nuevo'),
+    path('producto/formulario/', platillo_Formulario, name='platillo_formulario'),
+    path('producto/nuevo/tipo/', platillo_Nuevo, name='platillo_nuevo'),
     #Ejemplo: producto/5/
     # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
     path('service/', ServiceView.as_view(), name='serviceapp'),
