@@ -100,33 +100,36 @@
         </div>
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
-          <table class="table table-dark table-hover table-bordered">
-            <tr>
-              <td>ID #</td>
-              <td>Fecha</td>
-              <td>Tipo</td>
-              <td>Estado</td>
-              <td>Cliente</td>
-              <td>Colaborador</td>
-              <td>Cuadre de caja</td>
-              <td>Acciones</td>
-            </tr>
-            {% for ord in object_list.orden %}
-            <tr>
-              <td> {{ord.id}} </td>
-              <td> {{ord.creacion}} </td>
-              <td> {{ord.tipo}} </td>
-              <td> {{ord.estado}} </td>
-              <td> {{ord.cliente_id}} </td>
-              <td> {{ord.colaborador_id.nombre}} </td>
-              <td> {{ord.cuadreCaja_id}} </td>
-              <td>
-                <a href=" {% url 'home:tomar_orden' ord.id %} " class="btn btn-info">*</a>
-                <a href="{% url 'home:ordenes_eliminar' ord.id %}" class="btn btn-danger">-</a>
-              </td>
-            </tr>
-            {% endfor %}
-          </table>
+          
+          {% for ord in object_list.orden %}
+
+          {% if ord.estado == 'Creada' %}
+            <div class="card text-white bg-secondary mb-3 mx-3" style="max-width: 18rem;">
+          {% endif %}
+          {% if ord.estado == 'Terminada' %}
+            <div class="card text-white bg-success mb-3 mx-3" style="max-width: 18rem;">
+          {% endif %}
+          {% if ord.estado == 'Entregada' %}
+            <div class="card text-white bg-primary mb-3 mx-3" style="max-width: 18rem;">
+          {% endif %}
+
+            <div class="card-header">No. {{ord.id}} - {{ord.tipo}} - {{ord.estado}} </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ord.cliente_id}}</h5>
+              <ul>
+                {% for detOrd in ord.detalleorden_set.all %}
+                  <li class="card-text style-none"> {{detOrd.tipoPlatillo_id}} </li>
+                {% endfor %}
+              </ul>
+              <div class="card-footer">
+                <a href=" {% url 'home:tomar_orden' ord.id %} " class="btn btn-info">Editar</a>
+                <a href="{% url 'home:ordenes_eliminar' ord.id %}" class="btn btn-danger">Eliminar</a>
+              </div>
+            </div>
+          </div>
+
+          {% endfor %}
+
         </div>
       </div>
     </main>
