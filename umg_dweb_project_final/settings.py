@@ -30,6 +30,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+CSRF_TRUSTED_ORIGINS = ['https://umgdwebprojectfinal-production.up.railway.app/']
+
 
 # Application definition
 
