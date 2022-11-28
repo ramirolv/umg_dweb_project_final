@@ -1,1 +1,1 @@
-web: gunicorn reportersprj.wsgi --log-file -
+web: gunicorn umg_dweb_project_final.wsgi --log-file -
