@@ -114,12 +114,12 @@ class Usuario(models.Model):
     def __str__(self):
         return self.perfil.username 
         
-@receiver ( post_save, sender = User)
+@receiver (post_save, sender = User)
 def crear_usuario(sender, instance, created, **kwargs):
         if created:
             Usuario.objects.create(perfil=instance)
 
-@receiver ( post_save, sender = User)
+@receiver (post_save, sender = User)
 def guardar_usuario(sender, instance, created, **kwargs):
        instance.usuario.save()
     
