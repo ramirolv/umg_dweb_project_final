@@ -116,7 +116,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Redireccionamiento del Login
-LOGIN_REDIRECT_URL = reverse_lazy('home:home')
+LOGIN_REDIRECT_URL = reverse_lazy('home:mainapp')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
