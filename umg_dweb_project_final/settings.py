@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^pbx(-_hxzk$frtn_@i936%^c8gac!=2=0xuyk8^$fk47ac(=7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'base',
+    'userauths',
+    'taggit',
+    'crispy_forms',
+    'django_social_share'
 ]
 
 MIDDLEWARE = [
@@ -104,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-mx'
 
 TIME_ZONE = 'America/Mexico_City'
 
