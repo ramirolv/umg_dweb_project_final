@@ -7,12 +7,9 @@
 
         
         <form action="" method="POST">
-        <p> {% csrf_token %}
-            {{ form }}
-
-        </p>
+            {% csrf_token %}
+            <p>{{ form }}</p>
             <input class="btn btn-success" type="submit" name="Guardar">
-        
         </form>
 
     </div>

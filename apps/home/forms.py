@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Platillo, TipoPlatillo, CuadreCaja, Gasto, Puesto, Colaborador, Orden, DetalleOrden
+from .models import Cliente, Platillo, TipoPlatillo, CuadreCaja, Gasto, Puesto, Colaborador, Orden, DetalleOrden, Usuario
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -49,5 +49,14 @@ class DetalleOrdenForm(forms.ModelForm):
     class Meta:
         model = DetalleOrden
         fields = '__all__'
+
+class RegistroForm(UserCreationForm):
+       class Meta:
+        model=User 
+        fields =(
+            'username',
+            'password1',
+            'password2',
+            )
 
 

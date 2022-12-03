@@ -10,6 +10,7 @@ from .models import Puesto
 from .models import Colaborador
 from .models import Orden
 from .models import DetalleOrden
+from .models import Usuario
 
 
 
@@ -22,5 +23,7 @@ admin.site.register(Puesto)
 admin.site.register(Colaborador)
 admin.site.register(Orden)
 admin.site.register(DetalleOrden)
+admin.site.register(Usuario)
+
 
 

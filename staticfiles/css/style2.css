@@ -1,0 +1,43 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+:root {
+  /* paleta de colores */
+  --primary: #EAA636;
+  --secondary: #545454;
+  --light: #FDF5EB;
+  --dark: #1E1916;
+  --textColor: #8F1802;
+
+  /* ===== Otros colores ===== */
+  --body-color: #E4E9F7;
+  --sidebar-color: #4e392b;
+  --primary-color: #F5CE69;
+  --primary-color-light: #F6F5FF;
+  --toggle-color: #DDD;
+  --text-color: #b4b4b4;
+
+  /* ====== Transiciones ====== */
+  --tran-03: all 0.2s ease;
+  --tran-03: all 0.3s ease;
+  --tran-04: all 0.3s ease;
+  --tran-05: all 0.3s ease;
+
+}
+
+.bg-navbar{
+  background: var(--sidebar-color);
+}
+
+body{
+  margin: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;     
+}
+

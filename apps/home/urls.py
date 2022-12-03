@@ -22,7 +22,7 @@ from .views import *
 app_name='home'
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='indexapp'),
+    path('', LoginView.as_view(), name='indexapp'),
     path('main/', MainView.as_view(), name='mainapp'),
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
     path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),
@@ -44,10 +44,12 @@ urlpatterns = [
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
     path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
     path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
-    path('eliminar_platillo/<int:pk>', views.delete, name='eliminarplatillo'),
+    path('eliminar_platillo/<int:pk>', platillodelete, name='eliminarplatillo'),
     path('plantilla/', plantillaParametros, name='plantilla'),    
     path('puesto/', PuestoView.as_view(), name='puestoapp'),
     path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
     path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
+    path('registro/', RegistroView.as_view(), name='registro'),
+    path('login/', LoginView.as_view(), name='login')
 ]
 

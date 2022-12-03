@@ -4,9 +4,9 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden, Puesto
-from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm, PuestoForm
-
+from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden, Puesto, Usuario
+from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm, PuestoForm, RegistroForm
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 class HomeView(TemplateView):
@@ -216,7 +216,7 @@ class EditarPlatilloView(UpdateView):
     form_class = TipoPlatilloForm
     success_url = reverse_lazy('home:productoapp')
 
-def delete (request,pk):
+def platillodelete (request,pk):
     Platillo = TipoPlatillo.objects.get(id=pk)
     Platillo.delete()
     return redirect('home:productoapp')
@@ -255,3 +255,12 @@ def plantillaParametros(request):
     #Se renderiza el documento con el contexto
     documento = template.render(contexto)
     return HttpResponse(documento)
+
+
+class RegistroView (CreateView):
+    model= Usuario
+    form_class = RegistroForm
+    success_url =reverse_lazy('home:teamapp')
+
+class LoginView(LoginView):
+    template_name = 'index.html'

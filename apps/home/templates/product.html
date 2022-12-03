@@ -110,7 +110,7 @@
   
 
   <div class="container">
-    <h2>Platillos</h2>
+    <h2>PLATILLOS</h2>
     {% for plat in platillo %}
         <h2 class=""> {{plat.nombre}} </h2>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
@@ -126,6 +126,8 @@
                             <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}</li>
                             <li class="list-group-item list-group-item-action d-flex">Mediana Q{{ tipoPlat.SegundoPrecio }}</li>
                             <li class="list-group-item list-group-item-action d-flex">Grande Q{{ tipoPlat.TercerPrecio }}</li>
+                            <td><a class="btn btn-dark" href="{% url 'home:editarplatilloapp' tipoPlat.id %}">Editar</a></td>
+                            <td><a class="btn btn-danger" href="{% url 'home:eliminarplatillo' tipoPlat.id %}">Eliminar</a></td> 
                         </ul>        
                     </div>
                 </div>
