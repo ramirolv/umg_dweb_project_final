@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^pbx(-_hxzk$frtn_@i936%^c8gac!=2=0xuyk8^$fk47ac(=7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -34,17 +34,17 @@ CORS_ALLOW_CREDENTIALS = True
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-CSRF_TRUSTED_ORIGINS = ['https://umgdwebprojectfinal-production.up.railway.app']
+# CSRF_TRUSTED_ORIGINS = ['https://umgdwebprojectfinal-production.up.railway.app']
 
 CORS_REPLACE_HTTPS_REFERER = True
 
-CSRF_COOKIE_DOMAIN = 'railway.app'
+# CSRF_COOKIE_DOMAIN = 'railway.app'
 
-CORS_ORIGIN_WHITELIST = (
-    'https://umgdwebprojectfinal-production.up.railway.app',
-    'umgdwebprojectfinal-production.up.railway.app',
-    'railway.app',
-)
+# CORS_ORIGIN_WHITELIST = (
+#     'https://umgdwebprojectfinal-production.up.railway.app',
+#     'umgdwebprojectfinal-production.up.railway.app',
+#     'railway.app',
+# )
 
 # Application definition
 
@@ -95,13 +95,18 @@ WSGI_APPLICATION = 'umg_dweb_project_final.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'railway',
+    #     'USER': 'root',
+    #     'PASSWORD': 'hED3ghCSwox9xst3dGAk',
+    #     'HOST': 'containers-us-west-20.railway.app',
+    #     'PORT': '7010'
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'hED3ghCSwox9xst3dGAk',
-        'HOST': 'containers-us-west-20.railway.app',
-        'PORT': '7010'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase.sqlite',
     }
 }
 
