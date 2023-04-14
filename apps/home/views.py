@@ -1,20 +1,22 @@
 from datetime import datetime
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required # Add the following line to the top of your code
+from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import Colaborador, CuadreCaja, Gasto, Orden, Platillo, TipoPlatillo, Cliente, DetalleOrden, Puesto, Usuario
-from .forms import OrdenForm, PlatilloForm, TipoPlatilloForm, ColaboradorForm, GastoForm, PuestoForm, RegistroForm
-from django.contrib.auth.views import LoginView
+from .models import *
+from .forms import *
 
 # Create your views here.
 class HomeView(TemplateView):
     template_name = 'index.html'
 
-
-class MainView(TemplateView):
-    template_name = 'main.html'
+@login_required
+def MainView(request):
+    return render(request, 'main.html')
 
 
 class OrdenesView(TemplateView):
@@ -118,7 +120,7 @@ def clienteNuevo(request):
 
     return redirect('home:ordenes_progreso')
 
-
+@login_required
 def ProductosView(request):
     model = Platillo
     return render(request, 'product.html' ,{'platillo':Platillo.objects.all()})
@@ -262,5 +264,11 @@ class RegistroView (CreateView):
     form_class = RegistroForm
     success_url =reverse_lazy('home:teamapp')
 
+
+#Vistas para inicio y cierre de sesión
 class LoginView(LoginView):
-    template_name = 'index.html'
+    template_name = 'registration/login.html'
+
+def LogoutView(request):
+    logout(request)
+    return redirect('home:login')
