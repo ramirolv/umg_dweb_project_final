@@ -114,18 +114,22 @@
               Ordenes
             </a>
           </li>
+          {% if perms.user.auth %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:productoapp' %} ">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               Platillos
             </a>
           </li>
+          {% endif %}
+          {% if perms.user.auth %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:teamapp' %} ">
               <span data-feather="users" class="align-text-bottom"></span>
               Colaboradores
             </a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:gastoapp' %} ">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
