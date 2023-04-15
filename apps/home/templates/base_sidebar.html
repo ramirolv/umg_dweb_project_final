@@ -90,7 +90,7 @@
   {% comment %} <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Buscar" aria-label="Search"> {% endcomment %}
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href=" {% url 'home:indexapp' %} ">Cerrar sesión</a>
+      <a class="nav-link px-3" href=" {% url 'home:logout' %} ">Cerrar sesión</a>
     </div>
   </div>
 </header>
@@ -100,30 +100,36 @@
     <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky" style="background-color: #BEB6B1;">
         <ul class="nav flex-column">
+          {% if perms.user.auth %}
           <li class="nav-item">
             <a class="nav-link" aria-current="page" href=" {% url 'home:serviceapp' %} ">
               <span data-feather="home" class="align-text-bottom"></span>
               Informes
             </a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:ordenes_progreso' %} ">
               <span data-feather="file" class="align-text-bottom"></span>
               Ordenes
             </a>
           </li>
+          {% if perms.user.auth %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:productoapp' %} ">
               <span data-feather="shopping-cart" class="align-text-bottom"></span>
               Platillos
             </a>
           </li>
+          {% endif %}
+          {% if perms.user.auth %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:teamapp' %} ">
               <span data-feather="users" class="align-text-bottom"></span>
               Colaboradores
             </a>
           </li>
+          {% endif %}
           <li class="nav-item">
             <a class="nav-link" href=" {% url 'home:gastoapp' %} ">
               <span data-feather="bar-chart-2" class="align-text-bottom"></span>
