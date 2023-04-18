@@ -44,7 +44,7 @@ urlpatterns = [
     #Ejemplo: producto/5/
     # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
     path('service/', ServiceView.as_view(), name='serviceapp'),
-    path('team/', TeamView.as_view(), name='teamapp'),
+    path('team/', TeamView, name='teamapp'),
     path('gasto/', GastoView.as_view(), name='gastoapp'),
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
     path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
