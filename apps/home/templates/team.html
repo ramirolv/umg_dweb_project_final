@@ -54,30 +54,33 @@
     <thead>
       <tr>
         <th scope="col">Nombre</th>
-        <th scope="col">Edad</th>
-        <th scope="col">Dirección</th>
-        <th scope="col">Teléfono</th>
+        <th scope="col">Apellidos</th>
+        <th scope="col">Usuario</th>
         <th scope="col">Puesto</th>
-
         <th scope="col">Acción</th>
 
       </tr>
     </thead>
 
-    {% for col in object_list %}
+    {% for user in object_list %}
     <tbody>
       <tr>
-        <td>{{ col.nombre }}</td>
-        <td>{{ col.edad }}</td>
-        <td>{{ col.direccion }}</td>
-        <td>{{ col.telefono }}</td>
-        <td>{{ col.puesto }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.username }}</td>
         <td>
-            <a class="btn btn-info" href="{% url 'home:editarusuarioapp' col.id %}">Editar</a> <a class="btn btn-danger" href="{% url 'home:eliminarusuario' col.id %}">Eliminar</a>
-            <a class="btn btn-info" href="{% url 'home:registro' %}">Crear Usuario</a> </td>
+            {% for group in user.groups.all %}
+                {{ group.name }}
+            {% endfor %}
+        </td>
+        <td>
+            <a class="btn btn-info" href="{% url 'home:editarusuarioapp' user.id %}">Editar</a> <a class="btn btn-danger" href="{% url 'home:eliminarusuario' user.id %}">Eliminar</a>
+            <a class="btn btn-info" href="{% url 'home:registro' %}">Crear Usuario</a>
+        </td>
       </tr>
-      {% endfor %}
-  </div>    
+    </tbody>
+    {% endfor %}
+  </table>
 </div>
 
 {% endblock %}

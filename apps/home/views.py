@@ -157,25 +157,24 @@ class ServiceView(TemplateView):
 
 class TeamView(CreateView, ListView):
     template_name = 'team.html'
-    form_class = ColaboradorForm
+    form_class = UserForm
     success_url = reverse_lazy('home:teamapp')
-    model = Colaborador
-
+    model = User
 
     def get_query(self):
-        return Colaborador.objects.all()
+        return User.objects.all()
     
-def usuariodelete (request,id):
-    colaborador = Colaborador.objects.get(id=id)
+def usuariodelete (request, id):
+    colaborador = User.objects.get(id=id)
     colaborador.delete()
     return redirect('home:teamapp')
 
 
 class EditarUsuarioView(UpdateView):
     template_name = 'editarusuario.html'
-    form_class = ColaboradorForm
+    form_class = UserForm
     success_url = reverse_lazy('home:teamapp')
-    model = Colaborador
+    model = User
 
 class PuestoView (CreateView):
     template_name = "puesto.html"
@@ -260,8 +259,9 @@ def plantillaParametros(request):
 
 
 class RegistroView (CreateView):
-    model= Usuario
-    form_class = RegistroForm
+    
+    model= User
+    form_class = UserForm
     success_url =reverse_lazy('home:teamapp')
 
 
