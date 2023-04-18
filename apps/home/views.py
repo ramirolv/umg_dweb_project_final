@@ -11,13 +11,23 @@ from .models import *
 from .forms import *
 
 
-# Saber a qué grupo pertenece un usuario
+# Funciones para saber a qué grupo pertenece un usuario
 def is_member(user):
     return user.groups.filter(name='Administrador').exists()
 
 
 def is_in_multiple_groups(user):
     return user.groups.filter(name__in=['group1', 'group2']).exists()
+
+
+# Vistas para inicio y cierre de sesión
+class LoginView(LoginView):
+    template_name = 'registration/login.html'
+
+
+def LogoutView(request):
+    logout(request)
+    return redirect('home:login')
 
 
 # Create your views here.
@@ -172,9 +182,9 @@ class ServiceView(TemplateView):
 
 
 @login_required
-@user_passes_test(is_member) # or @user_passes_test(is_in_multiple_groups)
+@user_passes_test(is_member)  # or @user_passes_test(is_in_multiple_groups)
 def TeamView(request):
-    return render(request, 'team.html', {'usuario':User.objects.all()})
+    return render(request, 'team.html', {'usuario': User.objects.all()})
 
 
 def usuariodelete(request, id):
@@ -188,6 +198,7 @@ class EditarUsuarioView(UpdateView):
     form_class = UserForm
     success_url = reverse_lazy('home:teamapp')
     model = User
+
 
 class GastoView(CreateView, ListView):
     template_name = 'gasto.html'
@@ -265,17 +276,14 @@ def plantillaParametros(request):
     return HttpResponse(documento)
 
 
-class RegistroView(CreateView):
-    model = User
-    form_class = UserForm
-    success_url = reverse_lazy('home:teamapp')
+def RegistroView(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            username = form. cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado')
+        else:
+            form = UserCreationForm()
 
-
-# Vistas para inicio y cierre de sesión
-class LoginView(LoginView):
-    template_name = 'registration/login.html'
-
-
-def LogoutView(request):
-    logout(request)
-    return redirect('home:login')
+        context = {'form': form}
+    return render(request, 'team.html', context)
