@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Platillo, TipoPlatillo, CuadreCaja, Gasto, Puesto, Colaborador, Orden, DetalleOrden, Usuario
+from .models import Cliente, Platillo, TipoPlatillo, CuadreCaja, Gasto, Orden, DetalleOrden
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -34,17 +34,6 @@ class GastoForm(forms.ModelForm):
         model = Gasto
         fields = '__all__'
 
-class PuestoForm(forms.ModelForm):
-    class Meta:
-        model = Puesto
-        fields = '__all__'
-
-class ColaboradorForm(forms.ModelForm):
-   
-    class Meta:
-        model= Colaborador
-        fields = fields = '__all__'
-       
 class OrdenForm(forms.ModelForm):
     class Meta:
         model = Orden
@@ -57,7 +46,7 @@ class DetalleOrdenForm(forms.ModelForm):
 
 class RegistroForm(UserCreationForm):
        class Meta:
-        model=User 
+        model=User
         fields =(
             'username',
             'password1',

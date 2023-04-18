@@ -43,23 +43,23 @@ class OrdenesProgresoView(CreateView, ListView):
     def get_query(self):
 
         return {"orden": Orden.objects.all(), "cliente": Cliente.objects.all(),
-                "colaborador": Colaborador.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
+                "colaborador": User.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
 
     def get_queryset(self):
         vEstado = self.request.GET.get('estado')
         if (vEstado):
             return {"orden": Orden.objects.filter(estado__icontains=vEstado), "cliente": Cliente.objects.all(),
-                    "colaborador": Colaborador.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
+                    "colaborador": User.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
         else:
             return {"orden": Orden.objects.all(), "cliente": Cliente.objects.all(),
-                    "colaborador": Colaborador.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
+                    "colaborador": User.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
 
 
 def ordenNueva(request):
     tipo = request.POST['tipo']
     # estado= request.POST['estado'] Se asigna directamente
     cliente_id = Cliente.objects.get(pk=request.POST['cliente'])
-    colaborador_id = Colaborador.objects.get(pk=request.POST['colaborador_id'])
+    colaborador_id = User.objects.get(pk=request.POST['colaborador_id'])
 
     if (CuadreCaja.objects.filter(fecha=datetime.now().date()).count() == 0):
         try:
@@ -188,17 +188,6 @@ class EditarUsuarioView(UpdateView):
     form_class = UserForm
     success_url = reverse_lazy('home:teamapp')
     model = User
-
-
-class PuestoView(CreateView):
-    template_name = "puesto.html"
-    form_class = PuestoForm
-    success_url = reverse_lazy('home:teamapp')
-    model = Puesto
-
-    def get_query(self):
-        return Puesto.objects.all()
-
 
 class GastoView(CreateView, ListView):
     template_name = 'gasto.html'
