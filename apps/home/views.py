@@ -152,7 +152,7 @@ def ProductosView(request):
     return render(request, 'product.html', {'platillo': Categoria.objects.all(), 'form':form})
 
 
-#Categorias
+## ----------------- Views of Categoria -----------------
 def categoria_nueva(request):
     nuevaCategoria = Categoria(nombre=request.POST['categoria'])
     nuevaCategoria.save()
@@ -173,7 +173,7 @@ def categoria_eliminar(request, id):
     return redirect('home:productoapp')
 
 
-#Especialidad
+# ----------------- Views of Especialidad -----------------
 def especialidad_nueva(request):
     form = EspecialidadForm(request.POST, request.FILES)
 
@@ -208,30 +208,6 @@ def especialidad_eliminar(request, id):
         messages.success(request, f'Especialidad {eliminarEspecialidad.descripcion} eliminada correctamente')
     else:
         messages.error(request, f'La especialidad no se pudo eliminar')
-    return redirect('home:productoapp')
-
-
-def producto_Nuevo(request):
-    tipo = request.POST['tipo']
-    descripcion = request.POST['descripcion']
-    precio1 = request.POST['precio']
-    id_platillo = Categoria.objects.get(pk=request.POST['platillo_id'])
-
-    plat = TipoPlatillo(tipo=tipo, descripcion=descripcion, PrimerPrecio=precio1, SegundoPrecio=precio2,
-                        TercerPrecio=precio3, platillo_id=id_platillo)
-    plat.save()
-
-    return redirect('home:productoapp')
-
-
-def platillo_Formulario(request):
-    return render(request, 'platillo_formulario.html')
-
-
-def platillo_Nuevo(request):
-    nombre_platillo = request.POST['nombrePlatillo']
-    platillo = Platillo(nombre=nombre_platillo)
-    platillo.save()
     return redirect('home:productoapp')
 
 
