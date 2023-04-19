@@ -14,6 +14,14 @@ urlpatterns = [
     # CRUD Usuarios
     path('registro/', RegistroView, name='registro'),
 
+    #CRUD Categorias
+    path('categoria/nueva', categoria_nueva, name='categoria_nueva'),
+    path('categoria/eliminar/<int:id>', categoria_eliminar, name='categoria_eliminar'),
+
+    #CRUD Especialidad
+    path('especialidad/nueva', especialidad_nueva, name='especialidad_nueva'),
+    path('especialidad/eliminar/<int:id>', especialidad_eliminar, name='especialidad_eliminar'),
+
     path('main/', MainView, name='mainapp'),
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
     path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),

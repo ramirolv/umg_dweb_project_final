@@ -152,10 +152,8 @@ LOGOUT_REDIRECT_URL = reverse_lazy('home:login')
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 # The absolute path to the directory where collectstatic will collect static files for deployment.
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-# The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"

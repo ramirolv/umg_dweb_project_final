@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from datetime import datetime
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required, user_passes_test  # Add the following line to the top of your code
@@ -150,7 +152,67 @@ def clienteNuevo(request):
 @login_required
 def ProductosView(request):
     model = Categoria
-    return render(request, 'product.html', {'platillo': Categoria.objects.all()})
+    form = EspecialidadForm()
+    return render(request, 'product.html', {'platillo': Categoria.objects.all(), 'form':form})
+
+
+#Categorias
+def categoria_nueva(request):
+    nuevaCategoria = Categoria(nombre=request.POST['categoria'])
+    nuevaCategoria.save()
+    if nuevaCategoria.pk is None:
+        messages.error(request, f'La categoría no se pudo crear')
+    else:
+        messages.success(request, f'Categoria {nuevaCategoria.nombre} creada correctamente')
+    return redirect('home:productoapp')
+
+
+def categoria_eliminar(request, id):
+    eliminarCategoria = Categoria.objects.get(pk=id)
+    eliminarCategoria.delete()
+    if eliminarCategoria.pk is None:
+        messages.success(request, f'Categoria {eliminarCategoria.nombre} eliminada correctamente')
+    else:
+        messages.error(request, f'La categoría no se pudo eliminar')
+    return redirect('home:productoapp')
+
+
+#Especialidad
+def especialidad_nueva(request):
+    form = EspecialidadForm(request.POST, request.FILES)
+
+    if form.is_valid():
+        form.save()
+        descripcion = form.cleaned_data['descripcion']
+        messages.success(request, f'Especialidad {descripcion} creada correctamente')
+    else:
+        messages.error(request, f'La especialidad no se pudo crear')
+    return redirect('home:productoapp')
+
+
+def especialidad_eliminar(request, id):
+    eliminarEspecialidad = Especialidad.objects.get(pk=id)
+
+    rutapartes=(eliminarEspecialidad.imagen.url).split("/")
+    #mi lista queda asi ['', 'media', 'peliculas', 'mi_imagen.jpg']
+
+    try:
+        #crear la ruta faltante cambiando / por \\ como el media_root 
+        #y no considerando el index 0 y 1 de la lista
+        rutaok="\\"+str(rutapartes[2])+"\\"+str(rutapartes[3])
+        
+        #eliminando con la ruta correcta
+        os.remove(os.path.join(settings.MEDIA_ROOT+rutaok))
+    except:
+        messages.error(request, 'No se encontró la imagen')
+    #luego eliminar y redirigir
+    eliminarEspecialidad.delete()
+
+    if eliminarEspecialidad.pk is None:
+        messages.success(request, f'Especialidad {eliminarEspecialidad.descripcion} eliminada correctamente')
+    else:
+        messages.error(request, f'La especialidad no se pudo eliminar')
+    return redirect('home:productoapp')
 
 
 def producto_Nuevo(request):

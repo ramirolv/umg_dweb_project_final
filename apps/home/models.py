@@ -30,15 +30,16 @@ class Categoria(models.Model):
 class Especialidad(models.Model):
     # idPlatillo=models.IntegerField
     descripcion = models.CharField(max_length=200, verbose_name='Descripcion')
-    imagen = models.ImageField(upload_to='especialidad', height_field=None, width_field=None, max_length=None)
+    imagen = models.ImageField(upload_to='especialidad', default='descarga.png', )
     categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.tipo
+        return self.descripcion
+
 
 class Tipo(models.Model):
-    Tipo = models.CharField(max_length=25, verbose_name='Descripcion')
+    tipo = models.CharField(max_length=25, verbose_name='Descripcion')
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     especialidad_id = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)

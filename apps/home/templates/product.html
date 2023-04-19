@@ -1,12 +1,6 @@
 {% extends 'base_sidebar.html' %}
 
 {% block titulo %}
-  <div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      <i class="bi bi-bag-plus-fill small"> Agregar</i>
-    </button>
-  </div>
   <h2 class="text-white">Platillos</h2>
 {% endblock titulo %}
 
@@ -58,45 +52,20 @@
 
   <!-- / Panel OffCanvas -->
 
-  <!-- Modal -->
+  <!-- Modal categoria -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Agregue los siguientes datos</h5>
+          <h5 class="modal-title" id="staticBackdropLabel">Categoría</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action=" {% url 'home:producto_nuevo' %} " method="post">
+          <form action=" {% url 'home:categoria_nueva' %} " method="post">
             {% csrf_token %}
             <div class="form-group">
-              <label for="id_tipo">Nombre del platillo</label>
-              <input class="form-control" type="text" id="id_tipo" name="tipo" required="">
-            </div>
-            <div class="form-group">
-              <label for="id_Descripcion">Descripcion</label>
-              <input class="form-control" type="text" id="id_Descripcion" name="descripcion">
-            </div>
-            <div class="form-group">
-              <label for="id_Precio1">Precio pequeño</label>
-              <input class="form-control" type="number" id="id_Precio1" name="precio1">
-            </div>
-            <div class="form-group">
-              <label for="id_Precio2">Precio mediano</label>
-              <input class="form-control" type="number" id="id_Precio2" name="precio2">
-            </div>
-            <div class="form-group">
-              <label for="id_Precio3">Precio Grande</label>
-              <input class="form-control" type="number" id="id_Precio3" name="precio3">
-            </div>
-            <div class="form-group">
-              <label for="id_platillo_id">Tipo de Platillo</label>
-              <select class="form-control" name="platillo_id" id="id_platillo_id">
-                {% for plat in platillo %}
-                <option value=" {{plat.id}} "> {{ plat.nombre }} </option>
-                {% endfor %}
-              </select>
-
+              <label for="id_tipo">Escriba el nombre de la nueva categoria</label>
+              <input class="form-control" type="text" id="id_tipo" name="categoria" required>
             </div>
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
@@ -109,25 +78,69 @@
   </div>
   
 
+  <!-- Modal Especialidad-->
+  <div class="modal fade" id="modalEspecialidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Especialidad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action=" {% url 'home:especialidad_nueva' %} " method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="id_tipo">Nombre</label>
+              {{form.descripcion}}
+            </div>
+            <div class="form-group">
+              <label for="imagen">Imagen</label>
+              {{form.imagen}}
+            </div>
+            <div class="form-group">
+              <label for="categoria">Categoria</label>
+              {{form.categoria_id}}
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
   <div class="container">
-    <h2>PLATILLOS</h2>
+    <h2>Categorías
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="bi bi-bag-plus-fill small"> Nueva Categoría</i>
+      </button>
+    </h2>
+
     {% for plat in platillo %}
-        <h2 class=""> {{plat.nombre}} </h2>
+        <h2 class=""> {{plat.nombre}} <a href="{% url 'home:categoria_eliminar' plat.id %}" class="btn btn-danger">Borrar</a> 
+          <a type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEspecialidad">
+            <i class="bi bi-bag-plus-fill small"> Nueva Especialidad</i>
+          </a>
+        </h2>
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
-            {% for tipoPlat in plat.tipoplatillo_set.all %}
+            {% for tipoPlat in plat.especialidad_set.all %}
                 <div class="col">
                     <div class="card h-100 border-secondary">
-                        <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
+                        <img src="{{tipoPlat.imagen.url}}" class="card-img-top" style="width=10px;" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"> {{ tipoPlat.tipo }} </h5>
                             <p class="card-text">{{ tipoPlat.descripcion }}</p>    
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}</li>
-                            <li class="list-group-item list-group-item-action d-flex">Mediana Q{{ tipoPlat.SegundoPrecio }}</li>
-                            <li class="list-group-item list-group-item-action d-flex">Grande Q{{ tipoPlat.TercerPrecio }}</li>
+                          {% for tipo in tipoPlat.tipo_set.all %}
+                            <li class="list-group-item list-group-item-action d-flex">{{tipo.tipo}} Q{{tipo.precio}} </li>
+                          {% endfor %}
                             <td><a class="btn btn-dark" href="{% url 'home:editarplatilloapp' tipoPlat.id %}">Editar</a></td>
-                            <td><a class="btn btn-danger" href="{% url 'home:eliminarplatillo' tipoPlat.id %}">Eliminar</a></td> 
+                            <td><a class="btn btn-danger" href="{% url 'home:especialidad_eliminar' tipoPlat.id %}">Eliminar</a></td> 
                         </ul>        
                     </div>
                 </div>
