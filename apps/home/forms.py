@@ -29,6 +29,7 @@ class CategoriaForm(forms.ModelForm):
 class EspecialidadForm(forms.ModelForm):
     descripcion = forms.CharField(label='Especialidad', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=200, required=True)
     imagen = forms.ImageField(label='Imagen', widget=forms.FileInput(attrs={"class":"form-control"}), required=False)
+    categoria = 
     
     class Meta:
         model = Especialidad
