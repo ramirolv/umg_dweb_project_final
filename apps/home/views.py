@@ -34,11 +34,7 @@ def LogoutView(request):
     return redirect('home:login')
 
 
-# Create your views here.
-class HomeView(TemplateView):
-    template_name = 'index.html'
-
-
+# MainView.
 @login_required
 def MainView(request):
     return render(request, 'main.html')
