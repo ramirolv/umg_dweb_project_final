@@ -6,10 +6,14 @@ from .views import *
 app_name='home'
 
 urlpatterns = [
+    #Main View
+    path('', MainView, name='mainapp'),
+    
     #Inicio y cierre de sesión
-    path('', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView, name='logout'),
     #path('', LoginView.as_view(), name='indexapp'),
+
 
     # CRUD Usuarios
     path('registro/', RegistroView, name='registro'),
@@ -22,7 +26,7 @@ urlpatterns = [
     path('especialidad/nueva', especialidad_nueva, name='especialidad_nueva'),
     path('especialidad/eliminar/<int:id>', especialidad_eliminar, name='especialidad_eliminar'),
 
-    path('main/', MainView, name='mainapp'),
+    
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
     path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),
     path('ordenes/progreso/', OrdenesProgresoView.as_view(), name='ordenes_progreso'),
