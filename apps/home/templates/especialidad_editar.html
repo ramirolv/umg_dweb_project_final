@@ -1,0 +1,23 @@
+{% extends 'base_sidebar.html' %}
+
+{% load static %}
+
+{% block titulo %}
+<h3 class="text-white">Editar Especialidad</h3>
+{% endblock titulo %}
+
+
+{% block contenido %}
+
+     <div class="container">
+        {% block content %}
+        <form action="" method="POST">
+            <p> {% csrf_token %}
+            {{ form.as_p  }}</p>
+            <input type="submit" name="Guardar">
+           </form>
+        {% endblock content %}
+    </div>
+{% endblock contenido %}
+   
+

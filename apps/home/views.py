@@ -211,6 +211,13 @@ def especialidad_eliminar(request, id):
     return redirect('home:productoapp')
 
 
+class especialidad_editar(UpdateView):
+    template_name = 'especialidad_editar.html'
+    form_class = EspecialidadForm
+    model = Especialidad
+    success_url = reverse_lazy('home:productoapp')
+
+
 class ServiceView(TemplateView):
     template_name = 'service.html'
 

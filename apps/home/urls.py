@@ -14,17 +14,21 @@ urlpatterns = [
     path('logout/', LogoutView, name='logout'),
     #path('', LoginView.as_view(), name='indexapp'),
 
-
-    # CRUD Usuarios
-    path('registro/', RegistroView, name='registro'),
+    #CRUD Usuarios
+    path('team/', TeamView, name='teamapp'),
+    path('usuario/nuevo/', RegistroView, name='registro'),
+    path('usuario/editar/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
+    path('usuario/eliminar/<int:id>', usuariodelete, name='eliminarusuario'),
 
     #CRUD Categorias
+    path('producto/', ProductosView, name='productoapp'), #View of List Categoria and Especialidad
     path('categoria/nueva', categoria_nueva, name='categoria_nueva'),
     path('categoria/eliminar/<int:id>', categoria_eliminar, name='categoria_eliminar'),
 
     #CRUD Especialidad
     path('especialidad/nueva', especialidad_nueva, name='especialidad_nueva'),
     path('especialidad/eliminar/<int:id>', especialidad_eliminar, name='especialidad_eliminar'),
+    path('especialidad/editar/<int:pk>', especialidad_editar.as_view(), name='especialidad_editar'),
 
     
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
@@ -39,14 +43,14 @@ urlpatterns = [
     #Ejemplo: producto/5/
     # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
     path('service/', ServiceView.as_view(), name='serviceapp'),
-    path('team/', TeamView, name='teamapp'),
+    
+    
+
     path('gasto/', GastoView.as_view(), name='gastoapp'),
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
     path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
     path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
     path('eliminar_platillo/<int:pk>', platillodelete, name='eliminarplatillo'),
     path('plantilla/', plantillaParametros, name='plantilla'),
-    path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
-    path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

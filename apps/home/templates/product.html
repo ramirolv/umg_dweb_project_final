@@ -139,7 +139,7 @@
                           {% for tipo in tipoPlat.tipo_set.all %}
                             <li class="list-group-item list-group-item-action d-flex">{{tipo.tipo}} Q{{tipo.precio}} </li>
                           {% endfor %}
-                            <td><a class="btn btn-dark" href="{% url 'home:editarplatilloapp' tipoPlat.id %}">Editar</a></td>
+                            <td><a class="btn btn-dark" href="{% url 'home:especialidad_editar' tipoPlat.id %}">Editar</a></td>
                             <td><a class="btn btn-danger" href="{% url 'home:especialidad_eliminar' tipoPlat.id %}">Eliminar</a></td> 
                         </ul>        
                     </div>
