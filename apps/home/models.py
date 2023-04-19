@@ -18,7 +18,7 @@ class Cliente(models.Model):
         return self.nombre
 
 
-class Platillo(models.Model):
+class Categoria(models.Model):
     # idPlatillo=models.IntegerField
     nombre = models.CharField(max_length=45, verbose_name='Nombre')
     creacion = models.DateTimeField(auto_now_add=True)
@@ -27,19 +27,21 @@ class Platillo(models.Model):
         return '%s' % (self.nombre)
 
 
-class TipoPlatillo(models.Model):
+class Especialidad(models.Model):
     # idPlatillo=models.IntegerField
-    tipo = models.CharField(max_length=45, verbose_name='Tipo')
-    PrimerPrecio = models.DecimalField(max_digits=10, decimal_places=2)
-    SegundoPrecio = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    TercerPrecio = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     descripcion = models.CharField(max_length=200, verbose_name='Descripcion')
+    imagen = models.ImageField(upload_to='especialidad', height_field=None, width_field=None, max_length=None)
+    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
-    platillo_id = models.ForeignKey(Platillo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.tipo
 
+class Tipo(models.Model):
+    Tipo = models.CharField(max_length=25, verbose_name='Descripcion')
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    especialidad_id = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
+    creacion = models.DateTimeField(auto_now_add=True)
 
 class CuadreCaja(models.Model):
     # idCaja =models.IntegerField
@@ -84,7 +86,7 @@ class DetalleOrden(models.Model):
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     sub_total = models.DecimalField(max_digits=10, decimal_places=2)
     orden_id = models.ForeignKey(Orden, on_delete=models.CASCADE)
-    tipoPlatillo_id = models.ForeignKey(TipoPlatillo, on_delete=models.CASCADE)
+    tipo_id = models.ForeignKey(Tipo, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

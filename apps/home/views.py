@@ -2,12 +2,14 @@ from datetime import datetime
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.decorators import login_required, user_passes_test  # Add the following line to the top of your code
 from django.contrib.auth import logout
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-from .models import *
+
+
 from .forms import *
 
 
@@ -112,7 +114,7 @@ def tomarOrden(request, id):
 def agregarDetalleOrden(request):
     id_orden = Orden.objects.get(pk=request.POST['id_orden'])
     cantidad = request.POST['cantidad']
-    tipo_platillo = TipoPlatillo.objects.get(pk=request.POST['tipoPlatillo'])
+    tipo_platillo = Tipo.objects.get(pk=request.POST['tipoPlatillo'])
     sub_total = cantidad * tipo_platillo.PrimerPrecio
 
     detalle = DetalleOrden(cantidad=cantidad, sub_total=sub_total, orden_id=id_orden, tipoPlatillo_id=tipo_platillo)
@@ -147,17 +149,15 @@ def clienteNuevo(request):
 
 @login_required
 def ProductosView(request):
-    model = Platillo
-    return render(request, 'product.html', {'platillo': Platillo.objects.all()})
+    model = Categoria
+    return render(request, 'product.html', {'platillo': Categoria.objects.all()})
 
 
 def producto_Nuevo(request):
     tipo = request.POST['tipo']
     descripcion = request.POST['descripcion']
-    precio1 = request.POST['precio1']
-    precio2 = request.POST['precio2']
-    precio3 = request.POST['precio3']
-    id_platillo = Platillo.objects.get(pk=request.POST['platillo_id'])
+    precio1 = request.POST['precio']
+    id_platillo = Categoria.objects.get(pk=request.POST['platillo_id'])
 
     plat = TipoPlatillo(tipo=tipo, descripcion=descripcion, PrimerPrecio=precio1, SegundoPrecio=precio2,
                         TercerPrecio=precio3, platillo_id=id_platillo)
@@ -184,12 +184,23 @@ class ServiceView(TemplateView):
 @login_required
 @user_passes_test(is_member)  # or @user_passes_test(is_in_multiple_groups)
 def TeamView(request):
-    return render(request, 'team.html', {'usuario': User.objects.all()})
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado correctamente')
+            return redirect('home:teamapp')
+    else:
+        form = UserRegisterForm()
 
+    context = {'form': form, 'usuario': User.objects.all()}
+    return render(request, 'team.html', context)
 
 def usuariodelete(request, id):
     colaborador = User.objects.get(id=id)
     colaborador.delete()
+    messages.success(request, f'Usuario {colaborador.first_name} eliminado correctamente')
     return redirect('home:teamapp')
 
 
@@ -229,22 +240,22 @@ class EditarGastoView(UpdateView):
 
 class EditarPlatilloView(UpdateView):
     template_name = 'editarplatillo.html'
-    model = TipoPlatillo
-    form_class = TipoPlatilloForm
+    model = Tipo
+    form_class = TipoForm
     success_url = reverse_lazy('home:productoapp')
 
 
 def platillodelete(request, pk):
-    Platillo = TipoPlatillo.objects.get(id=pk)
+    Platillo = Tipo.objects.get(id=pk)
     Platillo.delete()
     return redirect('home:productoapp')
 
 
 class PlatillosView(ListView):
     template_name = 'product.html'
-    form_class = PlatilloForm
+    form_class = EspecialidadForm
     success_url = reverse_lazy('home:gastoapp')
-    model = Platillo
+    model = Especialidad
 
     def get_query(self):
         return Platillo.objects.all()
@@ -281,9 +292,9 @@ def RegistroView(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             username = form. cleaned_data['username']
-            messages.success(request, f'Usuario {username} creado')
+            message.success(request, f'Usuario {username} creado correctamente')
         else:
             form = UserCreationForm()
 
-        context = {'form': form}
+        context = {'form': form, 'usuario': User.objects.all()}
     return render(request, 'team.html', context)

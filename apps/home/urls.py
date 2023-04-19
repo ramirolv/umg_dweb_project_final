@@ -11,6 +11,8 @@ urlpatterns = [
     path('logout/', LogoutView, name='logout'),
     #path('', LoginView.as_view(), name='indexapp'),
 
+    # CRUD Usuarios
+    path('registro/', RegistroView, name='registro'),
 
     path('main/', MainView, name='mainapp'),
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
@@ -37,5 +39,5 @@ urlpatterns = [
     path('plantilla/', plantillaParametros, name='plantilla'),
     path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
     path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
-    path('registro/', RegistroView.as_view(), name='registro'),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -14,6 +14,14 @@
   <h2 class="text-white">Colaboradores</h2>
 {% endblock titulo %}
 
+{% if messages %}
+    {% for message in messages %}
+        <div class="notification {{ message.tags }}">
+        {{ message }}
+        </div>
+    {% endfor %}
+
+{% endif %}
 
 {% block contenido %}  
 
@@ -29,20 +37,15 @@
             <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresando Colaboradores</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>   
+            </div>
               <div class="modal-body">
-                  <form method="POST">
-                  {% csrf_token %}
-                  <br><br>Nombre  {{ form.nombre }}
-                  <br><br>Edad    {{ form.edad }}
-                  <br><br>Dirección {{ form.direccion}}
-                  <br><br>Telefono  {{ form.telefono}}
-                  <br><br>Perfil {{ form.perfil}}
-                  <br><br><br>
-                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </form>
-              </div> 
+                    <form class="form" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </form>
+              </div>
           </div>
         </div>
       </div>
@@ -74,7 +77,26 @@
         </td>
         <td>
             <a class="btn btn-info" href="{% url 'home:editarusuarioapp' user.id %}">Editar</a> <a class="btn btn-danger" href="{% url 'home:eliminarusuario' user.id %}">Eliminar</a>
-            <a class="btn btn-info" href="{% url 'home:registro' %}">Crear Usuario</a>
+             <div class="modal fade" id="formularioRegistro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Ingresando Colaboradores</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+              <div class="modal-body">
+                    <form class="form" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                          {{ form.as_p }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </form>
+              </div>
+          </div>
+        </div>
+      </div>
         </td>
       </tr>
     </tbody>
