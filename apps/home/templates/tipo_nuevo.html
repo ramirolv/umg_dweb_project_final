@@ -11,9 +11,11 @@
 
      <div class="container">
         {% block content %}
-        <form action="" method="POST" enctype="multipart/form-data">
-            <p> {% csrf_token %}
-            {{ form.as_p  }}</p>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <input type="text">
             <input type="submit" name="Guardar">
            </form>
         {% endblock content %}

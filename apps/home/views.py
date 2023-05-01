@@ -2,7 +2,8 @@ import os
 from django.conf import settings
 from datetime import datetime
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.decorators import login_required, user_passes_test  # Add the following line to the top of your code
+from django.contrib.auth.decorators import login_required, \
+    user_passes_test  # Add the following line to the top of your code
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -10,7 +11,6 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-
 
 from .forms import *
 
@@ -98,7 +98,7 @@ def ordenEliminar(request, id):
 
 
 def tomarOrden(request, id):
-    modeloPlatillo = Platillo.objects.all()
+    modeloPlatillo = Categoria.objects.all()
     modeloOrden = Orden.objects.get(pk=id)
     modeloCliente = Cliente.objects.get(pk=modeloOrden.cliente_id.id)
 
@@ -149,10 +149,10 @@ def clienteNuevo(request):
 def ProductosView(request):
     model = Categoria
     form = EspecialidadForm()
-    return render(request, 'product.html', {'platillo': Categoria.objects.all(), 'form':form})
+    return render(request, 'product.html', {'platillo': Categoria.objects.all(), 'form': form})
 
 
-## ----------------- Views of Categoria -----------------
+# ----------------- Views of Categoria -----------------
 def categoria_nueva(request):
     nuevaCategoria = Categoria(nombre=request.POST['categoria'])
     nuevaCategoria.save()
@@ -189,19 +189,19 @@ def especialidad_nueva(request):
 def especialidad_eliminar(request, id):
     eliminarEspecialidad = Especialidad.objects.get(pk=id)
 
-    rutapartes=(eliminarEspecialidad.imagen.url).split("/")
-    #mi lista queda asi ['', 'media', 'peliculas', 'mi_imagen.jpg']
+    rutapartes = (eliminarEspecialidad.imagen.url).split("/")
+    # mi lista queda asi ['', 'media', 'peliculas', 'mi_imagen.jpg']
 
     try:
-        #crear la ruta faltante cambiando / por \\ como el media_root 
-        #y no considerando el index 0 y 1 de la lista
-        rutaok="\\"+str(rutapartes[2])+"\\"+str(rutapartes[3])
-        
-        #eliminando con la ruta correcta
-        os.remove(os.path.join(settings.MEDIA_ROOT+rutaok))
+        # crear la ruta faltante cambiando / por \\ como el media_root
+        # y no considerando el index 0 y 1 de la lista
+        rutaok = "\\" + str(rutapartes[2]) + "\\" + str(rutapartes[3])
+
+        # eliminando con la ruta correcta
+        os.remove(os.path.join(settings.MEDIA_ROOT + rutaok))
     except:
         messages.error(request, 'No se encontró la imagen')
-    #luego eliminar y redirigir
+    # luego eliminar y redirigir
     eliminarEspecialidad.delete()
 
     if eliminarEspecialidad.pk is None:
@@ -216,6 +216,23 @@ class especialidad_editar(UpdateView):
     form_class = EspecialidadForm
     model = Especialidad
     success_url = reverse_lazy('home:productoapp')
+
+
+# ----------------- Views of Tipo -----------------
+def tipo_nuevo(request):
+    tipo = request.POST['tipo']
+    precio = request.POST['precio']
+    idEspecialidad = request.POST['id_especialidad']
+    especialidad = Especialidad.objects.get(pk=idEspecialidad)
+    tipo_nuevo = Tipo(tipo=tipo, precio=precio, especialidad_id=especialidad)
+    tipo_nuevo.save()
+
+    if tipo_nuevo.pk is None:
+        messages.success(request, f'El tipo no se pudo crear')
+    else:
+        messages.success(request, f'Tipo {tipo_nuevo.tipo} creado correctamente')
+
+    return redirect('home:productoapp')
 
 
 class ServiceView(TemplateView):
@@ -237,6 +254,7 @@ def TeamView(request):
 
     context = {'form': form, 'usuario': User.objects.all()}
     return render(request, 'team.html', context)
+
 
 def usuariodelete(request, id):
     colaborador = User.objects.get(id=id)
@@ -332,8 +350,8 @@ def RegistroView(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            username = form. cleaned_data['username']
-            message.success(request, f'Usuario {username} creado correctamente')
+            username = form.cleaned_data['username']
+            messages.success(request, f'Usuario {username} creado correctamente')
         else:
             form = UserCreationForm()
 

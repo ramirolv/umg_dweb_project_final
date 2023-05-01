@@ -57,17 +57,8 @@
                   </div>
                 </div>
 
-                <div class="form-group row mt-2">
-                  <label class="col-sm-2 col-form-label" for="id_colaborador_id">Colaborador</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" name="colaborador_id" id="id_colaborador_id">
-                      {% for cli in object_list.colaborador %}
-                      <option value=" {{cli.id}} "> {{cli.nombre}} </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-                
+              <input class="form-control" type="hidden" value="{{ user.id }}" name="colaborador_id" id="id_colaborador_id">
+
                 <div class="container d-flex justify-content-center my-3">
                   <button class="btn btn-primary" type="sumbit">Crear Orden</button>
                 </div>

@@ -7,51 +7,6 @@
 {% block contenido %}
 
     <div class="home">
-    
-                
-                  <!-- PIZZA'S MENU -->
-                  <!-- Panel OffCanvas -->
-  
-  <div class="offcanvas offcanvas-end bg-dark text-light" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">Orden No. 15</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <h2 class="mt-5">Detalle de orden</h2>
-      <table class="table table-primary table-bordered table-hover">
-        <thead>
-          <td>#</td>
-          <td>Descripción</td>
-          <td>Precio</td>
-        </thead>
-        <tr>
-          <td>4</td>
-          <td>Pizza Pepperoni (Grande)</td>
-          <td>Q360</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Pizza Hauawiana (Mediana)</td>
-          <td>Q140</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Coca-Cola</td>
-          <td>Q10</td>
-        </tr>
-        <tfoot>
-          <td></td>
-          <td>Total</td>
-          <td>Q510</td>
-        </tfoot>
-      </table>
-      
-    </div>
-  </div>
-
-  <!-- / Panel OffCanvas -->
-
   <!-- Modal categoria -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -79,6 +34,8 @@
   
 
   <!-- Modal Especialidad-->
+
+    <!-- Modal Especialidad-->
   <div class="modal fade" id="modalEspecialidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -93,14 +50,12 @@
               <label for="id_tipo">Nombre</label>
               {{form.descripcion}}
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label for="imagen">Imagen</label>
               {{form.imagen}}
             </div>
-            <div class="form-group">
-              <label for="categoria">Categoria</label>
-              {{form.categoria_id}}
-            </div>
+              <input type="hidden" id="inputIdCategoria" name="categoria_id">
+
             <button type="submit" class="btn btn-primary">Guardar cambios</button>
           </form>
         </div>
@@ -111,37 +66,77 @@
     </div>
   </div>
 
-  
 
+    <!-- Modal Tipo-->
+  <div class="modal fade" id="modalTipo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Tipo</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action=" {% url 'home:tipo_nuevo' %} " method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="id_tipo">Tipo o sabor</label>
+                <input type="text" class="form-control" name="tipo">
+            </div>
+            <div class="form-group mb-2">
+              <label for="precio">Precio</label>
+                <input type="number" class="form-control" name="precio">
+            </div>
+              <input type="hidden" id="inputIdEspecialidad" name="id_especialidad">
+
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    <!-- Final de los modal -->
+
+
+<!-- Bloque del contenido principal-->
   <div class="container">
     <p class="fw-bold">Categorías
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i class="bi bi-bag-plus-fill small"> Nueva Categoría</i>
-      </button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="bi bi-bag-plus-fill small"> Nueva Categoría</i>
+        </button>
     </p>
 
     {% for plat in platillo %}
-        <p class="fw-bold"> {{plat.nombre}} <a href="{% url 'home:categoria_eliminar' plat.id %}" class="btn btn-danger">Borrar</a> 
-          <a type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalEspecialidad">
-            <i class="bi bi-bag-plus-fill small"> Nueva Especialidad</i>
-          </a>
-        </p>
-        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
+        <h5 class="fw-bold">
+            {{plat.nombre}}
+            <a href="{% url 'home:categoria_eliminar' plat.id %}" class="btn btn-danger"> <small><i class="bi bi-trash"></i></small> </a>
+            <a type="button" class="btn btn-success" onclick="openModalCEspecialidad({{ plat.id }})">
+                <i class="bi bi-bag-plus-fill small"> Nueva Especialidad</i>
+            </a>
+            <a type="hidden" id="botonModalEspecialidad" data-bs-toggle="modal" data-bs-target="#modalEspecialidad"></a>
+        </h5>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
+
+            <!-- Card of Products -->
             {% for tipoPlat in plat.especialidad_set.all %}
                 <div class="col">
-                    <div class="card w-75 h-100 border-secondary">
+                    <div class="card w-100 h-100 border-secondary">
                         <img src="{{tipoPlat.imagen.url}}" class="card-img-top" width="10px" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"> {{ tipoPlat.tipo }} </h5>
-                            <p class="card-text">{{ tipoPlat.descripcion }}</p>    
+                        <div class="card-body py-1">
+                            <h5 class="card-title mb-0"> {{ tipoPlat.descripcion }} </h5>
                         </div>
                         <ul class="list-group list-group-flush">
                           {% for tipo in tipoPlat.tipo_set.all %}
                             <li class="list-group-item list-group-item-action d-flex py-1">{{tipo.tipo}} Q{{tipo.precio}} </li>
                           {% endfor %}
                             <li class="form-control">
-                              <a class="btn btn-dark" href="{% url 'home:especialidad_editar' tipoPlat.id %}"><i class="bi bi-pencil-square"></i></a>
-                              <a class="btn btn-danger" href="{% url 'home:especialidad_eliminar' tipoPlat.id %}"> <i class="bi bi-trash"></i> </a>
+                                <a type="hidden" id="buttonModalTipo" data-bs-toggle="modal" data-bs-target="#modalTipo"></a>
+                                <a class="btn btn-success py-1 px-2" onclick="openModalTipo({{ tipoPlat.id }});"> <i class="bi bi-plus-square"></i> </a>
+                                <a class="btn btn-dark py-1 px-2" href="{% url 'home:especialidad_editar' tipoPlat.id %}"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-danger py-1 px-2" href="{% url 'home:especialidad_eliminar' tipoPlat.id %}"> <i class="bi bi-trash"></i> </a>
+
                             </li>
                         </ul>        
                     </div>
@@ -153,4 +148,19 @@
     {% endfor %}
   </div>
 
+        <script>
+            function openModalTipo(id){
+                var inputEspecialidad = document.getElementById('inputIdEspecialidad');
+                inputEspecialidad.value = id;
+                var boton = document.getElementById('buttonModalTipo');
+                boton.click();
+            }
+            function openModalCEspecialidad(id){
+                var inputCategoria = document.getElementById('inputIdCategoria');
+                inputCategoria.value = id;
+                var boton = document.getElementById('botonModalEspecialidad');
+                boton.click();
+            }
+
+        </script>
 {% endblock contenido %}

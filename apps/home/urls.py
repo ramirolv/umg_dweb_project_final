@@ -30,7 +30,9 @@ urlpatterns = [
     path('especialidad/eliminar/<int:id>', especialidad_eliminar, name='especialidad_eliminar'),
     path('especialidad/editar/<int:pk>', especialidad_editar.as_view(), name='especialidad_editar'),
 
-    
+    #CRUD Tipo
+    path('tipo/nuevo/', tipo_nuevo, name='tipo_nuevo'),
+
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
     path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),
     path('ordenes/progreso/', OrdenesProgresoView.as_view(), name='ordenes_progreso'),

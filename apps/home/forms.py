@@ -29,16 +29,19 @@ class CategoriaForm(forms.ModelForm):
 class EspecialidadForm(forms.ModelForm):
     descripcion = forms.CharField(label='Especialidad', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=200, required=True)
     imagen = forms.ImageField(label='Imagen', widget=forms.FileInput(attrs={"class":"form-control"}), required=False)
-    categoria = 
+    categoria_id = forms.ModelChoiceField(queryset=Categoria.objects.all(), widget=forms.Select(attrs={"class":"form-control"}), required=True)
     
     class Meta:
         model = Especialidad
         fields = ['descripcion', 'imagen', 'categoria_id']
 
 class TipoForm(forms.ModelForm):
+    tipo = forms.CharField(label='Tipo o sabor', widget=forms.TextInput(attrs={"class":"form-control"}), max_length=200, required=True)
+    precio = forms.DecimalField(label='Precio', widget=forms.NumberInput(attrs={"class":"form-control"}), max_digits=10, required=True)
+    especialidad_id = forms.ModelChoiceField(queryset=Especialidad.objects.all(), widget=forms.Select(attrs={"class": "form-control"}), required=True)
     class Meta:
         model = Tipo
-        fields = '__all__'
+        fields = ['tipo', 'precio']
 
 class CuadreCajaForm(forms.ModelForm):
     class Meta:
