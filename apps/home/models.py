@@ -44,6 +44,9 @@ class Tipo(models.Model):
     especialidad_id = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return '%s %s %s' % (self.especialidad_id.categoria_id, self.especialidad_id, self.tipo)
+
 
 class CuadreCaja(models.Model):
     # idCaja =models.IntegerField
