@@ -100,12 +100,18 @@ def ordenEliminar(request, id):
 def tomarOrden(request, id):
     modeloPlatillo = Categoria.objects.all()
     modeloOrden = Orden.objects.get(pk=id)
+    totalOrden = 0
+
+    for subtotal in modeloOrden.detalleorden_set.all():
+        totalOrden = totalOrden + subtotal.sub_total
+        
     modeloCliente = Cliente.objects.get(pk=modeloOrden.cliente_id.id)
 
     templateExterno = open('./apps/home/templates/ordenes_tomar_platillos.html')
     template = Template(templateExterno.read())
-    contexto = Context({'orden': modeloOrden, 'platillos': modeloPlatillo, 'cliente': modeloCliente})
+    contexto = Context({'orden': modeloOrden, 'platillos': modeloPlatillo, 'cliente': modeloCliente, 'total': totalOrden})
     documento = template.render(contexto)
+
     return HttpResponse(documento)
 
 

@@ -44,6 +44,7 @@ class Tipo(models.Model):
     especialidad_id = models.ForeignKey(Especialidad, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
 
+
 class CuadreCaja(models.Model):
     # idCaja =models.IntegerField
     disponible = models.DecimalField(max_digits=10, decimal_places=2)
@@ -91,7 +92,7 @@ class DetalleOrden(models.Model):
     creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s %s %s' % (self.cantidad, self.tipoPlatillo_id, self.sub_total)
+        return '%s %s' % (self.cantidad, self.sub_total)
 
 # class Usuario(models.Model):
 #     # idUsuario =models.IntegerField
