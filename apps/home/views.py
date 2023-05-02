@@ -107,23 +107,20 @@ def tomarOrden(request, id):
         
     modeloCliente = Cliente.objects.get(pk=modeloOrden.cliente_id.id)
 
-    templateExterno = open('./apps/home/templates/ordenes_tomar_platillos.html')
-    template = Template(templateExterno.read())
-    contexto = Context({'orden': modeloOrden, 'platillos': modeloPlatillo, 'cliente': modeloCliente, 'total': totalOrden})
-    documento = template.render(contexto)
-
-    return HttpResponse(documento)
+    return render(request, 'ordenes_tomar_platillos.html', {'orden': modeloOrden, 'platillos': modeloPlatillo, 'cliente': modeloCliente, 'total': totalOrden})
 
 
-def agregarDetalleOrden(request):
+def detalleordenAgregar(request):
     id_orden = Orden.objects.get(pk=request.POST['id_orden'])
-    cantidad = request.POST['cantidad']
-    tipo_platillo = Tipo.objects.get(pk=request.POST['tipoPlatillo'])
-    sub_total = cantidad * tipo_platillo.PrimerPrecio
+    id_tipo = Tipo.objects.get(pk=request.POST['id_tipo'])
+    cantidad = request.POST['inputCantidad']
 
-    detalle = DetalleOrden(cantidad=cantidad, sub_total=sub_total, orden_id=id_orden, tipoPlatillo_id=tipo_platillo)
+    sub_total = float(cantidad) * float(id_tipo.precio)
+
+    detalle = DetalleOrden(cantidad=cantidad, precio=id_tipo.precio, sub_total=sub_total, orden_id=id_orden, tipo_id=id_tipo)
     detalle.save()
-    return redirect('home:tomar_orden', id_orden)
+
+    return redirect('home:tomar_orden', id_orden.pk)
 
 
 def detalleOrdenEliminar(request, id):

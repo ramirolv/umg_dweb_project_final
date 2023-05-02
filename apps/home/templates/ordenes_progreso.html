@@ -109,7 +109,7 @@
               <h5 class="card-title">{{ord.cliente_id}}</h5>
               <ul>
                 {% for detOrd in ord.detalleorden_set.all %}
-                  <li class="card-text style-none"> {{detOrd.tipoPlatillo_id}} </li>
+                  <li class="card-text style-none"> {{detOrd.cantidad}} {{detOrd.tipo_id}} </li>
                 {% endfor %}
               </ul>
               <div class="card-footer">
