@@ -76,13 +76,15 @@
         <div class="container">
           <form class="form-inline d-flex justify-content-center" action="" method="get">
             <div class="form-group px-5">
-              <label for="estado">Filtrar por estado</label>
+              <label for="estado"> Filtrar por estado </label>
               <select class="form-control" name="estado" id="estado" value=" {{ request.GET.estado }} ">
                 <option value="">Todas</option>
-                <option value="Creada">Creada</option>
-                <option value="Terminada">Terminada</option>
+                <option value="Nueva">Creada</option>
+                <option value="Preparada">Preparada</option>
                 <option value="Entregada">Entregada</option>
+                <option value="Finalizada">Finalizada</option>
               </select>
+              
               <div class="container my-1">
                 <input class="btn btn-primary" type="submit" value="Buscar">
               </div>
@@ -94,13 +96,16 @@
           
           {% for ord in object_list.orden %}
 
-          {% if ord.estado == 'Creada' %}
+          {% if ord.estado == 'Nueva' %}
             <div class="card text-white bg-secondary mb-3 mx-3" style="max-width: 18rem;">
           {% endif %}
-          {% if ord.estado == 'Terminada' %}
+          {% if ord.estado == 'Preparada' %}
             <div class="card text-white bg-success mb-3 mx-3" style="max-width: 18rem;">
           {% endif %}
           {% if ord.estado == 'Entregada' %}
+            <div class="card text-white bg-warning mb-3 mx-3" style="max-width: 18rem;">
+          {% endif %}
+          {% if ord.estado == 'Finalizada' or ord.estado == 'Terminada' %}
             <div class="card text-white bg-primary mb-3 mx-3" style="max-width: 18rem;">
           {% endif %}
 

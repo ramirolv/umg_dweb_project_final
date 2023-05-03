@@ -64,25 +64,25 @@ class OrdenesProgresoView(CreateView, ListView):
             return {"orden": Orden.objects.all(), "cliente": Cliente.objects.all(),
                     "colaborador": User.objects.all(), "cuadrecaja": CuadreCaja.objects.all()}
 
-
+@login_required
 def ordenNueva(request):
     tipo = request.POST['tipo']
-    # estado= request.POST['estado'] Se asigna directamente
     cliente_id = Cliente.objects.get(pk=request.POST['cliente'])
-    colaborador_id = User.objects.get(pk=request.POST['colaborador_id'])
 
-    if (CuadreCaja.objects.filter(fecha=datetime.now().date()).count() == 0):
-        try:
-            ultimo = CuadreCaja.objects.filter(fecha__isnull=False).latest('fecha')
-            nuevoCuadre = CuadreCaja(disponible=ultimo.disponible, fecha=datetime.now().date())
-        except CuadreCaja.DoesNotExist:
-            nuevoCuadre = CuadreCaja(disponible=0, fecha=datetime.now().date())
+    # estado= request.POST['estado'] Se asigna directamente
+    # colaborador_id = User.objects.get(pk=request.POST['colaborador_id'])
 
-        nuevoCuadre.save()
+    # if (CuadreCaja.objects.filter(fecha=datetime.now().date()).count() == 0):
+    #     try:
+    #         ultimo = CuadreCaja.objects.filter(fecha__isnull=False).latest('fecha')
+    #         nuevoCuadre = CuadreCaja(disponible=ultimo.disponible, fecha=datetime.now().date())
+    #     except CuadreCaja.DoesNotExist:
+    #         nuevoCuadre = CuadreCaja(disponible=0, fecha=datetime.now().date())
 
-    cuadrecaja_id = CuadreCaja.objects.get(fecha=datetime.now().date())
-    orden = Orden(tipo=tipo, estado='Creada', cliente_id=cliente_id, colaborador_id=colaborador_id,
-                  cuadreCaja_id=cuadrecaja_id)
+    #     nuevoCuadre.save()
+
+    # cuadrecaja_id = CuadreCaja.objects.get(fecha=datetime.now().date())
+    orden = Orden(tipo=tipo, estado='Nueva', cliente_id=cliente_id, colaborador_id=request.user)
     orden.save()
 
     orden = Orden.objects.latest('creacion')
@@ -273,7 +273,7 @@ class EditarUsuarioView(UpdateView):
     model = User
 
 
-class GastoView(CreateView, ListView):
+class GastoView(ListView):
     template_name = 'gasto.html'
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
@@ -287,6 +287,24 @@ class GastoView(CreateView, ListView):
             return Gasto.objects.all()
 
 
+@login_required
+def gastoNuevoView(request):
+    cantidad = request.POST['cantidad']
+    descripcion = request.POST['descripcion']
+    monto = request.POST['monto']
+    total = float(cantidad) * float(monto)
+    
+    gasto = Gasto(cantidad=cantidad, descripcion=descripcion, monto=monto, total=total, colaborador_id=request.user)
+    gasto.save()
+
+    if gasto.pk is None:
+        messages.error(request, f'El gasto no se pudo crear')
+    else:
+        messages.success(request, f'Gasto creado exitosamente')
+
+
+    return redirect('home:gastoapp')
+
 def gastodelete(request, pk):
     gasto = Gasto.objects.get(id=pk)
     gasto.delete()
@@ -298,6 +316,7 @@ class EditarGastoView(UpdateView):
     model = Gasto
     form_class = GastoForm
     success_url = reverse_lazy('home:gastoapp')
+
 
 
 class EditarPlatilloView(UpdateView):

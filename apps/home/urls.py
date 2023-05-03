@@ -46,15 +46,17 @@ urlpatterns = [
     path('cliente/formulario/', clienteFormulario, name='cliente_formulario'),
     path('cliente/nuevo/', clienteNuevo, name='cliente_nuevo'),
 
+    #CRUD Gastos
+    path('gasto/', GastoView.as_view(), name='gastoapp'),
+    path('gasto/nuevo', gastoNuevoView, name='gasto_nuevo'),
+    path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
+    path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
+
     #Ejemplo: producto/5/
     # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
     path('service/', ServiceView.as_view(), name='serviceapp'),
     
-    
 
-    path('gasto/', GastoView.as_view(), name='gastoapp'),
-    path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
-    path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
     path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
     path('eliminar_platillo/<int:pk>', platillodelete, name='eliminarplatillo'),
     path('plantilla/', plantillaParametros, name='plantilla'),
