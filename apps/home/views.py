@@ -238,8 +238,18 @@ def tipo_nuevo(request):
     return redirect('home:productoapp')
 
 
-class ServiceView(TemplateView):
-    template_name = 'service.html'
+@login_required
+@user_passes_test(is_member)  # or @user_passes_test(is_in_multiple_groups)
+def InformeView(request):
+    data = []
+    labels = []
+
+    queryset = Gasto.objects.all()
+    for gasto in queryset:
+        labels.append(gasto.descripcion)
+        data.append(str(gasto.total))
+
+    return render(request, 'informe.html', {'labels':labels, 'data':data})
 
 
 @login_required

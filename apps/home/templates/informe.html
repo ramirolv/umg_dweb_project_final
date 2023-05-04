@@ -1,0 +1,75 @@
+{% extends 'base_sidebar.html' %}
+{% load static %}
+
+{% block titulo %}
+<div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="bi bi-bag-plus-fill small"> Imprimir informe</i>
+    </button>
+</div>
+<h2 class="text-white">Informes</h2>
+{% endblock titulo %}
+
+{% block contenido %}
+
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-6 col-xl-3">
+            <h1>Gastos</h1>
+            <canvas id="myChart" style="max-width: 100%; max-height: 100%;"></canvas>
+        </div>
+        <div class="col-sm-12 col-lg-6 col-xl-3">
+            <h1>Ingresos</h1>
+            <canvas id="myChart2" style="max-width: 100%; max-height: 100%;"></canvas>
+        </div>
+        <div class="col-sm-12 col-lg-6 col-xl-3">
+            <h1>Otros</h1>
+            <canvas id="myChart3" style="max-width: 100%; max-height: 100%;"></canvas>
+        </div>
+    </div>
+  </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        ctx.addEventListener('load', formatChart(ctx));
+
+        const ctx2 = document.getElementById('myChart2');
+        ctx2.addEventListener('load', formatChart(ctx2));
+
+        const ctx3 = document.getElementById('myChart3');
+        ctx3.addEventListener('load', formatChart(ctx3));
+
+        function formatChart(contexto){
+            const myChart = new Chart(contexto, {
+                type: 'doughnut',
+                data: {
+                    labels: {{labels|safe}},
+                    datasets: [{
+                        label: 'Gastos',
+                        data: {{data|safe}},
+                        /*
+                        backgroundColor:[
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(189, 147, 249, 0.5)',
+                            'rgba(80, 250, 123, 0.5)',
+                            'rgba(116, 202, 255, 0.5)',
+                            'rgba(127, 21, 108, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 99, 132, 0.2)'
+                        ],
+                        borderWidth: 1.5
+                        */
+                    }]
+                }
+            })
+        }
+        
+    </script>
+{% endblock contenido %}
