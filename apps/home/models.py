@@ -6,7 +6,6 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 class Cliente(models.Model):
-    # idCliente=models.IntegerField
     nombre = models.CharField(max_length=45, verbose_name='Nombre')
     direccion = models.CharField(max_length=45, verbose_name='Direccion')
     telefono = models.CharField(max_length=20, verbose_name='Telefono')
@@ -19,7 +18,6 @@ class Cliente(models.Model):
 
 
 class Categoria(models.Model):
-    # idPlatillo=models.IntegerField
     nombre = models.CharField(max_length=45, verbose_name='Nombre')
     creacion = models.DateTimeField(auto_now_add=True)
 
@@ -28,7 +26,6 @@ class Categoria(models.Model):
 
 
 class Especialidad(models.Model):
-    # idPlatillo=models.IntegerField
     descripcion = models.CharField(max_length=200, verbose_name='Descripcion')
     imagen = models.ImageField(upload_to='especialidad', default='descarga.png', )
     categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
@@ -49,7 +46,6 @@ class Tipo(models.Model):
 
 
 class CuadreCaja(models.Model):
-    # idCaja =models.IntegerField
     disponible = models.DecimalField(max_digits=10, decimal_places=2)
     fecha = models.DateField(verbose_name='Fecha')
     creacion = models.DateTimeField(auto_now_add=True)
@@ -71,7 +67,6 @@ class Gasto(models.Model):
 
 
 class Orden(models.Model):
-    # idOrden=models.IntegerField
     tipo = models.CharField(max_length=45, verbose_name='Tipo')
     estado = models.CharField(max_length=20, verbose_name="Estado")
     cliente_id = models.ForeignKey(Cliente, on_delete=models.CASCADE)

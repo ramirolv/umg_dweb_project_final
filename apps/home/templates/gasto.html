@@ -75,8 +75,8 @@
             <td>{{gast.creacion | date}}</td>
             <td>{{gast.cantidad}}</td>
             <td>{{gast.descripcion}}</td>
-            <td>{{gast.monto}}</td>
-            <td>{{gast.total}}</td>
+            <td>Q {{gast.monto}}</td>
+            <td>Q {{gast.total}}</td>
             <td> {{gast.colaborador_id.first_name}} {{gast.colaborador_id.last_name}}</td>
             <td>
               <a class="btn btn-dark" href="{% url 'home:editargastoapp' gast.id %}">Editar</a>
