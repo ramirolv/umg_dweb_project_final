@@ -15,61 +15,33 @@
 
   <div class="container">
     <div class="row">
-        <div class="col-sm-12 col-lg-6 col-xl-3">
-            <h1>Gastos</h1>
-            <canvas id="myChart" style="max-width: 100%; max-height: 100%;"></canvas>
+        <div class="col-sm-12 col-lg-4 col-xl-3">
+            <h3>Ingresos</h3>
+            <h6>Q{{total2}}</h6>
+            <canvas id="myChartIngresos" style="max-width: 100%; max-height: 100%;"></canvas>
         </div>
-        <div class="col-sm-12 col-lg-6 col-xl-3">
-            <h1>Ingresos</h1>
-            <canvas id="myChart2" style="max-width: 100%; max-height: 100%;"></canvas>
+        <div class="col-sm-12 col-lg-4 col-xl-3">
+            <h3>Gasto</h3>
+            <h6>Q{{total1}}</h6>
+            <canvas id="myChartGastos" style="max-width: 100%; max-height: 100%;"></canvas>
         </div>
-        <div class="col-sm-12 col-lg-6 col-xl-3">
-            <h1>Otros</h1>
-            <canvas id="myChart3" style="max-width: 100%; max-height: 100%;"></canvas>
+        <div class="col-sm-12 col-lg-4 col-xl-3">
+            <h3>Otros</h3>
+            <canvas id="myChartOtros" style="max-width: 100%; max-height: 100%;"></canvas>
         </div>
     </div>
   </div>
     
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="{% static './js/charts/chart.umd.js' %}"></script>
+    <script src="{% static './js/main.js' %}"></script>
     <script>
-        const ctx = document.getElementById('myChart');
-        ctx.addEventListener('load', formatChart(ctx));
+        const ctx = document.getElementById('myChartIngresos');
+        ctx.addEventListener('load', formatChart(ctx, {{data2|safe}}, {{labels2|safe}}));
 
-        const ctx2 = document.getElementById('myChart2');
-        ctx2.addEventListener('load', formatChart(ctx2));
+        const ctx2 = document.getElementById('myChartGastos');
+        ctx2.addEventListener('load', formatChart(ctx2, {{data1|safe}}, {{labels1|safe}}));
 
-        const ctx3 = document.getElementById('myChart3');
-        ctx3.addEventListener('load', formatChart(ctx3));
-
-        function formatChart(contexto){
-            const myChart = new Chart(contexto, {
-                type: 'doughnut',
-                data: {
-                    labels: {{labels|safe}},
-                    datasets: [{
-                        label: 'Gastos',
-                        data: {{data|safe}},
-                        /*
-                        backgroundColor:[
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(189, 147, 249, 0.5)',
-                            'rgba(80, 250, 123, 0.5)',
-                            'rgba(116, 202, 255, 0.5)',
-                            'rgba(127, 21, 108, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(255, 99, 132, 0.2)'
-                        ],
-                        borderWidth: 1.5
-                        */
-                    }]
-                }
-            })
-        }
-        
+        const ctx3 = document.getElementById('myChartOtros');
+        ctx3.addEventListener('load', formatChart(ctx3, {{data1|safe}}, {{labels1|safe}}));
     </script>
 {% endblock contenido %}

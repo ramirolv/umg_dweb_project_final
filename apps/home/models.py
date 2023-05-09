@@ -1,7 +1,9 @@
+import math
 from django.db import models
+from django.db.models import Sum, F
 from django.contrib.auth.models import User
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 
 
 # Create your models here.
@@ -69,6 +71,7 @@ class Gasto(models.Model):
 class Orden(models.Model):
     tipo = models.CharField(max_length=45, verbose_name='Tipo')
     estado = models.CharField(max_length=20, verbose_name="Estado")
+    total = models.DecimalField(max_digits=10, decimal_places=2)
     cliente_id = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     colaborador_id = models.ForeignKey(User, on_delete=models.CASCADE)
     creacion = models.DateTimeField(auto_now_add=True)
@@ -87,7 +90,33 @@ class DetalleOrden(models.Model):
     creacion = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return '%s %s' % (self.cantidad, self.sub_total)
+        return '%s' % (self.cantidad)
+
+@receiver(post_save, sender=DetalleOrden)
+def actualizar_total_orden(sender, instance, created, **kwargs):
+    if created:
+        orden = instance.orden_id
+
+        # Calcular la suma de los subtotales de los detalles de la orden
+        subtotales = [float(d.sub_total) for d in orden.detalleorden_set.all()]
+        total = sum(subtotales)
+
+        # Asignar el total a la orden
+        orden.total = total
+        orden.save()
+
+
+@receiver(post_delete, sender=DetalleOrden)
+def actualizar_total_orden(sender, instance, **kwargs):
+    orden = instance.orden_id
+
+    # Calcular la suma de los subtotales de los detalles de la orden
+    subtotales = [float(d.sub_total) for d in orden.detalleorden_set.all()]
+    total = sum(subtotales)
+
+    # Asignar el total a la orden
+    orden.total = total
+    orden.save()
 
 # class Usuario(models.Model):
 #     # idUsuario =models.IntegerField

@@ -1,9 +1,8 @@
 import os
-from django.conf import settings
 from datetime import datetime
+from django.conf import settings
 from django.contrib.auth.views import LoginView
-from django.contrib.auth.decorators import login_required, \
-    user_passes_test  # Add the following line to the top of your code
+from django.contrib.auth.decorators import login_required, user_passes_test  # Add the following line to the top of your code
 from django.contrib.auth import logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -11,11 +10,10 @@ from django.views.generic import TemplateView, CreateView, ListView, UpdateView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.template import Template, Context
-
 from .forms import *
 
 
-# Funciones para saber a qué grupo pertenece un usuario
+#  ------------------- Funciones para saber a qué grupo pertenece un usuario -------------------
 def is_member(user):
     return user.groups.filter(name='Administrador').exists()
 
@@ -24,7 +22,7 @@ def is_in_multiple_groups(user):
     return user.groups.filter(name__in=['group1', 'group2']).exists()
 
 
-# Vistas para inicio y cierre de sesión
+# --------------------- Vistas para inicio y cierre de sesión ---------------------
 class LoginView(LoginView):
     template_name = 'registration/login.html'
 
@@ -69,23 +67,8 @@ def ordenNueva(request):
     tipo = request.POST['tipo']
     cliente_id = Cliente.objects.get(pk=request.POST['cliente'])
 
-    # estado= request.POST['estado'] Se asigna directamente
-    # colaborador_id = User.objects.get(pk=request.POST['colaborador_id'])
-
-    # if (CuadreCaja.objects.filter(fecha=datetime.now().date()).count() == 0):
-    #     try:
-    #         ultimo = CuadreCaja.objects.filter(fecha__isnull=False).latest('fecha')
-    #         nuevoCuadre = CuadreCaja(disponible=ultimo.disponible, fecha=datetime.now().date())
-    #     except CuadreCaja.DoesNotExist:
-    #         nuevoCuadre = CuadreCaja(disponible=0, fecha=datetime.now().date())
-
-    #     nuevoCuadre.save()
-
-    # cuadrecaja_id = CuadreCaja.objects.get(fecha=datetime.now().date())
-    orden = Orden(tipo=tipo, estado='Nueva', cliente_id=cliente_id, colaborador_id=request.user)
+    orden = Orden(tipo=tipo, estado='Nueva', total=0.0, cliente_id=cliente_id, colaborador_id=request.user)
     orden.save()
-
-    orden = Orden.objects.latest('creacion')
 
     return redirect('home:tomar_orden', orden.id)
 
@@ -243,13 +226,24 @@ def tipo_nuevo(request):
 def InformeView(request):
     data = []
     labels = []
+    total1 = 0
+    data2 = []
+    labels2 = []
+    total2 = 0
 
     queryset = Gasto.objects.all()
     for gasto in queryset:
         labels.append(gasto.descripcion)
         data.append(str(gasto.total))
+        total1+=gasto.total
 
-    return render(request, 'informe.html', {'labels':labels, 'data':data})
+    queryset = Orden.objects.all()
+    for orden in queryset:
+        labels2.append(orden.tipo)
+        data2.append(str(orden.total))
+        total2+=orden.total
+
+    return render(request, 'informe.html', {'labels1':labels, 'data1':data, 'total1':total1, 'labels2':labels2, 'data2':data2, 'total2':total2})
 
 
 @login_required
