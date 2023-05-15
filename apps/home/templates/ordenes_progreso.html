@@ -57,17 +57,8 @@
                   </div>
                 </div>
 
-                <div class="form-group row mt-2">
-                  <label class="col-sm-2 col-form-label" for="id_colaborador_id">Colaborador</label>
-                  <div class="col-sm-10">
-                    <select class="form-control" name="colaborador_id" id="id_colaborador_id">
-                      {% for cli in object_list.colaborador %}
-                      <option value=" {{cli.id}} "> {{cli.nombre}} </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                </div>
-                
+              <input class="form-control" type="hidden" value="{{ user.id }}" name="colaborador_id" id="id_colaborador_id">
+
                 <div class="container d-flex justify-content-center my-3">
                   <button class="btn btn-primary" type="sumbit">Crear Orden</button>
                 </div>
@@ -85,13 +76,15 @@
         <div class="container">
           <form class="form-inline d-flex justify-content-center" action="" method="get">
             <div class="form-group px-5">
-              <label for="estado">Filtrar por estado</label>
+              <label for="estado"> Filtrar por estado </label>
               <select class="form-control" name="estado" id="estado" value=" {{ request.GET.estado }} ">
                 <option value="">Todas</option>
-                <option value="Creada">Creada</option>
-                <option value="Terminada">Terminada</option>
+                <option value="Nueva">Nueva</option>
+                <option value="Preparada">Preparada</option>
                 <option value="Entregada">Entregada</option>
+                <option value="Finalizada">Finalizada</option>
               </select>
+              
               <div class="container my-1">
                 <input class="btn btn-primary" type="submit" value="Buscar">
               </div>
@@ -103,22 +96,25 @@
           
           {% for ord in object_list.orden %}
 
-          {% if ord.estado == 'Creada' %}
+          {% if ord.estado == 'Nueva' %}
             <div class="card text-white bg-secondary mb-3 mx-3" style="max-width: 18rem;">
           {% endif %}
-          {% if ord.estado == 'Terminada' %}
+          {% if ord.estado == 'Preparada' %}
             <div class="card text-white bg-success mb-3 mx-3" style="max-width: 18rem;">
           {% endif %}
           {% if ord.estado == 'Entregada' %}
+            <div class="card text-white bg-warning mb-3 mx-3" style="max-width: 18rem;">
+          {% endif %}
+          {% if ord.estado == 'Finalizada' or ord.estado == 'Terminada' %}
             <div class="card text-white bg-primary mb-3 mx-3" style="max-width: 18rem;">
           {% endif %}
 
             <div class="card-header">No. {{ord.id}} - {{ord.tipo}} - {{ord.estado}} </div>
             <div class="card-body">
-              <h5 class="card-title">{{ord.cliente_id}}</h5>
+              <h5 class="card-title">{{ord.cliente_id}} Q {{ord.total}} </h5>
               <ul>
                 {% for detOrd in ord.detalleorden_set.all %}
-                  <li class="card-text style-none"> {{detOrd.tipoPlatillo_id}} </li>
+                  <li class="card-text style-none"> {{detOrd.cantidad}} {{detOrd.tipo_id}} </li>
                 {% endfor %}
               </ul>
               <div class="card-footer">

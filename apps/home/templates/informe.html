@@ -1,0 +1,43 @@
+{% extends 'base_sidebar.html' %}
+{% load static %}
+
+{% block titulo %}
+<div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        <i class="bi bi-bag-plus-fill small"> Imprimir informe</i>
+    </button>
+</div>
+<h2 class="text-white">Informes</h2>
+{% endblock titulo %}
+
+{% block contenido %}
+
+  <div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-lg-4 col-xl-3">
+            <h3>Ingresos</h3>
+            <h6>Q{{total2}}</h6>
+            <canvas id="myChartIngresos" style="max-width: 100%; max-height: 100%;"></canvas>
+        </div>
+        <div class="col-sm-12 col-lg-4 col-xl-3">
+            <h3>Gasto</h3>
+            <h6>Q{{total1}}</h6>
+            <canvas id="myChartGastos" style="max-width: 100%; max-height: 100%;"></canvas>
+        </div>
+    </div>
+  </div>
+    
+    <script src="{% static './js/charts/chart.umd.js' %}"></script>
+    <script src="{% static './js/main.js' %}"></script>
+    <script>
+        const ctx = document.getElementById('myChartIngresos');
+        ctx.addEventListener('load', formatChart(ctx, {{data2|safe}}, {{labels2|safe}}));
+
+        const ctx2 = document.getElementById('myChartGastos');
+        ctx2.addEventListener('load', formatChart(ctx2, {{data1|safe}}, {{labels1|safe}}));
+
+        const ctx3 = document.getElementById('myChartOtros');
+        ctx3.addEventListener('load', formatChart(ctx3, {{data1|safe}}, {{labels1|safe}}));
+    </script>
+{% endblock contenido %}

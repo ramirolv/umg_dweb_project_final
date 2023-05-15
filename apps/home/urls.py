@@ -1,59 +1,66 @@
-"""umg_dweb_project_final URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
-from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
-from apps.home import views
 from .views import *
 
 app_name='home'
 
 urlpatterns = [
+    #Main View
+    path('', MainView, name='mainapp'),
+    
     #Inicio y cierre de sesión
-    path('', LoginView.as_view(), name='login'),
+    path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView, name='logout'),
     #path('', LoginView.as_view(), name='indexapp'),
 
+    #CRUD Usuarios
+    path('team/', TeamView, name='teamapp'),
+    path('usuario/nuevo/', RegistroView, name='registro'),
+    path('usuario/editar/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
+    path('usuario/eliminar/<int:id>', usuariodelete, name='eliminarusuario'),
 
-    path('main/', MainView, name='mainapp'),
+    #CRUD Categorias
+    path('producto/', ProductosView, name='productoapp'), #View of List Categoria and Especialidad
+    path('categoria/nueva', categoria_nueva, name='categoria_nueva'),
+    path('categoria/eliminar/<int:id>', categoria_eliminar, name='categoria_eliminar'),
+
+    #CRUD Especialidad
+    path('especialidad/nueva', especialidad_nueva, name='especialidad_nueva'),
+    path('especialidad/eliminar/<int:id>', especialidad_eliminar, name='especialidad_eliminar'),
+    path('especialidad/editar/<int:pk>', especialidad_editar.as_view(), name='especialidad_editar'),
+
+    #CRUD Tipo
+    path('tipo/nuevo/', tipo_nuevo, name='tipo_nuevo'),
+
     path('ordenes/', OrdenesView.as_view(), name='ordenesapp'),
     path('ordenes/nueva/', ordenNueva, name='ordenes_nueva'),
     path('ordenes/progreso/', OrdenesProgresoView.as_view(), name='ordenes_progreso'),
     path('ordenes/eliminar/<int:id>', ordenEliminar, name='ordenes_eliminar'),
     path('ordenes/platillos/<int:id>', tomarOrden, name='tomar_orden'),
+
+    #CRUD Detalle de Ordenes
     path('ordenes/detalle/eliminar/<int:id>', detalleOrdenEliminar, name='detalle_eliminar'),
+    path('ordenes/detalle/agregar/', detalleordenAgregar, name='detalle_agregar' ),
+
     path('cliente/formulario/', clienteFormulario, name='cliente_formulario'),
     path('cliente/nuevo/', clienteNuevo, name='cliente_nuevo'),
-    path('producto/', ProductosView, name='productoapp'),
-    path('producto/nuevo/', producto_Nuevo, name='producto_nuevo'),
-    path('producto/formulario/', platillo_Formulario, name='platillo_formulario'),
-    path('producto/nuevo/tipo/', platillo_Nuevo, name='platillo_nuevo'),
-    #Ejemplo: producto/5/
-    # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
-    path('service/', ServiceView.as_view(), name='serviceapp'),
-    path('team/', TeamView.as_view(), name='teamapp'),
+
+    #CRUD Gastos
     path('gasto/', GastoView.as_view(), name='gastoapp'),
+    path('gasto/nuevo', gastoNuevoView, name='gasto_nuevo'),
     path('editargastos/<int:pk>', EditarGastoView.as_view(), name='editargastoapp'),
     path('eliminargastos/<int:pk>', gastodelete, name='eliminargasto'),
+
+    #CRUD informes
+    path('informe/', InformeView, name='serviceapp'),
+
+    #Ejemplo: producto/5/
+    # path('producto/<int:product_id>/', views.list_product, name='productoapp'),
+    
+
     path('editar_platillo/<int:pk>', EditarPlatilloView.as_view(), name='editarplatilloapp'),
     path('eliminar_platillo/<int:pk>', platillodelete, name='eliminarplatillo'),
-    path('plantilla/', plantillaParametros, name='plantilla'),    
-    path('puesto/', PuestoView.as_view(), name='puestoapp'),
-    path('editar_usuario/<int:pk>', EditarUsuarioView.as_view(), name='editarusuarioapp'),
-    path('eliminar_usuario/<int:id>', usuariodelete, name='eliminarusuario'),
-    path('registro/', RegistroView.as_view(), name='registro'),
-]
+    path('plantilla/', plantillaParametros, name='plantilla'),
 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

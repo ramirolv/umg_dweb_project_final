@@ -27,17 +27,28 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>   
             <div class="modal-body">
-                <form method="POST">
+                <form action="{% url 'home:gasto_nuevo' %}" method="POST">
                 {% csrf_token %}
-                {{gast.creacion}}</td>
-                <br><br>cantidad {{ form.cantidad }}
-                <br><br>descripción {{ form.descripcion }}
-                <br><br> monto {{ form.monto }}
-                <br><br>total {{ form.total }}
-                <br><br>cuadreCaja {{ form.cuadreCaja }}
-                <br><br><br>
-                <button type="submit" class="btn btn-primary">Guardar cambios</button>
-              <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <div class="form-group">
+                  <label for="inputCantidad">Cantidad</label>
+                  <input type="number" class="form-control" id="inputCantidad" name="cantidad" onchange="calcularTotal()" required>
+                </div>
+                <div class="form-group">
+                  <label for="inputDescripcion">Descripción</label>
+                  <input type="text" class="form-control" id="inputDescripcion" name="descripcion" required>
+                </div>
+                <div class="form-group">
+                  <label for="inputMonto">Precio unitario</label>
+                  <input type="number" class="form-control" id="inputMonto" name="monto" onchange="calcularTotal()" step="0.5" required>
+                </div>
+                <div class="form-group">
+                  <label for="inputTotal">Total</label>
+                  <input type="number" class="form-control" id="inputTotal" name="total" disabled>
+                </div>
+                <div class="form-group my-2">
+                  <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                  <button type="button" id="btnmodal" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
               </form>
             </div> 
         </div>
@@ -45,33 +56,46 @@
     </div>
   
     <!--Data Listed-->
-    <div class="container">
-      <table class="table table-dark">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Cantidad<div class="fw-normal"></div></th>
-          <th>Descripcion<div class="fw-normal"></div></th>
-          <th>Monto<div class="fw-normal"></div></th>
-          <th>Total<div class="fw-normal"></div></th>
-          <th>Cuadre Caja<div class="fw-normal"></div></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for gast in object_list %}
-      <tr>
-        <td><code>{{gast.creacion}}</code></td>
-        <td>{{gast.cantidad}}</td>
-        <td>{{gast.descripcion}}</td>
-        <td>{{gast.monto}}</td>
-        <td>{{gast.total}}</td>
-        <td>{{gast.cuadreCaja}}</td> 
-        <td><a class="btn btn-dark" href="{% url 'home:editargastoapp' gast.id %}">Editar</a></td>              
-        <td><a class="btn btn-danger" href="{% url 'home:eliminargasto' gast.id %}">Eliminar</a></td>   
-     </tr>
-     {% endfor %}
+    <div class="container table-responsive">
+      <table class="table table-secondary">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cantidad</th>
+            <th>Descripcion</th>
+            <th>Monto</th>
+            <th>Total</th>
+            <th>Creado por:</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for gast in object_list %}
+          <tr>
+            <td>{{gast.creacion | date}}</td>
+            <td>{{gast.cantidad}}</td>
+            <td>{{gast.descripcion}}</td>
+            <td>Q {{gast.monto}}</td>
+            <td>Q {{gast.total}}</td>
+            <td> {{gast.colaborador_id.first_name}} {{gast.colaborador_id.last_name}}</td>
+            <td>
+              <a class="btn btn-dark" href="{% url 'home:editargastoapp' gast.id %}">Editar</a>
+              <a class="btn btn-danger" href="{% url 'home:eliminargasto' gast.id %}">Eliminar</a>
+            </td>               
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
+
+  <script>
+    function calcularTotal() {
+      const cantidad = parseInt(document.getElementById("inputCantidad").value);
+      const precio = parseFloat(document.getElementById("inputMonto").value);
+      const total = cantidad * precio;
+      document.getElementById("inputTotal").value = total.toFixed(2);
+      console.log(total.toFixed(2));
+    }
+  </script>
 {% endblock contenido %}

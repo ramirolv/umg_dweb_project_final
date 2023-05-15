@@ -1,6 +1,6 @@
 {% extends 'base_sidebar.html' %}
 
-{% load static %}
+
 
 {% block titulo %}
     <a class="btn btn-offcanvas btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
@@ -19,26 +19,30 @@
                 <div> {{orden.cliente_id}} </div>
                 <div> {{orden.tipo}} </div>
                 <div> Direccion: {{cliente.direccion}} </div>
-                <div> Telefono: <a class="link-danger" href="tel:+502{{cliente.telefono}}">{{cliente.telefono}}</a> </div>
+                <div> Telefono: <a class="link-danger" href="tel:+502{{cliente.telefono}}">{{cliente.telefono}}</a> <a class="link-success" href="https://api.whatsapp.com/send/?phone=502{{cliente.telefono}}">Whatsapp</a></div>
             </div>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <h2 class="">Detalle de orden</h2>
-            <table class="table table-primary table-bordered table-hover">
+            <table class="table table-primary table-bordered table-hover small">
                 <thead>
-                    <td>Borrar</td>
+                    <td></td>
                     <td>Cantidad</td>
                     <td>Descripción</td>
-                    <td>Precio</td>
+                    <td>Subtotal</td>
                 </thead>
 
                 <tbody id="body_table_orden">
                     {% for det in orden.detalleorden_set.all %}
                         <tr>
-                            <td><a href=" {% url 'home:detalle_eliminar' det.id %} " class="btn btn-danger">-</a></td>
+                            <td>
+                                <a href=" {% url 'home:detalle_eliminar' det.id %} " class="btn btn-danger px-1 py-0">
+                                    <small><i class="bi bi-trash"></i></small>
+                                </a>
+                            </td>
                             <td> {{det.cantidad}} </td>
-                            <td> {{det.tipoPlatillo_id}} </td>
+                            <td> {{det.tipo_id}} </td>
                             <td> Q{{det.sub_total}} </td>
                         </tr>
                     {% endfor %}
@@ -48,7 +52,7 @@
                     <td></td>
                     <td></td>
                     <td>Total</td>
-                    <td id="sumaTotal">Q105</td>
+                    <td id="sumaTotal"> Q {{orden.total}} </td>
                 </tfoot>
             </table>
             <a class="btn btn-primary" href=" {% url 'home:ordenes_progreso' %} ">Completar orden</a>
@@ -56,22 +60,62 @@
     </div>
     <!-- / Panel OffCanvas -->
 
+
+    <!-- Modal Tipo-->
+    <div class="modal fade" id="modalTipo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Tipo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="{% url 'home:detalle_agregar' %}" method="POST">
+                        {% csrf_token %}
+                        <!-- inputs ocultos para id's -->
+                        <input type="hidden" id="inputIdOrden" name="id_orden" value="{{orden.id}}">
+                        <input type="hidden" id="inputIdTipo" name="id_tipo">
+
+                        <!-- inputs visibles -->
+                        <div class="form-group mb-2">
+                            <label for="cantidad">Cantidad</label>
+                            <input type="number" class="form-control" name="inputCantidad" value="1">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Final de modal Tipo-->
+
+
+
     <div class="container">
         {% for plat in platillos %}
             <h2 class=""> {{plat.nombre}} </h2>
-            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-4 g-4">
-                {% for tipoPlat in plat.tipoplatillo_set.all %}
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
+                {% for tipoPlat in plat.especialidad_set.all %}
                     <div class="col">
                         <div class="card h-100 border-secondary">
-                            <img src="https://i.pinimg.com/736x/73/16/57/731657194c0de61a3d7583090e2d8a42--pizza-pizza-pizza-dough.jpg" class="card-img-top" alt="...">
+                            <img src="{{ tipoPlat.imagen.url }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"> {{ tipoPlat.tipo }} </h5>
                                 <p class="card-text">{{ tipoPlat.descripcion }}</p>    
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item list-group-item-action d-flex">Pequeña Q{{ tipoPlat.PrimerPrecio }}<a href="javascript:agregarDetalle()" class="d-flex ms-auto btn btn-success">+</a></li>
-                                <li class="list-group-item list-group-item-action d-flex">Mediana Q{{ tipoPlat.SegundoPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
-                                <li class="list-group-item list-group-item-action d-flex">Grande Q{{ tipoPlat.TercerPrecio }}<a href="#" class="d-flex ms-auto btn btn-success">+</a></li>
+                                {% for tipo in tipoPlat.tipo_set.all %}
+                                    <li class="list-group-item list-group-item-action d-flex py-1">
+                                        <a type="hidden" id="buttonModalTipo" data-bs-toggle="modal" data-bs-target="#modalTipo"></a>
+                                        <a class="text-decoration-none text-black" onclick="openModalTipo({{ tipo.id }});"> {{tipo.tipo}} Q{{tipo.precio}} </a>
+                                    </li>
+                                  {% endfor %}
                             </ul>        
                         </div>
                     </div>
@@ -83,32 +127,13 @@
 
     </div>
 
-    {% endblock contenido %}
-
     <script>
-        function agregarDetalle(){
-            var fila = document.createElement('tr');
-            var tdAcciones = document.createElement('td');
-            var tdCantidad = document.createElement('td');
-            var tdDescripcion = document.createElement('td');
-            var tdPrecio = document.createElement('td');
-        
-            var textoAcciones = document.createTextNode('-');
-            var textoCantidad = document.createTextNode('4');
-            var textoDescripcion = document.createTextNode('Pizza');
-            var textoPrecio = document.createTextNode('50.00');
-
-            tdAcciones.appenChild(textoAcciones);
-            tdCantidad.appenChild(textoCantidad);
-            tdDescripcion.appenChild(textoDescripcion);
-            tdPrecio.appenChild(textoPrecio);
-            
-            fila.appenChild(tdAcciones);
-            fila.appenChild(tdCantidad);
-            fila.appenChild(tdDescripcion);
-            fila.appenChild(tdPrecio);
-        
-            var tabla = document.getElementById('body_table_orden');
-            tabla.appenChild(fila);
+        function openModalTipo(id){
+            var inputEspecialidad = document.getElementById('inputIdTipo');
+            inputEspecialidad.value = id;
+            var boton = document.getElementById('buttonModalTipo');
+            boton.click();
         }
     </script>
+    
+    {% endblock contenido %}
