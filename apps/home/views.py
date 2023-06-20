@@ -82,7 +82,7 @@ def ordenNueva(request):
     #     nuevoCuadre.save()
 
     # cuadrecaja_id = CuadreCaja.objects.get(fecha=datetime.now().date())
-    orden = Orden(tipo=tipo, estado='Nueva', cliente_id=cliente_id, colaborador_id=request.user)
+    orden = Orden(tipo=tipo, estado='Nueva', total=0, cliente_id=cliente_id, colaborador_id=request.user)
     orden.save()
 
     orden = Orden.objects.latest('creacion')
@@ -114,10 +114,17 @@ def detalleordenAgregar(request):
     id_orden = Orden.objects.get(pk=request.POST['id_orden'])
     id_tipo = Tipo.objects.get(pk=request.POST['id_tipo'])
     cantidad = request.POST['inputCantidad']
+    
 
-    sub_total = float(cantidad) * float(id_tipo.precio)
-
-    detalle = DetalleOrden(cantidad=cantidad, precio=id_tipo.precio, sub_total=sub_total, orden_id=id_orden, tipo_id=id_tipo)
+    if len(DetalleOrden.objects.filter(orden_id=id_orden, tipo_id=id_tipo)) > 0:
+        detalle = DetalleOrden.objects.filter(orden_id=id_orden, tipo_id=id_tipo)
+        detalle = detalle[0]
+        detalle.cantidad += int(cantidad)
+        detalle.subtotal = float(detalle.cantidad) * float(id_tipo.precio)
+    else:
+        sub_total = float(cantidad) * float(id_tipo.precio)
+        detalle = DetalleOrden(cantidad=cantidad, precio=id_tipo.precio, sub_total=sub_total, orden_id=id_orden, tipo_id=id_tipo)
+    
     detalle.save()
 
     return redirect('home:tomar_orden', id_orden.pk)
