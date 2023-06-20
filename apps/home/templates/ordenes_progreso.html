@@ -111,7 +111,7 @@
 
             <div class="card-header">No. {{ord.id}} - {{ord.tipo}} - {{ord.estado}} </div>
             <div class="card-body">
-              <h5 class="card-title">{{ord.cliente_id}} Q {{ord.total}} </h5>
+              <h5 class="card-title">{{ord.cliente_id}}</h5>
               <ul>
                 {% for detOrd in ord.detalleorden_set.all %}
                   <li class="card-text style-none"> {{detOrd.cantidad}} {{detOrd.tipo_id}} </li>
